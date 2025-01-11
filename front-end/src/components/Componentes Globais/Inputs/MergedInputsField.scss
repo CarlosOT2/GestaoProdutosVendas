@@ -1,0 +1,33 @@
+//# Use //
+@use '../../../config/global_scss/inputs.scss' as inputs;
+
+//# Merged-Input //
+
+.merged-input {
+    width: calc(inputs.$standard-width / 2.01);
+    //# --1 //
+    &--1 {
+        @extend .merged-input;
+        text-align: center;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    //# --2 //
+    &--2 {
+        @extend .merged-input;
+        text-align: center;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-left: none;
+
+        &:hover {
+            border-left: none;
+        }
+
+        &:focus {
+            border-left: none;
+        }
+    }
+
+}

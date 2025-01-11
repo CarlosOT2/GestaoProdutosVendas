@@ -1,0 +1,99 @@
+//# Imports //
+@use './MainInclusao.scss' as MainInclusao;
+@use '../../config/global_scss/inputs.scss' as inputs;
+@use '../../config/global_scss/media.scss' as media;
+
+//# Form //
+.form-vendas {
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    //.. Divs //
+
+    &__div {
+        &-inputs {
+            width: 80%;
+        }
+
+        &-gap {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &-btns {
+            display: flex;
+            margin-top: 1%;
+            gap: 1%;
+        }
+    }
+
+    //.. Field Set //
+    &__field-set {
+        &-nomes {
+            display: inline;
+        }
+
+        &-preco {
+            display: inline-flex;
+            width: 50%;
+        }
+
+        &-data,
+        &-desconto,
+        &-quantidade {
+            display: inline-flex;
+            width: 25%;
+        }
+    }
+
+    //.. Inputs //
+    &__inputs {
+        &-nomes {
+            width: 98%;
+        }
+    }
+}
+
+//# Txt-Vendas //
+.#{MainInclusao.$main}__txt-vendas {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-style: normal;
+}
+
+//# Media //
+@media (max-width: media.$max-width-inclusao) {
+    .form-vendas {
+        //.. Divs //
+        &__div {
+            &-gap,
+            &-inputs {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        //.. Field Set //
+        &__field-set {
+            &-nomes,
+            &-preco,
+            &-data,
+            &-desconto,
+            &-quantidade {
+                width: 100%;
+            }
+        }
+
+        //.. Inputs //
+        &__inputs {
+            text-align: center;
+            &-nomes {
+                width: inputs.$standard-width;
+            }
+        }
+    }
+}

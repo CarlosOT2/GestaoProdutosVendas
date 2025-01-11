@@ -1,0 +1,27 @@
+//# Use //
+@use '../../../config/global_scss/user-select.scss' as user;
+@use '../../../config/global_scss/lista.scss' as lista;
+
+.t-head {
+    @include user.user-select-none;
+
+    //# Th //
+    &__th {
+        @include user.user-select-none;
+        background-color: lista.$thead-background-color;
+        border-radius: lista.$border-radius;
+    }
+
+    //# Txt //
+    &__txt {
+        font-size: lista.$thead-font-size;
+        color: lista.$txt-color;
+    }
+}
+
+//# Media //
+@media (max-width: lista.$media-max-width) {
+    .t-head {
+        display: none;
+    }
+}

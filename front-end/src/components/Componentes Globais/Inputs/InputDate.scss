@@ -1,0 +1,19 @@
+//# Use //
+@use '../../../config/global_scss/inputs.scss' as inputs;
+
+.input-date {
+        @include inputs.input-field-mixin;
+        text-align: center;
+        &:focus {
+            border-top: 1px solid var(--border-inputs-focus);
+            border-bottom: 1px solid var(--border-inputs-focus);
+            &::placeholder {
+                opacity: inputs.$placeholder-opacity-focus;
+            } 
+        }
+
+        &:hover {
+            border: 1px solid var(--border-inputs-hover);
+        }
+    
+}

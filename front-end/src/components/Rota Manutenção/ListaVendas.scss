@@ -1,0 +1,17 @@
+//# Variáveis //
+$text-align: center;
+
+
+.tr-vendas {
+    //# TH HEAD //
+
+    &__th-head {
+        text-align: $text-align;
+
+        &--acões {
+            text-align: $text-align;
+            width: 1%;
+        }
+    }
+    
+}

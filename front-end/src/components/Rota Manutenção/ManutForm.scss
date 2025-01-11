@@ -1,0 +1,38 @@
+//# Use //
+@use '../../config/global_scss/inputs.scss' as inputs;
+
+//# DIVS //
+
+.div {
+    &-inputs {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        &__button {
+            height: 35px;
+            margin: 1px;
+            border-radius: 3px;
+            transition: background-color 0.1s ease-in-out;
+        }
+    }
+
+}
+
+//# INPUTS //
+.input {
+    &-pequeno {
+        width: calc(inputs.$standard-width / 9);
+        margin-right: 2px;
+        padding-left: 6px;
+
+        &--num {
+            @extend .input-pequeno;
+            width: calc(inputs.$standard-width / 12);
+        }
+        &--date {
+            @extend .input-pequeno;
+            width: calc(inputs.$standard-width / 8);
+        }
+    }
+}
+

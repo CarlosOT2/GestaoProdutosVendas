@@ -1,0 +1,31 @@
+//# Use //
+@use './media' as media;
+
+//# Valores Padrões //
+
+//.. THEAD //
+//, THead Background Color //
+$thead-background-color: var(--bg-color_2);
+//, THead Font-Size //
+$thead-font-size: 12px;
+
+//.. TBODY //
+//, TBody Background Color //
+$tbody-background-color: var(--bg-color_3);
+//, TBody Font-Size //
+$tbody-font-size: 15px;
+//, TBody Border //
+$tbody-border: 1px solid var(--bg-color_4);
+
+//.. Miscellaneous //
+//, Txt Color //
+$txt-color: var(--txt-color-standard);
+//, Border Radius //
+$border-radius: 4px;
+
+//.. Media //
+//, max-width //
+$media-max-width: 830px;
+//, font-size //
+$media-font-size: 12px;
+

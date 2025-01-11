@@ -1,0 +1,16 @@
+.custom-link {
+    display: flex;
+
+    &--hover {
+        &:hover {
+            color: var(--link-hover);
+            transition: color 0.2s ease-in-out;
+        }
+    }
+
+    &--focus {
+        &:focus {
+            color: var(--link-focus);
+        }
+    }
+}

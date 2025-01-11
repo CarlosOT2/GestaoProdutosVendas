@@ -1,0 +1,19 @@
+.div-alert {
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+    &--sucess {
+        background-color: var(--bg-div_alert_sucess);
+    }
+    &--fail {
+        background-color: var(--bg-div_alert_fail);
+    }
+}
+
+

@@ -1,0 +1,52 @@
+//# Use //
+@use '../../../config/global_scss/inputs.scss' as inputs;
+@use '../../../config/global_scss/label.scss' as label;
+
+//# field-set //
+.field-set {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 7px;
+    border-radius: calc(inputs.$standard-border-radius * 1.5);
+    background: var(--bg-color_1);
+    border: none;
+
+
+    //# div //
+    &__div {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        &--center {
+            @extend .field-set__div;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &-column {
+                @extend .field-set__div--center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1px;
+            }
+        }
+    }
+
+    //# legend //
+    &__legend {
+        @include label.info-label;
+        opacity: 0.9;
+
+        margin-left: 7px;
+
+        font-size: 16px;
+        font-style: italic;
+    }
+}

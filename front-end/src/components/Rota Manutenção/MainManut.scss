@@ -1,0 +1,17 @@
+//# Variáveis // 
+$main: main-manut;
+
+//# Main //
+
+
+.#{$main} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //# Content //
+    &__content {
+        width: 90%;
+    }
+}
+
+

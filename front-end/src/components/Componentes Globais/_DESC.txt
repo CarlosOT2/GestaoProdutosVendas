@@ -1,0 +1,4 @@
+- --------------------------------------------------------------------------------------- -
+--- Cada Componente Nessa Pasta Irá Agir Como Componente Redundante Em Outro Componentes --
+-- Principais, Auxiliando Na Simplicidade Do Projeto. (ex: input-field, field-set, etc.) --
+-------------------------------------------------------------------------------------------

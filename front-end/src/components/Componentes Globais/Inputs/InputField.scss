@@ -1,0 +1,82 @@
+//# Use //
+@use '../../../config/global_scss/inputs.scss' as inputs;
+@use '../../../config/global_scss/user-select.scss' as user-select;
+
+//# Div-Input //
+
+.div-input {
+    display: flex;
+    width: inputs.$standard-width;
+
+    //.. Margin //
+    &--margin {
+        margin: 6px;
+    }
+
+    //.. Div-Icon //
+    &__div-icon {
+        background-color: var(--bg-color_3);
+        height: 34px;
+        width: calc(inputs.$standard-width / 11.5);
+        border-top-left-radius: inputs.$standard-border-radius;
+        border-bottom-left-radius: inputs.$standard-border-radius;
+        border-left: 1px solid var(--border_1);
+        border-bottom: 1px solid var(--border_1);
+        border-top: 1px solid var(--border_1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--icon-inputs-color);
+        font-size: 16px;
+
+        &--focus {
+            border-top: 1px solid var(--border-inputs-focus);
+            border-bottom: 1px solid var(--border-inputs-focus);
+            border-left: 1px solid var(--border-inputs-focus);
+        }
+
+        &--hover {
+            border-top: 1px solid var(--border-inputs-hover);
+            border-bottom: 1px solid var(--border-inputs-hover);
+            border-left: 1px solid var(--border-inputs-hover);
+        }
+    }
+
+}
+
+//# Input-Field //
+.input-field {
+    @include inputs.input-field-mixin;
+
+    &--center {
+        text-align: center;
+    }
+    
+    &--margin {
+        margin: 6px;
+    }
+
+    &--icon {
+        border-radius: 0px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    &--focus {
+        @include inputs.input-focus-mixin;
+    }
+
+    &--hover {
+        @include inputs.input-hover-mixin;
+    }
+}
+
+//# Label //
+.label-input {
+    @include inputs.input-field-label;
+}
+
+//# Error-Input-Field //
+.error-input-field {
+    color: rgb(180, 24, 24);
+}

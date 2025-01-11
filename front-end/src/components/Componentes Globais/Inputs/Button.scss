@@ -1,0 +1,23 @@
+.button {
+    width: 90px;
+    height: 40px;
+    font-size: 15px;
+
+    background-color: var(--bg-button);
+    color: var(--txt-color_1);
+
+    border: none;
+    border-radius: 6px;
+
+    transition: background-color 0.1s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--button-hover);
+    }
+
+    &:active {
+        background-color: var(--button-click);
+    }
+
+}

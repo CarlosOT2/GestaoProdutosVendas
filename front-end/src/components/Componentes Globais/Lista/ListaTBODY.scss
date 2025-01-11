@@ -1,0 +1,176 @@
+//# Use //
+@use '../../../config/global_scss/scrolling.scss' as scrolling;
+@use '../../../config/global_scss/user-select.scss' as user;
+@use '../../../config/global_scss/lista.scss' as lista;
+
+
+//# T-Body //
+.t-body {
+    font-size: 13px;
+
+    //# Th //
+    &__th {
+        display: none;
+        background-color: lista.$thead-background-color;
+        border-radius: lista.$border-radius;
+
+        &-txt {
+            font-size: lista.$thead-font-size;
+            color: lista.$txt-color;
+        }
+    }
+
+    //# Br //
+    &__br {
+        @include user.user-select-none;
+        display: none;
+    }
+
+
+    //# Td //
+    &__td {
+        width: 20vw;
+        background-color: lista.$tbody-background-color;
+        color: lista.$txt-color;
+
+        border: lista.$tbody-border;
+        border-radius: lista.$border-radius;
+
+        text-align: center;
+
+        //.. Txt //
+        &-txt {
+            @include scrolling.long-texts;
+            display: inline-flex;
+            flex-direction: column;
+            font-size: lista.$tbody-font-size;
+
+            max-width: 180px;
+            max-height: 108px;
+        }
+
+        //.. Type //
+
+        &-id {
+            width: 1vw;
+            vertical-align: middle;
+            color: rgb(148, 18, 18);
+            white-space: nowrap;
+        }
+
+
+        &-number,
+        &-date {
+            width: 10vw;
+        }
+
+        &-cash {
+            @extend .t-body__td-number;
+            color: rgb(30, 122, 30);
+        }
+
+        &-percentage {
+            color: rgb(153, 50, 204);
+            width: 5vh;
+        }
+
+
+        &-img {
+            @include user.user-select-none;
+            width: 1%;
+
+            border: none;
+            border-radius: 0;
+
+            background-color: var(--bg-app);
+
+            //- Img-Tam //
+            &-tam {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        &-acao {
+            text-align: center;
+            border: none;
+            user-select: none;
+
+            //, Ação-Excluir //
+            &--excluir {
+                color: rgb(185, 21, 21);
+
+                &:hover {
+                    color: rgb(124, 20, 20);
+                    transition: color 0.2s;
+                    cursor: pointer;
+                }
+            }
+
+            //, Ação-Add //
+            &--add {
+                margin-top: 10px;
+                font-size: 13.5px;
+                color: rgb(57, 180, 63);
+
+                &:hover {
+                    color: rgb(58, 146, 63);
+                    transition: color 0.2s;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+//# Media //
+@media (max-width: lista.$media-max-width) {
+    .t-body {
+
+        //# Br //
+        &__br {
+            display: inline;
+        }
+
+        //# Td //
+        &__td {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+            height: 2vh;
+            width: 70%;
+            margin-bottom: 2px;
+
+
+
+            &-txt {
+                max-width: 95%;
+                max-height: 100%;
+                font-size: lista.$media-font-size;
+            }
+
+            &-img {
+                display: none;
+            }
+        }
+
+        //# Th //
+        &__th {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 25%;
+            height: 2vh;
+            margin-right: 2px;
+            margin-bottom: 2px;
+
+            font-size: lista.$media-font-size;
+
+            &-img {
+                display: none;
+            }
+        }
+    }
+}

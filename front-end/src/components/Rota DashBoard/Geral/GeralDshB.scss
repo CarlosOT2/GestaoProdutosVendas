@@ -1,0 +1,315 @@
+//# Use //
+@use '../../../config/global_scss/scrolling.scss' as scrolling;
+@use '../../../config/global_scss/label.scss' as label;
+@use '../../../config/global_scss/media.scss' as media;
+
+//# PlaceHolders // 
+//.. Section //
+%section {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+//.. Summary //
+%summary {
+    width: 15%;
+    height: 500px;
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    justify-content: center;
+
+}
+
+%summary-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 90%;
+}
+
+//.. Chart //
+%chart {
+    width: 80%;
+    height: 500px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+//.. Miscellaneous //
+%input {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+
+}
+
+//# Main-Div //
+.main-div {
+    width: 100%;
+    display: block;
+
+    //.. Titles //
+    &__title {
+        &-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5%;
+        }
+
+    }
+
+    //.. Articles //
+    &__article {
+        &-summary {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            height: 70%;
+            width: 100%;
+            background-color: var(--bg-color_3);
+            border-radius: 10px;
+        }
+
+        &-chart {
+            height: 100%;
+            width: 100%;
+            background-color: var(--bg-color_3);
+            border-radius: 5px;
+
+            &--products {
+                @extend .main-div__article-chart;
+                width: 70%;
+                height: 90%;
+            }
+        }
+    }
+
+    //.. Summary  //
+    &__summary-section {
+        @extend %summary-info;
+    }
+
+    &__info-txt {
+        font-size: 25px;
+        margin-bottom: 10px;
+        @include scrolling.long-texts;
+    }
+
+    &__info-label {
+        @include label.info-label;
+    }
+
+    //.. Monthly //
+    &__annual {
+        &-section {
+            @extend %section;
+        }
+
+        &-summary {
+            @extend %summary;
+        }
+
+        &-chart {
+            @extend %chart;
+        }
+    }
+
+    //.. Weekly //
+    &__weekly {
+        &-section {
+            @extend %section;
+        }
+
+        &-summary {
+            @extend %summary;
+        }
+
+        &-chart {
+            @extend %chart;
+        }
+    }
+
+    //.. Products //
+    &__products {
+        &-section {
+            @extend %section;
+            flex-wrap: wrap;
+        }
+
+        &-chart {
+            @extend %chart;
+            width: 80%;
+            gap: 1%;
+        }
+
+        &-summary {
+            @extend %summary;
+        }
+
+        &-filter {
+            @extend %input;
+            background-color: var(--bg-color_3);
+            width: 97%;
+            border-radius: 5px;
+            /*
+            //- A 'position' nesse caso está relacionada á 'filter-list', o motivo é;
+            //- para o 'filter-list' se posicionar próximo á o 'filter'
+            //- propriedade que ocorre em 'position absolute'.
+            */
+            position: relative;
+        }
+    }
+
+    //.. Filter Products //
+    &__filter {
+        &-inputs {}
+
+        &-list {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-evenly;
+            flex-direction: column;
+
+            gap: 20px;
+            position: absolute;
+
+            top: 70px;
+
+            background-color: var(--bg-color_3);
+
+            height: 17vh;
+            width: 250px;
+            border-radius: 10px;
+
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1), -2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 15;
+
+            &-trigger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                width: 40px;
+                height: 100%;
+                font-size: 25px;
+
+                color: var(--icon-trigger);
+
+                cursor: pointer;
+
+                &:hover {
+                    color: var(--icon-trigger-hover);
+                }
+            }
+        }
+
+        &-section {
+            cursor: pointer;
+
+            &-title,
+            &-icon {
+                transition: color 0.1s ease-in-out, font-size 0.2s ease-in-out, transform 0.2s ease-in-out;
+                font-weight: bold;
+                color: var(--dashboard-options_1);
+            }
+
+            &-label {
+                @include label.info-label;
+                font-size: 13px;
+            }
+
+            &:hover {
+
+                .main-div__filter-section-title,
+                .main-div__filter-section-icon {
+                    font-size: 18px;
+                    transform: scale(1.05);
+                    color: var(--dashboard-options_2)
+                }
+            }
+        }
+
+        &-title-txt {
+            font-size: 18px;
+            font-weight: 550;
+        }
+    }
+}
+
+//# Media //
+@media (max-width: media.$max-width-geralDshB) {
+    .main-div {
+        &__filter {
+            &-list {
+                width: 100%;
+            }
+
+            &-inputs {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+
+        &__info {
+            &-txt {
+                font-size: 20px;
+            }
+
+            &-label {
+                font-size: 12epx;
+            }
+
+        }
+
+        &__article-chart--products {
+            width: 100%;
+            height: 100%;
+        }
+
+        &__annual-summary,
+        &__weekly-summary,
+        &__products-summary {
+            width: 80%;
+            height: 30vh;
+        }
+
+        &__annual-section,
+        &__weekly-section,
+        &__products-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__summary-section {
+            width: 45%;
+        }
+
+
+        &__annual-chart,
+        &__weekly-chart {
+            width: 95%;
+        }
+
+        &__products {
+            &-chart {
+                width: 95%;
+                flex-direction: column;
+            }
+
+            &-filter {
+                flex-direction: column;
+                height: 100%;
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,65 @@
+//# --- Light Theme --- //
+
+$theme: (
+    //, Back Ground //
+    "bg-app": darken(white, 3%),
+    "bg-button": rgb(70, 70, 70),
+    //- Div Sombra //
+    "bg-div_sombra": linear-gradient(to bottom, rgba(214, 214, 214, 0.5), rgba(250, 250, 250, 0)),
+    //- Div Alert //
+    "bg-div_alert_sucess": rgb(13, 175, 75),
+    "bg-div_alert_fail": rgb(197, 25, 25),
+    //- Menu Lateral // 
+    "bg-menu_lateral": linear-gradient(to bottom, rgb(87, 84, 84), rgb(70, 70, 70)),
+    //- Miscellaneous // 
+    "bg-color_1": darken(white, 6.5%),
+    "bg-color_2": rgb(87, 84, 84),
+    "bg-color_3": white,
+    "bg-color_4": rgb(226, 226, 226),
+
+    //, Border //
+    "border_1": rgb(196, 202, 207),
+    //- Inputs //
+    "border-inputs": rgb(197, 203, 207),
+    "border-inputs-focus": rgb(180, 180, 180),
+    "border-inputs-hover": rgb(180, 180, 180),
+
+    //, Txt //
+    //- Standard //
+    "txt-color-standard": rgb(0, 0, 0),
+    //- Title //
+    "txt-color-title": rgb(0, 0, 0),
+    "txt-color-title_2": rgb(92, 92, 92),
+    //- Miscellaneous //
+    "txt-color_1": white,
+    "txt-color_2": rgb(119, 119, 119),
+    "txt-color_3": rgb(107, 105, 102),
+    "txt-color_4": rgb(0, 0, 0),
+
+    //, Icons // 
+    "icon-default-color": white,
+    //- Inputs //
+    "icon-inputs-color": rgb(77, 77, 77),
+    //- Filter //
+    "icon-trigger": rgb(107, 107, 107),
+    "icon-trigger-hover": rgb(56, 56, 56),
+
+    //, Link //
+    "link-hover": rgb(177, 177, 177),
+    "link-focus": rgb(177, 177, 177),
+
+    //, Button //
+    "button-hover": rgb(63, 63, 63),
+    "button-click": rgb(49, 49, 49),
+
+    //, Dash Board //
+    //- Categorie Label Color //
+    "dashboard-categorie": rgb(0, 0, 0),
+    "dashboard-negative": rgb(255, 0, 0),
+    //- Options Color //
+    "dashboard-options_1": rgb(0, 153, 255),
+    "dashboard-options_2": rgb(0, 114, 190),
+    "dashboard-options_3": rgb(49, 219, 49),
+    "dashboard-options_4": rgb(255, 0, 0),
+    "dashboard-options_5": darken(white, 10%),
+);

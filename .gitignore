@@ -1,0 +1,10 @@
+# FOLDERS #
+front-end/node_modules/
+back-end/node_modules/
+# FILES #
+back-end/data/imgData/produtos/*
+back-end/data/imgData/temp_produtos/*
+back-end/data/local_credentials/*.json
+# KEEP EMPTY FOLDERS #
+!back-end/data/imgData/produtos/.gitkeep
+!back-end/data/imgData/temp_produtos/.gitkeep

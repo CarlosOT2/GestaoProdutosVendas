@@ -1,0 +1,13 @@
+@mixin theme($theme) {
+    @each $key, $value in $theme {
+        @if type-of($value) == 'map' {
+            @each $in_map-key, $in_map-value in $value {
+                --#{$in_map-key}: #{$in_map-value};
+            }
+        }
+
+        @else {
+            --#{$key}: #{$value};
+        }
+    }
+}

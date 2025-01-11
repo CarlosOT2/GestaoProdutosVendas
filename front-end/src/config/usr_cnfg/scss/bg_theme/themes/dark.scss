@@ -1,0 +1,68 @@
+//# Dark Theme //
+
+$theme: (
+    //, Back Ground //
+    "bg-app": rgb(34, 39, 46),
+    "bg-button": rgb(42, 46, 51),
+    //- Div Sombra //
+    "bg-div_sombra": linear-gradient(to bottom, rgba(0, 0, 0, 0.411), rgba(0, 0, 0, 0)),
+    //- Div Alert //
+    "bg-div_alert_sucess": rgb(2, 126, 49),
+    "bg-div_alert_fail": rgb(167, 0, 0),
+    //- Menu Lateral // 
+    "bg-menu_lateral": linear-gradient(to bottom, rgb(34, 40, 46), rgb(32, 34, 36)),
+    //- Miscellaneous //
+    "bg-color_1": rgb(38, 44, 51),
+    "bg-color_2": rgb(27, 29, 32),
+    "bg-color_3": rgb(58, 66, 77),
+    "bg-color_4": rgb(46, 52, 58),
+
+    //, Border //
+    //- Miscellaneous //
+    "border_1": rgb(46, 52, 58),
+    //- Inputs //
+    "border-inputs-focus": rgb(43, 46, 48),
+    "border-inputs-hover": rgb(43, 46, 48),
+
+    //, Txt //
+    //- Standard //
+    "txt-color-standard": rgb(223, 223, 223),
+    //- Title //
+    "txt-color-title": rgb(223, 223, 223),
+    "txt-color-title_2": rgb(200, 200, 200),
+    //- Miscellaneous //
+    "txt-color_1": rgb(223, 223, 223),
+    "txt-color_2": rgb(223, 223, 223),
+    "txt-color_3": rgb(108, 115, 124),
+    "txt-color_4": rgb(83, 83, 83),
+
+    //, Icons // 
+    "icon-default-color": rgb(223, 223, 223),
+
+    //- Inputs //
+    "icon-inputs-color": rgb(25, 29, 34),
+
+    //- Filter //
+    "icon-trigger": rgb(223, 223, 223),
+    "icon-trigger-hover": rgb(255, 255, 255),
+
+    //, Hover, Focus, Click //
+    //- Link //
+    "link-hover": rgb(255, 255, 255),
+    "link-focus": rgb(255, 255, 255),
+    //- Button //
+    "button-hover": rgb(27, 30, 32),
+    "button-click": rgb(32, 32, 32),
+
+    //, Dash Board //
+    //- Categorie Label Color //
+    "dashboard-categorie": rgb(154, 156, 163),
+    "dashboard-negative": rgb(190, 38, 38),
+
+    //- Colors //
+    "dashboard-options_1": rgb(0, 127, 211),
+    "dashboard-options_2": rgb(0, 93, 155),
+    "dashboard-options_3": rgb(61, 151, 61),
+    "dashboard-options_4": rgb(190, 38, 38),
+    "dashboard-options_5": rgb(43, 49, 56),
+);

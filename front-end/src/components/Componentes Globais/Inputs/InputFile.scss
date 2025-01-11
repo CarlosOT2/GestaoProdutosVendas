@@ -1,0 +1,92 @@
+//# Use //
+@use '../../../config/global_scss/inputs.scss' as inputs;
+@use '../../../config/global_scss/scrolling.scss' as scrolling;
+
+//# Div-File //
+
+.div-file {
+    display: flex;
+
+    //# Center //
+    &--center {
+        align-items: center;
+        justify-content: center;
+    }
+
+    //# Div //
+    &__div {
+        display: flex;
+        justify-content: space-around;
+
+        border: 1px solid var(--border_1);
+        border-radius: 5px;
+
+        width: inputs.$standard-width;
+        background-color: var(--bg-color_3);
+        height: 16px;
+
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+
+    //# Label //
+    &__label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        color: #fff;
+
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-right: 1px solid var(--border_1);
+
+        height: 100%;
+        width: 30%;
+
+        cursor: pointer;
+    }
+
+    //# File-Name //
+    &__file-name {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 65%;
+
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    //# Input //
+    &__input {
+        display: none;
+    }
+
+    //# Icon //
+    &__icon {
+        color: var(--txt-color_2);
+        margin-right: 2px;
+        font-size: 20px;
+    }
+
+    //# Txt //
+    &__txt {
+        &-upload {
+            font-size: 15px;
+            cursor: pointer;
+            color: var(--txt-color_2);
+        }
+
+        &-file-name {
+            @include scrolling.long-texts;
+            
+            font-size: 15px;
+            color: var(--txt-color_2);
+
+            max-height: 200%;
+            max-width: 100%;
+        }
+    }
+}

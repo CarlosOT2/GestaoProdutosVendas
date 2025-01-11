@@ -1,0 +1,5 @@
+-------------------------------------------------------------------------------------------
+---- Pasta Onde Vai Conter, Funções, Objetos, Variáveis, Que Irão Auxiliar Durante O   ----                  
+---  Projeto, Tendo Funções, Variáveis, Objetos Repetitivos. Solucionado Diversos      --- 
+---- Problemas.                                                                        ----                                                                       
+- --------------------------------------------------------------------------------------- -

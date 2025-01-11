@@ -1,0 +1,52 @@
+//# Use //
+@use './config/usr_cnfg/scss/bg_theme/themes/light.scss' as light;
+@use './config/usr_cnfg/scss/bg_theme/themes/dark.scss' as dark;
+@use './config/usr_cnfg/scss/bg_theme/create_root.scss';
+
+//# ROOT //
+#root {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+//# BODY //
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+//# HEADER //
+.header {}
+
+//# MAIN //
+.main {
+    width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    background-color: var(--bg-app);
+}
+
+//# GLOBAL //
+
+//.. THEME //
+[bg_theme='dark_bg'] {
+    @include create_root.theme(dark.$theme);
+}
+
+[bg_theme='light_bg'] {
+    @include create_root.theme(light.$theme);
+}
+
+//.. CONFIG //
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

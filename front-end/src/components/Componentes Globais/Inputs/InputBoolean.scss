@@ -1,0 +1,26 @@
+//# Div Inputs //
+
+.div-input {
+    //# Boolean // 
+    &-boolean {
+        display: block;
+        
+        &--margin {
+            margin: 5px;
+            margin-left: 10px;
+        }
+        &__txt {
+            color: var(--txt-color_3);
+        }
+    }
+
+    //# JSX // 
+    &-jsx {
+        display: block;
+        &--center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

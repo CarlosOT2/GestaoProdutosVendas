@@ -1,0 +1,50 @@
+//# Use //
+@use './user-select.scss' as user-select;
+
+//# Valores Padrões //
+
+//.. Inputs Width //
+$standard-width: 95%;
+//.. Inputs Height //
+$standard-height: 100%;
+
+//.. Inputs border-radius //
+$standard-border-radius: 4px;
+
+//.. Inputs Focus PlaceHolder Opacity //
+$placeholder-opacity-focus: 0.4;
+
+//# Mixins //
+@mixin input-field-mixin($height: $standard-height, $width: $standard-width) {
+    @include user-select.user-select-none;
+    background-color: var(--bg-color_3);
+    color: var(--txt-color-standard);
+    width: $width;
+    height: $height;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 9px;
+    padding-top: 9px;
+    font-size: 14px;
+    border: none;
+    border: 1px solid var(--border_1);
+    border-radius: $standard-border-radius;
+    outline: none;
+    &::placeholder {
+        color: var(--txt-color_3);
+    }
+}
+@mixin input-field-label() {
+    @include user-select.user-select-none;
+}
+@mixin input-focus-mixin() {
+    border: 1px solid var(--border-inputs-focus);
+
+    &::placeholder {
+        opacity: $placeholder-opacity-focus;
+    }
+}
+
+@mixin input-hover-mixin() {
+    border: 1px solid var(--border-inputs-hover);
+}

@@ -1,0 +1,61 @@
+.txt-padrao {
+    font-size: 15px;
+    font-family: "Gill Sans", sans-serif;
+    cursor: default;
+    margin: 0;
+
+    //# TXT //
+    //.. Title //
+    &--title {
+        margin-left: 10px;
+        margin-top: 5px;
+        color: var(--txt-color-title);
+    }
+
+    &--title_2 {
+        font-size: 22px;
+        color: var(--txt-color-title_2);
+    }
+
+    //.. Types //
+    &--h1 {
+        font-style: italic;
+        font-size: 30px;
+    }
+
+    //.. Miscellaneous //
+    &--user-select {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    &--centralizar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    &--bold {
+        font-weight: bold
+    }
+
+    &--default-color {
+        color: var(--txt-color-standard);
+    }
+
+    &--cursor {
+        &-pointer {
+            cursor: pointer;
+        }
+    }
+
+    //# ICON //
+    //.. ICON //
+    &-icon {
+        margin-right: 8px;
+    }
+
+}

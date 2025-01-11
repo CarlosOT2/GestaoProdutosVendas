@@ -1,0 +1,10 @@
+//# Mixins //
+
+@mixin long-texts {
+    word-break: break-word;
+    overflow: auto;
+    max-height: 65%;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

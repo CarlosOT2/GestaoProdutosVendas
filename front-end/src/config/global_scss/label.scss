@@ -1,0 +1,6 @@
+//# Mixins //
+
+@mixin info-label {
+    color: var(--txt-color_2);
+    opacity: 0.6;
+}

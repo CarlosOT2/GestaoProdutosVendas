@@ -1,0 +1,20 @@
+//# Button-Theme //
+.button-theme {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+      
+    //# Icon //
+    &__icon {
+        font-size: 30px;
+        &-sun {
+            @extend .button-theme__icon;
+            font-size: 35px;
+            color: white;
+        }
+        &-moon {
+            @extend .button-theme__icon;
+            color: gold;
+        }
+    }
+}
