@@ -34,11 +34,13 @@ export async function get_secret(secret_name, optional_config = {}) {
     const command = new GetSecretValueCommand({ SecretId: secret_name });
     try {
         const data = await client.send(command);
+
         if ('SecretString' in data) {
             return JSON.parse(data.SecretString)
+            
         }
         if ('SecretBinary' in data) {
-            const buff = Buffer.from(data.SecretBinary, 'base64');
+            const buff = Buffer.from(data.SecretBinary, 'base64');     
             return JSON.parse(buff.toString('ascii'))
         }
         throw Error(`Unknown 'data' format received from Secrets Manager`)
