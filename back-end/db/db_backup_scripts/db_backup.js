@@ -48,7 +48,7 @@ async function backup_database(db_name) {
     const __dirname = dirname(__filename)
     const backup_path = join(__dirname, `fullbackup_${db_name}.sql`)
     //, command //
-    const command = `mysqldump  -u${username} -p${password} ${db_name} > "${backup_path}"`
+    const command = `mariabackup --backup --target-dir=${backup_path} --user=${username} --password=${password} --databases="${db_name}"`
 
 
     return new Promise((resolve, reject) => {

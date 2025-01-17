@@ -18,7 +18,7 @@ const knex_file = {
       host: 'localhost',
       user: username,
       password: password,
-      database: 'db_controle_estoque',
+      database: 'db_GestaoProdutosVendas',
     },
     useNullAsDefault: true,
     migrations: {
