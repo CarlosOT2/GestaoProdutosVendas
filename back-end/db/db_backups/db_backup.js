@@ -17,6 +17,7 @@ import get_root from '../root_credentials.js'
 
 export default async function upload_backup(db_name) {
     const file_path = await backup_database(db_name)
+    /*
     const file_name = basename(file_path)
     const file_content = fs.readFileSync(file_path)
     const upload_params = {
@@ -34,6 +35,7 @@ export default async function upload_backup(db_name) {
     } catch (error) {
         console.error(`;------- Error S3 Backup -------;`, error)
     }
+        */
 }
 
 async function backup_database(db_name) {
@@ -46,15 +48,14 @@ async function backup_database(db_name) {
     //, path //
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename)
-    const backup_path = join(__dirname, `fullbackup_${db_name}.sql`)
+    const backup_path = join(__dirname, `full_backups/fullbackup.xb.7z`)
     //, command //
-    const command = `mariabackup --backup --target-dir=${backup_path} --user=${username} --password=${password} --databases="${db_name}"`
+    const command = `mariabackup --user=${username} --password=${password} --backup --stream=xbstream --databases="${db_name}" | 7z a -si "${backup_path}"`
 
 
     return new Promise((resolve, reject) => {
         exec(command, (error, stdout) => {
             if (error) {
-                unlinkFile(backup_path)
                 reject(new Error('Ocorreu um erro durante o backup do banco de dados'));
             } else {
                 console.log(`;------- Sucess Backup ${db_name} -------;`, stdout)
