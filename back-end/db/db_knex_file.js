@@ -12,24 +12,24 @@ const knex_file = {
 
   //.. db_controle_estoque //
 
-  controle_estoque_dev: {
+  db_gestaoprodutosvendas_dev: {
     client: 'mysql2',
     connection: {
       host: 'localhost',
       user: username,
       password: password,
-      database: 'db_GestaoProdutosVendas',
+      database: 'db_gestaoprodutosvendas',
     },
     useNullAsDefault: true,
     migrations: {
-      directory: './db_controle_estoque/db_migrations'
+      directory: './db_gestaoprodutosvendas/db_migrations'
     },
     seeds: {
-      directory: './db_controle_estoque/db_seeds'
+      directory: './db_gestaoprodutosvendas/db_seeds'
     }
   },
 
-  controle_estoque_stag: {
+  stag: {
     client: 'mysql2',
     connection: {
       database: 'my_db',
@@ -45,7 +45,7 @@ const knex_file = {
     }
   },
 
-  controle_estoque_prod: {
+  prod: {
     client: 'mysql2',
     connection: {
       database: 'my_db',
