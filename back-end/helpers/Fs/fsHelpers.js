@@ -27,10 +27,10 @@ async function promiseFs(fs_config) {
         access: [path, constants],
         rename: [old_path, new_path],
         unlink: [path],
-        copyFile: [path, new_path],
 
         mkdir: [path],
-        writeFile: [path, data, options]
+        writeFile: [path, data, options],
+        copyFile: [path, new_path],
 
     }
 
@@ -116,7 +116,7 @@ export async function unlinkFile(path, res) {
 }
 //.. copyFile // 
 export async function copyFile(path, new_path) {
-    if(!path || !new_path) {
+    if (!path || !new_path) {
         console.error(`;------- Error copyFile -------; Argumentos Necessario Nulos (path, new_path)`)
         return false
     }
@@ -124,7 +124,7 @@ export async function copyFile(path, new_path) {
     try {
         await promiseFs({ type: 'copyFile', path, new_path })
         return true
-    } catch(copyFileError) {
+    } catch (copyFileError) {
         console.error(`;------- Error copyFile -------;`, copyFileError.message)
         return false
     }

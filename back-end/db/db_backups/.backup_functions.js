@@ -2,13 +2,12 @@
 import { exec } from 'child_process'
 import fs from 'fs'
 
-import { join, dirname, basename, resolve } from 'path'
+import { join, dirname } from 'path'
 import { fileURLToPath } from 'url';
 
 import { upload_s3 } from '../../helpers/Aws/s3.js'
 import { unlinkFile, copyFile } from '../../helpers/Fs/fsHelpers.js'
 
-import { current_date } from '../../helpers/Date/get_date.js'
 import get_root from '../root_credentials.js'
 
 
@@ -54,24 +53,57 @@ export async function backup_db(db_name) {
             await upload_s3(upload_params)
             console.log(`;------- Sucess 'backup_s3' -------;`)
         } catch (error) {
-            throw new Error(`;------- Error 'backup_s3' -------;`, error)
+            throw error
         }
     }
     async function backup_exec() {
-        /*
-                await copyFile(backup_path, backup_tempfile)
-                */
+
+        //.. Funções 'backup_exec' //
+        //, exec_command //
+        async function exec_command() {
+            return new Promise((resolve, rejects) => {
+                exec(command, (error, stdout) => {
+                    if (error) return rejects(error)
+                    resolve(stdout)
+                })
+            })
+        }
+        //, verify_backupFile //
+        async function verify_backupFile() {
+
+            return new Promise((resolve, rejects) => {
+                const service_name = 'MariaDB'
+                let valid_backup = false
+                exec(`sc query ${service_name}`, (execError, stdout) => {
+                    if (execError) return rejects(execError)
+
+                    valid_backup = stdout.toString().includes('RUNNING')
+                    fs.stat(backup_path, (statError, stats) => {
+                        if (statError) return rejects(statError)
+                        valid_backup = stats.size < 200
+                    })
+
+                    resolve(valid_backup)
+                })
+            })
+        }
+
+
+
         try {
-            /*
+            await copyFile(backup_path, backup_tempfile)
             await unlinkFile(backup_path)
-            */
-            exec(command, (error, stdout) => {
-                if (error) throw error
-                console.log(`;------- Success 'backup_exec' ${db_name} -------;`, stdout);
-                resolve();
-            });
+
+            const { error, stdout } = await exec_command()
+            if (error) throw error
+            if (!await verify_backupFile()) throw new Error('Houve falhas durante o processo de backup')
+
+            console.log(`;------- Success 'backup_exec' ${db_name} -------;`, stdout);
+            await unlinkFile(backup_tempfile)
         } catch (error) {
-            throw new Error(`;------- Error 'backup_exec' ${db_name} -------;`, error)
+            await copyFile(backup_tempfile, backup_path)
+            await unlinkFile(backup_tempfile)
+            throw error
         }
     }
 
@@ -79,7 +111,7 @@ export async function backup_db(db_name) {
         await backup_exec()
         await backup_s3()
     } catch (error) {
-        console.error(error.message)
+        console.error(error)
     }
 }
 
