@@ -15,7 +15,14 @@ import get_root from '../root_credentials.js'
 
 //# Funções //
 
-export async function restore_db(db_name) {
+export async function verify_fullbackup() {
+    /*
+    - Função que irá verificar a integridade dos dados, dos full backups no s3, e localmente no computador.
+    - Em resumo a 1 á 2 semanas vou verificar a integridades dos full backups, comparando o hashing deles.
+    - Irei usar essa função para verificar o backup antes de dar restore, tambem, para nao dar merda. 
+    */
+}
+export async function restore_db(backup_name) {
     /*
     - Comando Para Dar Restore, Por Enquanto É Esse, Precisa de um diretorio para os dados do backup em especifico,
     - ele vai armazenar os dados do backup no diretorio que está sendo executado o comando.
@@ -70,23 +77,20 @@ export async function backup_db(db_name) {
         }
         //, verify_backupFile //
         async function verify_backupFile() {
-
             return new Promise((resolve, rejects) => {
                 const service_name = 'MariaDB'
-                let valid_backup = false
                 exec(`sc query ${service_name}`, (execError, stdout) => {
                     if (execError) return rejects(execError)
-
-                    valid_backup = stdout.toString().includes('RUNNING')
+                    if (!stdout.toString().includes('RUNNING')) return rejects(false)
                     fs.stat(backup_path, (statError, stats) => {
                         if (statError) return rejects(statError)
-                        valid_backup = stats.size < 200
+                        if (stats.size < 1000) return rejects(false)
+                        resolve(true)
                     })
-
-                    resolve(valid_backup)
                 })
             })
         }
+
 
 
 
@@ -94,11 +98,11 @@ export async function backup_db(db_name) {
             await copyFile(backup_path, backup_tempfile)
             await unlinkFile(backup_path)
 
-            const { error, stdout } = await exec_command()
+            const { error } = await exec_command()
             if (error) throw error
             if (!await verify_backupFile()) throw new Error('Houve falhas durante o processo de backup')
 
-            console.log(`;------- Success 'backup_exec' ${db_name} -------;`, stdout);
+            console.log(`;------- Success 'backup_exec' ${db_name} -------;`);
             await unlinkFile(backup_tempfile)
         } catch (error) {
             await copyFile(backup_tempfile, backup_path)
