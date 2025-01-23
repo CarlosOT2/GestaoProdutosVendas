@@ -7,7 +7,7 @@ import { current_date, start } from '../helpers/Date/get_date.js';
 import { format_StringDate } from '../helpers/Date/format_date.js';
 import RequiredVariables from '../helpers/RequiredVariables.js'
 
-import { db_controle_estoque } from '../db/db_config.js';
+import { db_gestaoprodutosvendas } from '../db/db_config.js';
 
 //# Variáveis Globais //
 
@@ -46,14 +46,14 @@ async function info_dashboard(config_obj) {
     }
     async function build_query(config_obj) {
         const { lucro_query } = config_obj
-        if (lucro_query) return { [lucro_query]: db_controle_estoque.raw('cast(f_valor_vendas as signed) - cast(f_valorFornecedor_vendas as signed)') }
+        if (lucro_query) return { [lucro_query]: db_gestaoprodutosvendas.raw('cast(f_valor_vendas as signed) - cast(f_valorFornecedor_vendas as signed)') }
     }
     //.. Type //
     //, Lucros //
     //-- Lucro, Vendas Anual //
     if (type === 'lucro_anual') {
-        query = db_controle_estoque('vendas')
-            .select(db_controle_estoque.raw('MONTHNAME(d_data_vendas) AS mes'))
+        query = db_gestaoprodutosvendas('vendas')
+            .select(db_gestaoprodutosvendas.raw('MONTHNAME(d_data_vendas) AS mes'))
             .whereRaw('YEAR(d_data_vendas) = ?', [new Date().getFullYear()])
             .count('i_id_vendas as vendas')
             .sum(await build_query({ lucro_query: 'lucro' }))
@@ -72,13 +72,13 @@ async function info_dashboard(config_obj) {
     }
     //-- Lucro, Vendas Semanal //
     if (type === 'lucro_semanal') {
-        query = db_controle_estoque('vendas')
+        query = db_gestaoprodutosvendas('vendas')
             .select(
-                db_controle_estoque.raw('DAYNAME(d_data_vendas) as dia')
+                db_gestaoprodutosvendas.raw('DAYNAME(d_data_vendas) as dia')
             )
             .whereBetween('d_data_vendas', [
-                db_controle_estoque.raw('CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY'),
-                db_controle_estoque.raw('CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY + INTERVAL 6 DAY')
+                db_gestaoprodutosvendas.raw('CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY'),
+                db_gestaoprodutosvendas.raw('CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY + INTERVAL 6 DAY')
             ])
             .sum(await build_query({ lucro_query: 'lucro' }))
             .count('* as vendas')
@@ -97,7 +97,7 @@ async function info_dashboard(config_obj) {
     }
     //-- Lucro Total //
     if (type === 'lucro_total') {
-        query = db_controle_estoque('vendas')
+        query = db_gestaoprodutosvendas('vendas')
             .sum(await build_query({ lucro_query: 'lucro' }))
         if (quantidade_vendas) query.count('* as quantidade_vendas')
         if (previous_date && current_date) query.whereBetween('d_data_vendas', [previous_date, current_date])
@@ -106,7 +106,7 @@ async function info_dashboard(config_obj) {
     }
     //-- Ranking Produtos Mais Vendidos //
     if (type === 'mais_vendidos') {
-        query = db_controle_estoque('vendas')
+        query = db_gestaoprodutosvendas('vendas')
             .select('s_nome_vendas as nome')
             .count('* as quantidade_vendas')
             .groupBy('nome')
@@ -115,7 +115,7 @@ async function info_dashboard(config_obj) {
     }
     //-- Ranking Produtos Lucro //
     if (type === 'lucro_vendas') {
-        query = db_controle_estoque('vendas')
+        query = db_gestaoprodutosvendas('vendas')
             .select('s_nome_vendas as nome')
             .sum(await build_query({ lucro_query: 'lucro' }))
             .groupBy('nome')

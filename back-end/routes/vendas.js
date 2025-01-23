@@ -8,7 +8,7 @@ import BuilderWhere from '../helpers/Builder/BuilderWhere.js'
 import { formatTable_Date, format_StringDate } from '../helpers/Date/format_date.js'
 import { BuildPagCursor } from '../helpers/Pagination/cursor_based.js'
 
-import { db_controle_estoque } from '../db/db_config.js';
+import { db_gestaoprodutosvendas } from '../db/db_config.js';
 
 //# Variáveis Globais //
 
@@ -34,7 +34,7 @@ const rotaDeletePadrao = "/:id"
 router.get(rotaGetPadrao, async (req, res) => {
     const { cursor } = req.query
     try {
-        let query = db_controle_estoque('vendas')
+        let query = db_gestaoprodutosvendas('vendas')
 
         await BuildPagCursor(query, { cursor, column: 'i_id_vendas' })
         query.limit(limit)
@@ -74,7 +74,7 @@ router.post(rotaPostVenda, async (req, res) => {
     if (Error) return res.status(400).json({ info: Error })
 
     try {
-        const query = db_controle_estoque('vendas')
+        const query = db_gestaoprodutosvendas('vendas')
 
         const { d_data_vendas: formattedDate } = await format_StringDate({
             type: 'standard',
@@ -105,7 +105,7 @@ router.post(rotaPostVenda, async (req, res) => {
 router.delete(rotaDeletePadrao, async (req, res) => {
     const { id } = req.params
     try {
-        let query = db_controle_estoque('vendas')
+        let query = db_gestaoprodutosvendas('vendas')
         await BuilderWhere({
             query: query,
             id: {
@@ -125,7 +125,7 @@ router.get(rotaGetFiltrar, async (req, res) => {
     const { cursor, s_nome_vendas, f_valor_vendas, s_fornecedor_vendas, d_data_vendas } = req.query
 
     try {
-        let query = db_controle_estoque("vendas");
+        let query = db_gestaoprodutosvendas("vendas");
         await BuilderWhere({
             query: query,
             f_valor_vendas: {

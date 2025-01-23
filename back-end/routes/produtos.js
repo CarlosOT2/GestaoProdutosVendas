@@ -13,7 +13,7 @@ import { accessFile, unlinkFile, resizeFile } from '../helpers/Fs/fsHelpers.js'
 
 import fs from 'fs'
 
-import { db_controle_estoque } from '../db/db_config.js';
+import { db_gestaoprodutosvendas } from '../db/db_config.js';
 import port from '../port.js';
 
 
@@ -53,7 +53,7 @@ router.use(rotaExpressStatic, express.static(dirExpStatic))
 router.get(rotaGetPadrao, async (req, res) => {
     const { cursor } = req.query
     try {
-        let query = db_controle_estoque('produtos')
+        let query = db_gestaoprodutosvendas('produtos')
 
         await BuildPagCursor(query, { cursor, column: 'i_id_produtos' })
         query.limit(limit)
@@ -70,7 +70,7 @@ router.get(rotaGetFiltrar, async (req, res) => {
     const { cursor, s_nome_produtos, s_fornecedor_produtos, f_valor_produtos, i_estoque_produtos } = req.query
 
     try {
-        let query = db_controle_estoque("produtos");
+        let query = db_gestaoprodutosvendas("produtos");
 
         await BuilderWhere({
             query: query,
@@ -150,7 +150,7 @@ router.post(rotaPostProduto, async (req, res) => {
 
     const { path, finalPath } = s_img_produtos
     try {
-        let query = db_controle_estoque("produtos")
+        let query = db_gestaoprodutosvendas("produtos")
         if (path && finalPath) {
             const { filename } = await resizeFile(path, finalPath, res)
             const { originalUrl } = req
@@ -237,7 +237,7 @@ router.put(rotaPutPadrao, async (req, res) => {
         i_desconto_produtos
     } = req.body
     try {
-        const query = db_controle_estoque("produtos")
+        const query = db_gestaoprodutosvendas("produtos")
         await BuilderWhere({
             query: query,
             id: {
@@ -271,7 +271,7 @@ router.put(rotaPutPadrao, async (req, res) => {
 router.delete(rotaDeletePadrao, async (req, res) => {
     const { id } = req.params
     try {
-        let query = db_controle_estoque("produtos")
+        let query = db_gestaoprodutosvendas("produtos")
 
         await BuilderWhere({
             query: query,
