@@ -1,5 +1,6 @@
 - -------------------------------------------------------------------------------------- -
---  O Backup Do Banco Dados, Precisa Ser Agendado No Agendador De Tarefas Do Windows    --
---  Executando O Script 'db_backup_schedule.bat', Que Irá Executar O 'db_backup.js'     --
--- Para Ser Executado O Script, O Computador Precisa Está Ligado, Ou Não Será Executado --
+-- O Backup Do Banco Dados, Precisa Ser Agendado No Agendador De Tarefas Do Windows     --
+-- Executando O Script 'backup_db', Que Irá Executar O Backup.                          --
+--                                                                                      --
+-  Para Ser Executado O Script, O Computador Precisa Está Ligado, Ou Não Será Executado. -
 ------------------------------------------------------------------------------------------

@@ -10,18 +10,8 @@ import { unlinkFile, copyFile } from '../../helpers/Fs/fsHelpers.js'
 
 import get_root from '../root_credentials.js'
 
-
-
-
 //# Funções //
 
-export async function verify_fullbackup() {
-    /*
-    - Função que irá verificar a integridade dos dados, dos full backups no s3, e localmente no computador.
-    - Em resumo a 1 á 2 semanas vou verificar a integridades dos full backups, comparando o hashing deles.
-    - Irei usar essa função para verificar o backup antes de dar restore, tambem, para nao dar merda. 
-    */
-}
 export async function restore_db(backup_name) {
     /*
     - Comando Para Dar Restore, Por Enquanto É Esse, Precisa de um diretorio para os dados do backup em especifico,
@@ -64,43 +54,47 @@ export async function backup_db(db_name) {
         }
     }
     async function backup_exec() {
-
         //.. Funções 'backup_exec' //
+        //, check_db //
+        async function check_db() {
+            const check_db = `mariadb-check -c --all-databases --user=${username} --password=${password}`
+            const optimize_db = `mariadb-check -o --all-databases --user=${username} --password=${password}`
+            const service_name = 'MariaDB'
+            return new Promise((resolve, rejects) => {
+                exec(`sc query ${service_name}`, (sc_error, stdout) => {
+                    if (sc_error) return rejects(sc_error)
+                    if (!stdout.toString().includes('RUNNING')) {
+                        return rejects(new Error(`Serviço Windows ${service_name}, Não Está Sendo Executado`))
+                    }
+                    exec(check_db, (check_err) => {
+                        if (check_err) return rejects(check_err)
+                        exec(optimize_db, (optimize_err) => {
+                            if (optimize_err) return rejects(optimize_err)
+                            resolve()
+                        })
+                    })
+                })
+
+            })
+        }
         //, exec_command //
         async function exec_command() {
             return new Promise((resolve, rejects) => {
-                exec(command, (error, stdout) => {
+                exec(command, (error) => {
                     if (error) return rejects(error)
-                    resolve(stdout)
+                    resolve()
                 })
             })
         }
-        //, verify_backupFile //
-        async function verify_backupFile() {
-            return new Promise((resolve, rejects) => {
-                const service_name = 'MariaDB'
-                exec(`sc query ${service_name}`, (execError, stdout) => {
-                    if (execError) return rejects(execError)
-                    if (!stdout.toString().includes('RUNNING')) return rejects(false)
-                    fs.stat(backup_path, (statError, stats) => {
-                        if (statError) return rejects(statError)
-                        if (stats.size < 1000) return rejects(false)
-                        resolve(true)
-                    })
-                })
-            })
-        }
-
-
-
 
         try {
             await copyFile(backup_path, backup_tempfile)
             await unlinkFile(backup_path)
 
-            const { error } = await exec_command()
-            if (error) throw error
-            if (!await verify_backupFile()) throw new Error('Houve falhas durante o processo de backup')
+            const check_error = await check_db()
+            if (check_error) throw check_error
+            const exec_error = await exec_command()
+            if (exec_error) throw exec_error
 
             console.log(`;------- Success 'backup_exec' ${db_name} -------;`);
             await unlinkFile(backup_tempfile)
