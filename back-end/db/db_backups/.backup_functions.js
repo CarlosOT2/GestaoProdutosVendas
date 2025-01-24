@@ -6,7 +6,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url';
 
 import { upload_s3 } from '../../helpers/Aws/s3.js'
-import { unlinkFile, copyFile } from '../../helpers/Fs/fsHelpers.js'
+import { unlinkFile, copyFile, writeFile } from '../../helpers/Fs/fsHelpers.js'
 
 import get_root from '../root_credentials.js'
 
@@ -31,8 +31,12 @@ export async function backup_db(db_name) {
     const __dirname = dirname(__filename)
     const backup_path = join(__dirname, `full_backups/fullbackup.xb.7z`)
     const backup_tempfile = `${backup_path}.tmp`
+    const backup_checklogs = join(__dirname, '../backup_checklogs')
     //, command //
     const command = `mariabackup --user=${username} --password=${password} --backup --stream=xbstream --databases="${db_name}" | 7z a -si "${backup_path}"`
+
+
+
 
     //# Funções //
 
@@ -64,12 +68,20 @@ export async function backup_db(db_name) {
                 exec(`sc query ${service_name}`, (sc_error, stdout) => {
                     if (sc_error) return rejects(sc_error)
                     if (!stdout.toString().includes('RUNNING')) {
-                        return rejects(new Error(`Serviço Windows ${service_name}, Não Está Sendo Executado`))
+                        return rejects(new Error(`Serviço Windows "${service_name}" não está sendo executado.`))
                     }
-                    exec(check_db, (check_err) => {
+                    exec(check_db, (check_err, check_stdout) => {
                         if (check_err) return rejects(check_err)
-                        exec(optimize_db, (optimize_err) => {
-                            if (optimize_err) return rejects(optimize_err)
+                        if (check_stdout.includes('Error')) {
+                            writeFile(`${backup_checklogs}/checkerr.log`, check_stdout)
+                            return rejects(`Error durante a execução do comando 'check_db'`)
+                        }
+                        exec(optimize_db, (opt_err, opt_stdout) => {
+                            if (opt_err) return rejects(opt_err)
+                            if (opt_stdout.includes('Error')) {
+                                writeFile(`${backup_checklogs}/opterr.log`, opt_stdout)
+                                return rejects(`Error durante a execução do comando 'optimize_db'`)
+                            }
                             resolve()
                         })
                     })
