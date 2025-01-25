@@ -31,7 +31,7 @@ export async function backup_db(db_name) {
     const __dirname = dirname(__filename)
     const backup_path = join(__dirname, `full_backups/fullbackup.xb.7z`)
     const backup_tempfile = `${backup_path}.tmp`
-    const backup_checklogs = join(__dirname, '../backup_checklogs')
+    const backup_logs = join(__dirname, '../backup_logs')
     //, command //
     const command = `mariabackup --user=${username} --password=${password} --backup --stream=xbstream --databases="${db_name}" | 7z a -si "${backup_path}"`
 
@@ -64,24 +64,51 @@ export async function backup_db(db_name) {
             const check_db = `mariadb-check -c --all-databases --user=${username} --password=${password}`
             const optimize_db = `mariadb-check -o --all-databases --user=${username} --password=${password}`
             const service_name = 'MariaDB'
+            let rejects_flag = false
+
             return new Promise((resolve, rejects) => {
-                exec(`sc query ${service_name}`, (sc_error, stdout) => {
-                    if (sc_error) return rejects(sc_error)
-                    if (!stdout.toString().includes('RUNNING')) {
-                        return rejects(new Error(`Serviço Windows "${service_name}" não está sendo executado.`))
+
+                async function check_values(cnfg_obj) {
+                    const { filename_log, check_cond, rjct_check_cond, wrtFile_check_cond, error } = cnfg_obj
+                    if (error) {
+                        writeFile(`${backup_logs}/exec_${filename_log}`, JSON.stringify(error, Object.getOwnPropertyNames(error), 2))
+                        rejects(error)
+                        rejects_flag = true
                     }
+                    if (check_cond) {
+                        writeFile(`${backup_logs}/${filename_log}`, wrtFile_check_cond)
+                        rejects(rjct_check_cond)
+                        rejects_flag = true
+                    }
+                }
+
+                exec(`sc query ${service_name}`, (sc_error, stdout) => {
+                    check_values({
+                        filename_log: 'queryerr.log',
+                        check_cond: !stdout.toString().includes('RUNNING'),
+                        rjct_check_cond: new Error(`Serviço Windows "${service_name}" não está sendo executado.`),
+                        wrtFile_check_cond: `Serviço Windows "${service_name}" não está sendo executado.`,
+                        error: sc_error
+                    })
+                    if (rejects_flag) return
                     exec(check_db, (check_err, check_stdout) => {
-                        if (check_err) return rejects(check_err)
-                        if (check_stdout.includes('Error')) {
-                            writeFile(`${backup_checklogs}/checkerr.log`, check_stdout)
-                            return rejects(`Error durante a execução do comando 'check_db'`)
-                        }
+                        check_values({
+                            filename_log: 'checkerr.log',
+                            check_cond: check_stdout.includes('Error'),
+                            rjct_check_cond: `Error encontrado durante a checagem do comando 'check_db'`,
+                            wrtFile_check_cond: check_stdout,
+                            error: check_err
+                        })
+                        if (rejects_flag) return
                         exec(optimize_db, (opt_err, opt_stdout) => {
-                            if (opt_err) return rejects(opt_err)
-                            if (opt_stdout.includes('Error')) {
-                                writeFile(`${backup_checklogs}/opterr.log`, opt_stdout)
-                                return rejects(`Error durante a execução do comando 'optimize_db'`)
-                            }
+                            check_values({
+                                filename_log: 'opterr.log',
+                                check_cond: opt_stdout.includes('Error'),
+                                rjct_check_cond: `Error durante a execução do comando 'optimize_db'`,
+                                wrtFile_check_cond: opt_stdout,
+                                error: opt_err
+                            })
+                            if (rejects_flag) return
                             resolve()
                         })
                     })
