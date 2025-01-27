@@ -1,6 +1,7 @@
 //# Import //
 import { exec } from 'child_process'
 import fs from 'fs'
+import Registry from 'winreg'
 
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url';
@@ -10,33 +11,82 @@ import { unlinkFile, copyFile, writeFile } from '../../helpers/Fs/fsHelpers.js'
 
 import get_root from '../root_credentials.js'
 
+//# Variáveis Globais //
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename)
+const backup_path = join(__dirname, `full_backups/fullbackup.xb.7z`)
+const backup_logs = join(__dirname, '../backup_logs')
+
 //# Funções //
 
-export async function restore_db(backup_name) {
+export async function restore_backup() {
+    //# Variáveis //
+    const restorefiles_path = join(__dirname, './restore_backups')
+    const MariaDB_reg = new Registry({
+        hive: Registry.HKLM,
+        key: '\\SYSTEM\\CurrentControlSet\\Services\\MariaDB'
+    })
+    const MariaDB_paths = MariaDB_reg.get('ImagePath', (error, result) => {
+        if (error) return console.error(error)
+        return result.value.split(`" "`)
+    })
+
+    //# Funções //
+
+    async function extract_backup() {
+        const extract_backup = `cd ${restorefiles_path} && 7z e ${backup_path} -so | mbstream -x `
+        return new Promise((resolve, rejects) => {
+            exec(extract_backup, (error) => {
+                if (error) return rejects(error)
+                console.log(`;------- Success extrair backup -------;`);
+                resolve()
+            })
+        })
+
+    }
+    async function prepare_backup() {
+        const prepare_backup = `mariabackup --prepare --target-dir=${restorefiles_path}`
+        return new Promise((resolve, rejects) => {
+            exec(prepare_backup, (error) => {
+                if (error) throw rejects(error)
+                console.log(`;------- Success restaurar backup -------;`);
+                resolve()
+            })
+        })
+    }
+    async function move_essentials_folders() {
+        const folders = ['mysql', 'perfomance_schema', 'sys']
+        const datadir = MariaDB_paths[1]
+        const promises = []
+    }
+    try {
+        const extract_error = await extract_backup()
+        if (extract_error) throw extract_error
+
+        const prepare_error = await prepare_backup()
+        if (prepare_error) throw prepare_error
+
+        const move_folders = await move_essentials_folders()
+        if (move_folders) throw move_folders
+    } catch (error) {
+        console.error(error)
+    }
     /*
     - Comando Para Dar Restore, Por Enquanto É Esse, Precisa de um diretorio para os dados do backup em especifico,
     - ele vai armazenar os dados do backup no diretorio que está sendo executado o comando.
     , 7z e C:/Users/Carlos/.programacao/Projetos/GestaoProdutosVendas/Git/back-end/db/db_backups/full_backups/fullbackup.xb.7z -so | mbstream -x 
+    , mariabackup --prepare --target-dir=C:\Users\Carlos\.programacao\Projetos\GestaoProdutosVendas\Git\back-end\db\db_backups\restore_backups
+    , mariabackup --copy-back --target-dir=C:\Users\Carlos\.programacao\Projetos\GestaoProdutosVendas\Git\back-end\db\db_backups\restore_backups --datadir=C:\Users\Carlos\.mariadb
     */
 }
 export async function backup_db(db_name) {
 
     //# Variáveis //
 
-    //.. backup //
-    //, credentials //
     const { username, password } = await get_root()
-    //, path //
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename)
-    const backup_path = join(__dirname, `full_backups/fullbackup.xb.7z`)
     const backup_tempfile = `${backup_path}.tmp`
-    const backup_logs = join(__dirname, '../backup_logs')
-    //, command //
-    const command = `mariabackup --user=${username} --password=${password} --backup --stream=xbstream --databases="${db_name}" | 7z a -si "${backup_path}"`
-
-
-
+    const backup_command = `mariabackup --user=${username} --password=${password} --backup --stream=xbstream --databases="${db_name}" | 7z a -si "${backup_path}"`
 
     //# Funções //
 
@@ -116,10 +166,10 @@ export async function backup_db(db_name) {
 
             })
         }
-        //, exec_command //
-        async function exec_command() {
+        //, exec_backup //
+        async function exec_backup() {
             return new Promise((resolve, rejects) => {
-                exec(command, (error) => {
+                exec(backup_command, (error) => {
                     if (error) return rejects(error)
                     resolve()
                 })
@@ -132,8 +182,8 @@ export async function backup_db(db_name) {
 
             const check_error = await check_db()
             if (check_error) throw check_error
-            const exec_error = await exec_command()
-            if (exec_error) throw exec_error
+            const execBackup_error = await exec_backup()
+            if (execBackup_error) throw execBackup_error
 
             console.log(`;------- Success 'backup_exec' ${db_name} -------;`);
             await unlinkFile(backup_tempfile)

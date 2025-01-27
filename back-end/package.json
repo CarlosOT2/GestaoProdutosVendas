@@ -26,7 +26,8 @@
     "mysql2": "^3.6.5",
     "sharp": "^0.33.2",
     "validate-image-type": "^3.0.0",
-    "win-dpapi": "^1.1.0"
+    "win-dpapi": "^1.1.0",
+    "winreg": "^1.2.5"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
