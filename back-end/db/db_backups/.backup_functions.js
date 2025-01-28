@@ -7,7 +7,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url';
 
 import { upload_s3 } from '../../helpers/Aws/s3.js'
-import { unlinkFile, copyFile, writeFile } from '../../helpers/Fs/fsHelpers.js'
+import { unlinkFile, copyFile, writeFile, mkdir } from '../../helpers/Fs/fsHelpers.js'
 
 import get_root from '../root_credentials.js'
 
@@ -26,10 +26,6 @@ export async function restore_backup() {
     const MariaDB_reg = new Registry({
         hive: Registry.HKLM,
         key: '\\SYSTEM\\CurrentControlSet\\Services\\MariaDB'
-    })
-    const MariaDB_paths = MariaDB_reg.get('ImagePath', (error, result) => {
-        if (error) return console.error(error)
-        return result.value.split(`" "`)
     })
 
     //# Funções //
@@ -55,19 +51,46 @@ export async function restore_backup() {
             })
         })
     }
-    async function move_essentials_folders() {
-        const folders = ['mysql', 'perfomance_schema', 'sys']
-        const datadir = MariaDB_paths[1]
+    function move_essentials_folders(datadir) {
+        const folders = ['mysql', 'performance_schema', 'sys']
         const promises = []
+        const keepfolders_dir = join(datadir, `../../keep_folders`)
+        mkdir(keepfolders_dir)
+        folders.forEach((folder_name) => {
+            promises.push(new Promise((resolve, rejects) => {
+                const folder_dir = join(datadir, `../${folder_name}`)
+                const folder_newDir = `${keepfolders_dir}/${folder_name}`
+                fs.rename(folder_dir, folder_newDir, (error) => {
+                    if (error) return rejects(error)
+                    resolve()
+                })
+            }))
+        })
+        return promises
+    }
+    async function get_infodb() {
+        return new Promise((resolve, rejects) => {
+            MariaDB_reg.get('ImagePath', (error, result) => {
+                if (error) return rejects(error)
+                const info_db = result.value
+                    .match(/"([^"]*)"/g)
+                    .map(path => path.replace(/"/g, '').replace(/^--defaults-file=/, ''));
+                resolve(info_db)
+            })
+        })
     }
     try {
+        const info_db = await get_infodb()
+        const db_service_name = info_db[2]
+        
         const extract_error = await extract_backup()
         if (extract_error) throw extract_error
 
         const prepare_error = await prepare_backup()
         if (prepare_error) throw prepare_error
 
-        const move_folders = await move_essentials_folders()
+        const datadir = info_db[1]
+        const move_folders = await Promise.all(move_essentials_folders(datadir))
         if (move_folders) throw move_folders
     } catch (error) {
         console.error(error)
