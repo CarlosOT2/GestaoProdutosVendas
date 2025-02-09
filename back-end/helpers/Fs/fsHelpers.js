@@ -16,26 +16,23 @@ import HTTPError from '../Classes/HTTPError.js'
 
 import { verifyMimeType } from '../Img.js';
 
-//# Funções Exportadas //
 
 //.. promiseFs //
-async function promiseFs(fs_config) {
+function promiseFs(fs_config) {
     const { path, old_path, new_path } = fs_config
     const { type, data, options, constants } = fs_config
     const fs_arguments = {
-
         access: [path, constants],
         rename: [old_path, new_path],
         unlink: [path],
+        rm: [path, options],
 
         mkdir: [path],
         writeFile: [path, data, options],
         copyFile: [path, new_path],
-
     }
 
     let type_arguments = []
-
     try {
         if (!type) throw new Error(`'type' Nulo`)
 
@@ -64,16 +61,21 @@ async function promiseFs(fs_config) {
     })
 }
 
+
+
 //.. accessFile //
 export async function accessFile(path, constants, optional_config = {}) {
+    const { res, console_error = true, multiple_paths } = optional_config
 
-    if (!path || constants) {
-        console.error(`;------- Error Access -------; Argumentos Necessario Nulos (path, constants)`)
-        return false
-    }
-    const { res, console_error = true } = optional_config
     try {
-        await promiseFs({ type: 'access', path, constants })
+        if (!path || constants) throw new Error(`Argumentos Necessario Nulos (path, constants)`)
+        if (multiple_paths) {
+            await Promise.all(
+                path.map(async path => await promiseFs({ type: 'access', path, constants }))
+            )
+        } else {
+            await promiseFs({ type: 'access', path, constants })
+        }
         return true
     } catch (accessError) {
         if (console_error) console.error(';------- Error Access -------;', accessError.message)
@@ -81,14 +83,10 @@ export async function accessFile(path, constants, optional_config = {}) {
         return false
     }
 }
-
 //.. renameFile //
 export async function renameFile(old_path, new_path, res) {
-    if (!old_path || !new_path) {
-        console.error(`;------- Error Rename -------; Argumentos Necessario Nulos (oldPath, newPath)`)
-        return false
-    }
     try {
+        if (!old_path || !new_path) throw new Error(`;------- Error Rename -------; Argumentos Necessario Nulos (oldPath, newPath)`)
         await promiseFs({ type: 'rename', old_path, new_path })
         return true
     } catch (renameError) {
@@ -97,15 +95,10 @@ export async function renameFile(old_path, new_path, res) {
         return false
     }
 }
-
 //.. unlinkFile //
 export async function unlinkFile(path, res) {
-    if (!path) {
-        console.error(`;------- Error Unlink -------; Argumentos Necessario Nulos (path)`)
-        return false
-    }
-
     try {
+        if (!path) throw new Error(`;------- Error Unlink -------; Argumentos Necessario Nulos (path)`)
         await promiseFs({ type: 'unlink', path: path })
         return true
     } catch (unlinkError) {
@@ -116,12 +109,9 @@ export async function unlinkFile(path, res) {
 }
 //.. copyFile // 
 export async function copyFile(path, new_path) {
-    if (!path || !new_path) {
-        console.error(`;------- Error copyFile -------; Argumentos Necessario Nulos (path, new_path)`)
-        return false
-    }
 
     try {
+        if (!path || !new_path) throw new Error(`;------- Error copyFile -------; Argumentos Necessario Nulos (path, new_path)`)
         await promiseFs({ type: 'copyFile', path, new_path })
         return true
     } catch (copyFileError) {
@@ -129,7 +119,6 @@ export async function copyFile(path, new_path) {
         return false
     }
 }
-
 //.. resizeFile //
 export async function resizeFile(old_path, new_path, res) {
     if (!old_path || !new_path) {
@@ -166,14 +155,28 @@ export async function resizeFile(old_path, new_path, res) {
         return false
     }
 }
+//.. writeFile //
+export async function writeFile(path, data, options = {}) {
+    try {
+        if (!path || !data) {
+            throw new Error(`Argumentos Necessario Nulos (path, data)`)
+        }
+        await promiseFs({ type: 'writeFile', path, data, options })
+        return true
+    } catch (writeFileError) {
+        console.error(';------- Error writeFile -------;', writeFileError.message)
+        return false
+    }
+}
+
+
 
 //.. mkdir //
 export async function mkdir(path) {
-    if (!path) {
-        console.error(`;------- Error mkdir -------; Argumentos Necessario Nulos (path)`)
-        return false
-    }
     try {
+        if (!path) {
+            throw new Error(`Argumentos Necessario Nulos (path)`)
+        }
         await promiseFs({ type: 'mkdir', path })
         return true
     } catch (mkdirError) {
@@ -181,17 +184,26 @@ export async function mkdir(path) {
         return false
     }
 }
-//.. writeFile //
-export async function writeFile(path, data, options = {}) {
-    if (!path || !data) {
-        console.error(`;------- Error writeFile -------; Argumentos Necessario Nulos (path, data)`)
-        return false
-    }
+//.. remove //
+export async function remove(path, options = {}) {
+    const { emptyfolder, dontremove = [] } = options
+
     try {
-        await promiseFs({ type: 'writeFile', path, data, options })
-        return true
-    } catch (writeFileError) {
-        console.error(';------- Error writeFile -------;', writeFileError.message)
-        return false
+        if (!path) {
+            throw new Error(`Argumentos Necessario Nulos (path)`)
+        }
+        if (emptyfolder) {
+            await Promise.all(
+                fs.readdirSync(path)
+                    .filter(file_name => !dontremove.includes(file_name))
+                    .map(file_name => fs.promises.rm(`${path}/${file_name}`, { recursive: true, ...options }))
+            )
+        } else {
+            await promiseFs({ type: 'rm', path, options })
+        }
+        return {}
+    } catch (removeError) {
+        console.error(';------- Error remove -------;', removeError.message)
+        return { removeError }
     }
 }

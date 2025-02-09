@@ -5,7 +5,7 @@
 export async function seed(knex) {
   // Deletes ALL existing entries
   await knex('produtos').truncate();
-  const seeds = Array.from({ length: 105 }, (_, index) => ({
+  const seeds = Array.from({ length: 500 }, (_, index) => ({
     s_nome_produtos: `Produto ${index + 1}`,
     s_fornecedor_produtos: `Fornecedor ${index + 1}`,
     f_valor_produtos: Math.floor((Math.random() * (100 - 5) + 5) / 0.05) * 0.05,

@@ -2,12 +2,14 @@
 import { exec } from 'child_process'
 import fs from 'fs'
 import Registry from 'winreg'
+import util from 'util'
+import readline from 'readline'
 
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url';
 
 import { upload_s3 } from '../../helpers/Aws/s3.js'
-import { unlinkFile, copyFile, writeFile, mkdir } from '../../helpers/Fs/fsHelpers.js'
+import { unlinkFile, copyFile, writeFile, mkdir, accessFile, remove } from '../../helpers/Fs/fsHelpers.js'
 
 import get_root from '../root_credentials.js'
 
@@ -17,58 +19,36 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename)
 const backup_path = join(__dirname, `full_backups/fullbackup.xb.7z`)
 const backup_logs = join(__dirname, '../backup_logs')
+const restore_backups = join(__dirname, './restore_backups')
+
+const execPromise = util.promisify(exec)
 
 //# Funções //
 
 export async function restore_backup() {
     //# Variáveis //
-    const restorefiles_path = join(__dirname, './restore_backups')
     const MariaDB_reg = new Registry({
         hive: Registry.HKLM,
         key: '\\SYSTEM\\CurrentControlSet\\Services\\MariaDB'
     })
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    })
+
+    const info_db = await get_infodb()
+    const service_name = info_db[2]
+    const datadir = join(info_db[1], '..')
+
+    const keep_dir = join(datadir, `../keep`)
+    const keepdir_files = {
+        essentials: ['mysql', 'my.ini'],
+        not_essentials: ['performance_schema', 'sys']
+    }
 
     //# Funções //
 
-    async function extract_backup() {
-        const extract_backup = `cd ${restorefiles_path} && 7z e ${backup_path} -so | mbstream -x `
-        return new Promise((resolve, rejects) => {
-            exec(extract_backup, (error) => {
-                if (error) return rejects(error)
-                console.log(`;------- Success extrair backup -------;`);
-                resolve()
-            })
-        })
-
-    }
-    async function prepare_backup() {
-        const prepare_backup = `mariabackup --prepare --target-dir=${restorefiles_path}`
-        return new Promise((resolve, rejects) => {
-            exec(prepare_backup, (error) => {
-                if (error) throw rejects(error)
-                console.log(`;------- Success restaurar backup -------;`);
-                resolve()
-            })
-        })
-    }
-    function move_essentials_folders(datadir) {
-        const folders = ['mysql', 'performance_schema', 'sys']
-        const promises = []
-        const keepfolders_dir = join(datadir, `../../keep_folders`)
-        mkdir(keepfolders_dir)
-        folders.forEach((folder_name) => {
-            promises.push(new Promise((resolve, rejects) => {
-                const folder_dir = join(datadir, `../${folder_name}`)
-                const folder_newDir = `${keepfolders_dir}/${folder_name}`
-                fs.rename(folder_dir, folder_newDir, (error) => {
-                    if (error) return rejects(error)
-                    resolve()
-                })
-            }))
-        })
-        return promises
-    }
-    async function get_infodb() {
+    function get_infodb() {
         return new Promise((resolve, rejects) => {
             MariaDB_reg.get('ImagePath', (error, result) => {
                 if (error) return rejects(error)
@@ -79,29 +59,122 @@ export async function restore_backup() {
             })
         })
     }
+    async function prepare_restore() {
+        //.. Verify 'restore_backups' Path //
+        if (await accessFile(restore_backups, fs.constants.F_OK, { console_error: false })) {
+            fs.rmSync(restore_backups, { recursive: true }, (err_rmSync) => {
+                if (err_rmSync) return err_rmSync
+            })
+        }
+        await mkdir(restore_backups)
+
+        const extract_command = `cd ${restore_backups} && 7z e ${backup_path} -so | mbstream -x`
+        const prepare_command = `mariabackup --prepare --target-dir=${restore_backups}`
+        //.. Extract //
+        const { error } = await execPromise(extract_command)
+        if (error) throw error
+        console.log(`;------- Success extrair backup -------;`);
+        //.. Prepare //
+        if (!error) {
+            const { error } = await execPromise(prepare_command)
+            if (error) throw error
+            console.log(`;------- Success preparar restauração backup -------;`);
+        }
+    }
+    async function database_service(option) {
+        if (option !== 'start' && option !== 'stop') {
+            throw new Error(`Parâmetro '${option}' da função 'database_service' inválida`)
+        }
+
+        const query_service = `sc query ${service_name}`
+        const service_command = `net ${option} ${service_name}`
+        const exec_console = option === 'start' ? 'iniciar' : 'parar'
+        let attempts = 0
+
+        async function exec_command() {
+            if (attempts >= 3) throw new Error(`Falha ao ${exec_console} Serviço '${service_name}'`)
+
+            const { error, stdout } = await execPromise(query_service)
+            if (error) throw error
+
+            const isRunning = stdout.toString().includes('RUNNING')
+            if ((option === 'start' && isRunning) || (option === 'stop' && !isRunning)) {
+                return console.log(`;------- Success ${exec_console} Serviço '${service_name}' -------;`)
+            }
+            await execPromise(service_command)
+            attempts++
+            console.log(`${exec_console} Serviço '${service_name}', Tentativa; ${attempts}`);
+            return await exec_command()
+        }
+        await exec_command()
+    }
+    async function move_essentials(config = {}) {
+
+        const { moveto_keepdir, moveto_datadir } = config
+        if (!moveto_keepdir && !moveto_datadir) {
+            throw new Error("Nenhum diretório especificado em 'moveEssentials'");
+        }
+
+        function move(oldDir, newDir) {
+            const promises = []
+            for (const file_type in keepdir_files) {
+                keepdir_files[file_type].forEach(async (name) => {
+                    const console_error = {
+                        keepdir: `KEEPDIR; Arquivo '${name}' não foi encontrado`,
+                        datadir: `DATADIR; Arquivo '${name}' não foi encontrado`
+                    }
+                    if (file_type === 'essentials') {
+                        promises.push(fs.promises.rename(join(oldDir, `./${name}`), join(newDir, `./${name}`)))
+                    }
+                    if (file_type === 'not_essentials') {
+                        if (!await accessFile(join(oldDir, `./${name}`), fs.constants.F_OK, { console_error: false })) {
+                            console.error(moveto_keepdir ? console_error.keepdir : console_error.datadir)
+                            return
+                        }
+                        promises.push(fs.promises.rename(join(oldDir, `./${name}`), join(newDir, `./${name}`)))
+                    }
+                })
+            }
+            return promises
+        }
+
+        if (moveto_keepdir) {
+            if (!await accessFile(keep_dir, fs.constants.F_OK, { console_error: false })) await mkdir(keep_dir)
+            await Promise.all(move(datadir, keep_dir))
+        } else {
+            await Promise.all(move(keep_dir, datadir))
+            await remove(keep_dir, { recursive: true })
+        }
+    }
+    async function copyback_backup() {
+        const { essentials, not_essentials } = keepdir_files
+        const { removeError } = await remove(datadir, { emptyfolder: true, dontremove: [...essentials, ...not_essentials] })
+        if (removeError) throw removeError
+
+        const copyback_restore = `mariabackup --copy-back --target-dir=${restore_backups} --datadir=${datadir}`
+        const { error } = await execPromise(copyback_restore)
+        if (error) throw error
+        console.log(`;------- Success copyback backup -------;`);
+    }
+
     try {
-        const info_db = await get_infodb()
-        const db_service_name = info_db[2]
-        
-        const extract_error = await extract_backup()
-        if (extract_error) throw extract_error
+        await prepare_restore()
+        await database_service('stop')
+        const essentials_paths = keepdir_files['essentials'].map(file_name => join(datadir, `./${file_name}`))
+        if (!await accessFile(essentials_paths, fs.constants.F_OK, { multiple_paths: true })) {
+            throw new Error('Falha ao encontrar arquivo essencial, ele não existe')
+        }
 
-        const prepare_error = await prepare_backup()
-        if (prepare_error) throw prepare_error
-
-        const datadir = info_db[1]
-        const move_folders = await Promise.all(move_essentials_folders(datadir))
-        if (move_folders) throw move_folders
+        await move_essentials({ moveto_keepdir: true })
+        await copyback_backup()
+        await move_essentials({ moveto_datadir: true })
+        rl.question(`Deseja Iniciar o Serviço '${service_name}' Novamente? (s/n)`, async (user_input) => {
+            if (user_input.toLowerCase() === 's') await database_service('start')
+            rl.close()
+        })
     } catch (error) {
         console.error(error)
     }
-    /*
-    - Comando Para Dar Restore, Por Enquanto É Esse, Precisa de um diretorio para os dados do backup em especifico,
-    - ele vai armazenar os dados do backup no diretorio que está sendo executado o comando.
-    , 7z e C:/Users/Carlos/.programacao/Projetos/GestaoProdutosVendas/Git/back-end/db/db_backups/full_backups/fullbackup.xb.7z -so | mbstream -x 
-    , mariabackup --prepare --target-dir=C:\Users\Carlos\.programacao\Projetos\GestaoProdutosVendas\Git\back-end\db\db_backups\restore_backups
-    , mariabackup --copy-back --target-dir=C:\Users\Carlos\.programacao\Projetos\GestaoProdutosVendas\Git\back-end\db\db_backups\restore_backups --datadir=C:\Users\Carlos\.mariadb
-    */
 }
 export async function backup_db(db_name) {
 
@@ -125,7 +198,7 @@ export async function backup_db(db_name) {
         }
         try {
             await upload_s3(upload_params)
-            console.log(`;------- Sucess 'backup_s3' -------;`)
+            console.log(`;------- Success 'backup_s3' -------;`)
         } catch (error) {
             throw error
         }
