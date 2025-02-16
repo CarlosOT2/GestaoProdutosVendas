@@ -65,17 +65,10 @@ function promiseFs(fs_config) {
 
 //.. accessFile //
 export async function accessFile(path, constants, optional_config = {}) {
-    const { res, console_error = true, multiple_paths } = optional_config
-
+    const { res, console_error = true } = optional_config
     try {
         if (!path || constants) throw new Error(`Argumentos Necessario Nulos (path, constants)`)
-        if (multiple_paths) {
-            await Promise.all(
-                path.map(async path => await promiseFs({ type: 'access', path, constants }))
-            )
-        } else {
-            await promiseFs({ type: 'access', path, constants })
-        }
+        await promiseFs({ type: 'access', path, constants })
         return true
     } catch (accessError) {
         if (console_error) console.error(';------- Error Access -------;', accessError.message)

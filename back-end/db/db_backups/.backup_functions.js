@@ -17,11 +17,12 @@ import get_root from '../root_credentials.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename)
+const execPromise = util.promisify(exec)
+
 const backup_path = join(__dirname, `full_backups/fullbackup.xb.7z`)
 const backup_logs = join(__dirname, '../backup_logs')
-const restore_backups = join(__dirname, './restore_backups')
 
-const execPromise = util.promisify(exec)
+const restore_backups = join(__dirname, './restore_backups')
 
 //# Funções //
 
@@ -38,13 +39,12 @@ export async function restore_backup() {
 
     const info_db = await get_infodb()
     const service_name = info_db[2]
+
     const datadir = join(info_db[1], '..')
+    const temp_datadir = join(datadir, '../temp_datadir')
 
     const keep_dir = join(datadir, `../keep`)
-    const keepdir_files = {
-        essentials: ['mysql', 'my.ini'],
-        not_essentials: ['performance_schema', 'sys']
-    }
+    const essentials_files = ['mysql', 'my.ini', 'performance_schema', 'sys']
 
     //# Funções //
 
@@ -61,12 +61,8 @@ export async function restore_backup() {
     }
     async function prepare_restore() {
         //.. Verify 'restore_backups' Path //
-        if (await accessFile(restore_backups, fs.constants.F_OK, { console_error: false })) {
-            fs.rmSync(restore_backups, { recursive: true }, (err_rmSync) => {
-                if (err_rmSync) return err_rmSync
-            })
-        }
-        await mkdir(restore_backups)
+        if (!await accessFile(restore_backups, fs.constants.F_OK, { console_error: false })) await mkdir(restore_backups)
+        await remove(restore_backups, { emptyfolder: true })
 
         const extract_command = `cd ${restore_backups} && 7z e ${backup_path} -so | mbstream -x`
         const prepare_command = `mariabackup --prepare --target-dir=${restore_backups}`
@@ -74,6 +70,7 @@ export async function restore_backup() {
         const { error } = await execPromise(extract_command)
         if (error) throw error
         console.log(`;------- Success extrair backup -------;`);
+
         //.. Prepare //
         if (!error) {
             const { error } = await execPromise(prepare_command)
@@ -108,49 +105,40 @@ export async function restore_backup() {
         }
         await exec_command()
     }
-    async function move_essentials(config = {}) {
+    async function move_files(config = {}) {
+        const { keep, data, temp_data } = config
+        const { filesDir, files = fs.readdirSync(filesDir), remove_filesDir = false } = config
 
-        const { moveto_keepdir, moveto_datadir } = config
-        if (!moveto_keepdir && !moveto_datadir) {
-            throw new Error("Nenhum diretório especificado em 'moveEssentials'");
+        //.. Move //
+        async function move(newDir) {
+            return files.map(async (name) => {
+                return fs.promises.rename(join(filesDir, name), join(newDir, name))
+            })
         }
 
-        function move(oldDir, newDir) {
-            const promises = []
-            for (const file_type in keepdir_files) {
-                keepdir_files[file_type].forEach(async (name) => {
-                    const console_error = {
-                        keepdir: `KEEPDIR; Arquivo '${name}' não foi encontrado`,
-                        datadir: `DATADIR; Arquivo '${name}' não foi encontrado`
-                    }
-                    if (file_type === 'essentials') {
-                        promises.push(fs.promises.rename(join(oldDir, `./${name}`), join(newDir, `./${name}`)))
-                    }
-                    if (file_type === 'not_essentials') {
-                        if (!await accessFile(join(oldDir, `./${name}`), fs.constants.F_OK, { console_error: false })) {
-                            console.error(moveto_keepdir ? console_error.keepdir : console_error.datadir)
-                            return
-                        }
-                        promises.push(fs.promises.rename(join(oldDir, `./${name}`), join(newDir, `./${name}`)))
-                    }
-                })
-            }
-            return promises
+        //.. Verification //
+        if (!keep && !data && !temp_data) {
+            throw new Error(`Nenhum diretório especificado em 'move_files'`);
+        }
+        if (!filesDir) {
+            throw new Error(`Valores obrigatórios faltando em 'move_files'`)
         }
 
-        if (moveto_keepdir) {
+        //.. Conditions //
+        if (keep) {
             if (!await accessFile(keep_dir, fs.constants.F_OK, { console_error: false })) await mkdir(keep_dir)
-            await Promise.all(move(datadir, keep_dir))
+            await Promise.all(await move(keep_dir))
+        } else if (data) {
+            await Promise.all(await move(datadir))
         } else {
-            await Promise.all(move(keep_dir, datadir))
-            await remove(keep_dir, { recursive: true })
+            if (!await accessFile(temp_datadir, fs.constants.F_OK, { console_error: false })) {
+                if (!await mkdir(temp_datadir)) throw new Error(`Falha ao criar pasta 'temp_datadir'`)
+            }
+            await Promise.all(await move(temp_datadir))
         }
+        if (remove_filesDir) await remove(filesDir, { recursive: true })
     }
     async function copyback_backup() {
-        const { essentials, not_essentials } = keepdir_files
-        const { removeError } = await remove(datadir, { emptyfolder: true, dontremove: [...essentials, ...not_essentials] })
-        if (removeError) throw removeError
-
         const copyback_restore = `mariabackup --copy-back --target-dir=${restore_backups} --datadir=${datadir}`
         const { error } = await execPromise(copyback_restore)
         if (error) throw error
@@ -158,24 +146,48 @@ export async function restore_backup() {
     }
 
     try {
+        //.. Preparation To Restore //
         await prepare_restore()
         await database_service('stop')
-        const essentials_paths = keepdir_files['essentials'].map(file_name => join(datadir, `./${file_name}`))
-        if (!await accessFile(essentials_paths, fs.constants.F_OK, { multiple_paths: true })) {
-            throw new Error('Falha ao encontrar arquivo essencial, ele não existe')
-        }
+        await move_files({ keep: true, filesDir: datadir, files: essentials_files })
+        await move_files({ temp_data: true, filesDir: datadir })
 
-        await move_essentials({ moveto_keepdir: true })
+        //.. Executing Restore //
         await copyback_backup()
-        await move_essentials({ moveto_datadir: true })
+        await move_files({
+            data: true,
+            filesDir: keep_dir,
+            remove_filesDir: true
+        })
+        await remove(temp_datadir, { recursive: true })
+
         rl.question(`Deseja Iniciar o Serviço '${service_name}' Novamente? (s/n)`, async (user_input) => {
             if (user_input.toLowerCase() === 's') await database_service('start')
             rl.close()
         })
+
     } catch (error) {
         console.error(error)
+        if (await accessFile(temp_datadir, fs.constants.F_OK, { console_error: false })) {
+            await remove(datadir, { emptyfolder: true })
+            await move_files({
+                data: true,
+                filesDir: temp_datadir,
+                remove_filesDir: true
+            })
+        }
+        if (await accessFile(keep_dir, fs.constants.F_OK, { console_error: false })) {
+            await move_files({
+                data: true,
+                filesDir: keep_dir,
+                remove_filesDir: true
+            })
+        }
     }
 }
+
+
+
 export async function backup_db(db_name) {
 
     //# Variáveis //
