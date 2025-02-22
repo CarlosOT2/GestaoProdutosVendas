@@ -10,9 +10,9 @@ const { username, password } = await get_root()
 //# File //
 const knex_file = {
 
-  //.. db_controle_estoque //
+  //.. db_gestaoprodutosvendas //
 
-  db_gestaoprodutosvendas_dev: {
+  dev: {
     client: 'mysql2',
     connection: {
       host: 'localhost',
