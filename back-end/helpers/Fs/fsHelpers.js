@@ -16,7 +16,6 @@ import HTTPError from '../Classes/HTTPError.js'
 
 import { verifyMimeType } from '../Img.js';
 
-
 //.. promiseFs //
 function promiseFs(fs_config) {
     const { path, old_path, new_path } = fs_config
@@ -64,61 +63,61 @@ function promiseFs(fs_config) {
 
 
 //.. accessFile //
-export async function accessFile(path, constants, optional_config = {}) {
-    const { res, console_error = true } = optional_config
+export async function accessFile(path, constants, options = {}) {
+    const { console_error = true } = options
     try {
         if (!path || constants) throw new Error(`Argumentos Necessario Nulos (path, constants)`)
         await promiseFs({ type: 'access', path, constants })
         return true
     } catch (accessError) {
         if (console_error) console.error(';------- Error Access -------;', accessError.message)
-        if (res) res.status(accessError.status).json({ info: accessError.message })
         return false
     }
 }
 //.. renameFile //
-export async function renameFile(old_path, new_path, res) {
+export async function renameFile(old_path, new_path, options = {}) {
+    const { dont_throw = false, console_error = true } = options
     try {
         if (!old_path || !new_path) throw new Error(`;------- Error Rename -------; Argumentos Necessario Nulos (oldPath, newPath)`)
         await promiseFs({ type: 'rename', old_path, new_path })
-        return true
     } catch (renameError) {
-        console.error(';------- Error Rename -------;', renameError.message)
-        if (res) res.status(renameError.status).json({ info: renameError.message })
-        return false
+        if (console_error) console.error(';------- Error Rename -------;', renameError.message)
+        if (dont_throw) return
+        throw renameError
     }
 }
 //.. unlinkFile //
-export async function unlinkFile(path, res) {
+export async function unlinkFile(path, options = {}) {
+    const { return_boolean, dont_throw, console_error = true } = options
     try {
         if (!path) throw new Error(`;------- Error Unlink -------; Argumentos Necessario Nulos (path)`)
         await promiseFs({ type: 'unlink', path: path })
-        return true
+        if (return_boolean) return true
     } catch (unlinkError) {
-        console.error(';------- Error Unlink -------;', unlinkError.message)
-        if (res) res.status(unlinkError.status).json({ info: unlinkError.message })
-        return false
+        if (console_error) console.error(';------- Error Unlink -------;', unlinkError.message)
+        if (return_boolean) return false
+        if (dont_throw) return
+        throw unlinkError
     }
 }
 //.. copyFile // 
-export async function copyFile(path, new_path) {
-
+export async function copyFile(path, new_path, options = {}) {
+    const { dont_throw = false, console_error = true } = options
     try {
         if (!path || !new_path) throw new Error(`;------- Error copyFile -------; Argumentos Necessario Nulos (path, new_path)`)
         await promiseFs({ type: 'copyFile', path, new_path })
-        return true
     } catch (copyFileError) {
-        console.error(`;------- Error copyFile -------;`, copyFileError.message)
-        return false
+        if (console_error) console.error(`;------- Error copyFile -------;`, copyFileError.message)
+        if (dont_throw) return
+        throw copyFileError
     }
 }
 //.. resizeFile //
-export async function resizeFile(old_path, new_path, res) {
+export async function resizeFile(old_path, new_path) {
     if (!old_path || !new_path) {
         console.error(`;------- Error Resize -------; Argumentos Necessario Nulos (old_path, new_path)`)
         return false
     }
-    if (!verifyMimeType(old_path, res)) return false
 
     //.. Funções //
     const filename = `${path.basename(new_path, path.extname(new_path))}.jpeg`
@@ -140,12 +139,12 @@ export async function resizeFile(old_path, new_path, res) {
     }
 
     try {
+        await verifyMimeType(old_path, { err_obj: true })
         await promiseResize()
         return { filename, dirname }
     } catch (resizeError) {
         console.error(';------- Error Resize -------;', resizeError.message)
-        if (res) res.status(resizeError.status).json({ info: resizeError.message })
-        return false
+        throw resizeError
     }
 }
 //.. writeFile //
@@ -155,15 +154,11 @@ export async function writeFile(path, data, options = {}) {
             throw new Error(`Argumentos Necessario Nulos (path, data)`)
         }
         await promiseFs({ type: 'writeFile', path, data, options })
-        return true
     } catch (writeFileError) {
         console.error(';------- Error writeFile -------;', writeFileError.message)
-        return false
+        throw writeFileError
     }
 }
-
-
-
 //.. mkdir //
 export async function mkdir(path) {
     try {
@@ -171,19 +166,22 @@ export async function mkdir(path) {
             throw new Error(`Argumentos Necessario Nulos (path)`)
         }
         await promiseFs({ type: 'mkdir', path })
-        return true
     } catch (mkdirError) {
         console.error(';------- Error mkdir -------;', mkdirError.message)
-        return false
+        throw mkdirError
     }
 }
 //.. remove //
 export async function remove(path, options = {}) {
-    const { emptyfolder, dontremove = [] } = options
+    const { emptyfolder, deletefolder, dontremove = [] } = options
+    const { console_error = true, dont_throw = false } = options
 
     try {
         if (!path) {
             throw new Error(`Argumentos Necessario Nulos (path)`)
+        }
+        if (!await accessFile(path, fs.constants.F_OK, { console_error: false })) {
+            throw new Error(`Não existe o 'path': ${path}`)
         }
         if (emptyfolder) {
             await Promise.all(
@@ -191,12 +189,17 @@ export async function remove(path, options = {}) {
                     .filter(file_name => !dontremove.includes(file_name))
                     .map(file_name => fs.promises.rm(`${path}/${file_name}`, { recursive: true, ...options }))
             )
+        } else if (deletefolder) {
+            //,, Depois arrumar aqui, não posso adicionar '...options' porque ai vai gerar um loop infinito
+            //,, a lógica aqui ta meio ruim, com a passamento dos parametros
+            await remove(path, { emptyfolder: true, console_error, dontremove, dont_throw })
+            await remove(path, { recursive: true, console_error, dontremove, dont_throw })
         } else {
             await promiseFs({ type: 'rm', path, options })
         }
-        return {}
     } catch (removeError) {
-        console.error(';------- Error remove -------;', removeError.message)
-        return { removeError }
+        if (console_error) console.error(';------- Error remove -------;', removeError.message)
+        if (dont_throw) return
+        throw removeError
     }
 }

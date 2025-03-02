@@ -55,7 +55,7 @@
 */
 //# Import //
 
-import { format, formatDate } from 'date-fns'
+import { format } from 'date-fns'
 import HTTPError from '../Classes/HTTPError.js'
 
 //# Funções Exportadas //

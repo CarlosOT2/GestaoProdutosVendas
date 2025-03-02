@@ -7,11 +7,9 @@ back-end/data/imgData/produtos/*
 back-end/data/imgData/temp_produtos/*
 back-end/db/backup_logs/*
 back-end/data/local_credentials/*.json
-back-end/db/db_backups/full_backups/*
-back-end/db/db_backups/partial_backups/*
+back-end/db/db_backups/backups/*
 # KEEP EMPTY FOLDERS #
 !back-end/data/imgData/produtos/.gitkeep
 !back-end/data/imgData/temp_produtos/.gitkeep
 !back-end/db/backup_logs/.gitkeep
-!back-end/db/db_backups/full_backups/.gitkeep
-!back-end/db/db_backups/partial_backups/.gitkeep
+!back-end/db/db_backups/backups/.gitkeep

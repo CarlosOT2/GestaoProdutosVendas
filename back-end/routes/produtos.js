@@ -15,6 +15,7 @@ import fs from 'fs'
 
 import { db_gestaoprodutosvendas } from '../db/db_config.js';
 import port from '../port.js';
+import HTTPError from '../helpers/Classes/HTTPError.js';
 
 
 //# Variáveis Globais / Config //
@@ -61,7 +62,7 @@ router.get(rotaGetPadrao, async (req, res) => {
         const produtos = await query
         res.status(200).json(produtos);
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 });
 
@@ -116,7 +117,7 @@ router.get(rotaGetFiltrar, async (req, res) => {
 
         res.status(200).json(produtos)
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 })
 
@@ -135,24 +136,25 @@ router.post(rotaPostProduto, async (req, res) => {
         s_img_produtos,
     } = req.body
 
-
-    if (RequiredVariables({ s_nome_produtos, s_fornecedor_produtos, f_valor_produtos, f_valorFornecedor_produtos, i_estoque_produtos }, res)) {
-        return
-    }
-
-    //.. Verify // 
-    const verify_error =
-        (i_desconto_produtos > 100 || i_desconto_produtos < 0) ?
-            'Desconto Inválido. (0% - 100%)'
-            : undefined
-
-    if (verify_error) return res.status(400).json({ info: verify_error })
-
     const { path, finalPath } = s_img_produtos
+    let query = db_gestaoprodutosvendas("produtos")
     try {
-        let query = db_gestaoprodutosvendas("produtos")
+
+        //.. Verify // 
+        await RequiredVariables({
+            s_nome_produtos,
+            s_fornecedor_produtos,
+            f_valor_produtos,
+            f_valorFornecedor_produtos,
+            i_estoque_produtos
+        })
+        if (i_desconto_produtos > 100 || i_desconto_produtos < 0) {
+            throw new HTTPError('Desconto Inválido. (0% - 100%)', 400)
+        }
+
+        //.. Adding Product //
         if (path && finalPath) {
-            const { filename } = await resizeFile(path, finalPath, res)
+            const { filename } = await resizeFile(path, finalPath)
             const { originalUrl } = req
 
             if (!filename || !originalUrl) {
@@ -161,7 +163,7 @@ router.post(rotaPostProduto, async (req, res) => {
             }
 
             await unlinkFile(path)
-
+            //.. With IMG //
             query = query.insert({
                 s_nome_produtos,
                 s_fornecedor_produtos,
@@ -173,6 +175,7 @@ router.post(rotaPostProduto, async (req, res) => {
             })
 
         } else {
+            //.. Without IMG //
             query = query.insert(
                 {
                     s_nome_produtos,
@@ -188,10 +191,10 @@ router.post(rotaPostProduto, async (req, res) => {
         res.status(201).json({ info: id[0] })
     } catch (error) {
         if (s_img_produtos) {
-            if (await accessFile(path, fs.constants.F_OK)) await unlinkFile(path)
-            if (await accessFile(finalPath, fs.constants.F_OK)) await unlinkFile(finalPath)
+            if (await accessFile(path, fs.constants.F_OK, { console_error: false })) await unlinkFile(path)
+            if (await accessFile(finalPath, fs.constants.F_OK, { console_error: false })) await unlinkFile(finalPath)
         }
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 });
 
@@ -204,10 +207,13 @@ router.post(rotaPostUpload, tempUpload.single('s_img_produtos'), async (req, res
 
     const { path, filename } = req.file
     try {
-        if (!verifyMimeType(path, res)) return await unlinkFile(path, res)
-        if (!await accessFile(dirPermanent, fs.constants.F_OK, { res })) return await unlinkFile(path, res)
-        if (!await accessFile(path, fs.constants.F_OK, { res })) return
-
+        await verifyMimeType(path, { err_obj: true })
+        if (!await accessFile(dirPermanent, fs.constants.F_OK)) {
+            throw new Error(`Inválido 'dirPermanent' ${dirPermanent}`)
+        }
+        if (!await accessFile(path, fs.constants.F_OK)) {
+            return
+        }
         res.status(200).json({
             info: {
                 path: path,
@@ -216,7 +222,7 @@ router.post(rotaPostUpload, tempUpload.single('s_img_produtos'), async (req, res
         })
     } catch (error) {
         await unlinkFile(path)
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 })
 //.. Middleware Que Lida Com O Error Do Multer //
@@ -258,12 +264,11 @@ router.put(rotaPutPadrao, async (req, res) => {
         const res_query = await query
         if (res_query !== 0) {
             res.status(200).json({ info: "Registro Atualizado" })
-            return
+        } else {
+            throw new HTTPError('Registro Não Encontrado', 404)
         }
-        res.status(404).json({ info: "Registro não encontrado" })
-
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 });
 
@@ -290,8 +295,8 @@ router.delete(rotaDeletePadrao, async (req, res) => {
             const filename = img_path.split('/').pop()
             const registroImgPATH = `${dirPermanent}/${filename}`
             if (await accessFile(registroImgPATH, fs.constants.F_OK)) {
-                if (!await unlinkFile(registroImgPATH, res, 500)) {
-                    return
+                if (!await unlinkFile(registroImgPATH, { return_boolean: true })) {
+                    throw new HTTPError(`Houve um error ao tentar deletar; ${registroImgPATH}`)
                 }
             }
         }
@@ -299,7 +304,7 @@ router.delete(rotaDeletePadrao, async (req, res) => {
         await query.del()
         res.status(200).json({ info: "Registro Excluido" })
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 })
 

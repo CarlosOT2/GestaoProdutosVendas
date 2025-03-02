@@ -1,31 +1,50 @@
 //# Import //
 import { exec } from 'child_process'
-import fs, { write } from 'fs'
+import fs from 'fs'
 import Registry from 'winreg'
-import util from 'util'
+import util, { promisify } from 'util'
 import readline from 'readline'
 
-import { join, dirname, resolve } from 'path'
+import { join, dirname } from 'path'
 import { fileURLToPath } from 'url';
 
 import { upload_s3 } from '../../helpers/Aws/s3.js'
-import { unlinkFile, copyFile, writeFile, mkdir, accessFile, remove } from '../../helpers/Fs/fsHelpers.js'
+import { unlinkFile, copyFile, writeFile, mkdir, accessFile, remove, renameFile } from '../../helpers/Fs/fsHelpers.js'
 
 import get_root from '../root_credentials.js'
 
 //# Variáveis Globais //
+//.. DATABASE //
+const info_db = await get_infodb()
+const service_name = info_db[2]
 
 //.. DIRS //
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename)
 
-const backup_path = join(__dirname, `full_backups/fullbackup.xb.7z`)
+//-- Backup //
+const rawbackup_path = join(__dirname, `temp_backups`)
+const backup_path = join(__dirname, `backups/fullbackup.7z`)
 const backup_logs = join(__dirname, '../backup_logs')
-
-const restore_backups = join(__dirname, './restore_backups')
-//.. DATABASE //
-const info_db = await get_infodb()
-const service_name = info_db[2]
+const prepare_dir = join(__dirname, 'prepare_backup')
+//-- Restore //
+const datadir = join(info_db[1], '..')
+const keepdir = join(datadir, '../keep')
+const temp_datadir = join(datadir, '../temp_data')
+//.. RL //
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
+//-- Em Resumo, Quando eu chamar 'promisify()' para a função 'rl.question', ela vai ser "promisificada" de forma diferente.
+//-- O [promisify.custom] cria uma forma customizada, dessa função ser transformada em promise. sendo necessário nesse caso,
+//-- porque, a função 'rl.question' não pode ser transformada em promise da forma tradicional com 'promisify()'.
+rl.question[promisify.custom] = (question) => {
+    return new Promise((resolve) => {
+        rl.question(question, resolve);
+    })
+}
+const rlPromise = promisify(rl.question)
 
 //.. MISCELLANEOUS //
 const execPromise = util.promisify(exec)
@@ -79,27 +98,17 @@ async function database_service(option) {
 
 export async function restore_backup() {
     //# Variáveis //
-
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    })
-
-    const datadir = join(info_db[1], '..')
-    const temp_datadir = join(datadir, '../temp_datadir')
-
-    const keep_dir = join(datadir, `../keep`)
-    const essentials_files = ['my.ini', 'sys', 'performance_schema']
+    const essentials_files = ['sys', 'performance_schema']
 
     //# Funções //
 
     async function prepare_restore() {
-        //.. Verify 'restore_backups' Path //
-        if (!await accessFile(restore_backups, fs.constants.F_OK, { console_error: false })) await mkdir(restore_backups)
-        await remove(restore_backups, { emptyfolder: true })
+        //.. Verify 'prepare_dir' Path //
+        if (!await accessFile(prepare_dir, fs.constants.F_OK, { console_error: false })) await mkdir(prepare_dir)
+        await remove(prepare_dir, { emptyfolder: true })
 
-        const extract_command = `cd ${restore_backups} && 7z e ${backup_path} -so | mbstream -x`
-        const prepare_command = `mariabackup --prepare --target-dir=${restore_backups}`
+        const extract_command = `cd ${prepare_dir} && 7z x ${backup_path}`
+        const prepare_command = `mariabackup --prepare --target-dir=${prepare_dir}`
         //.. Extract //
         const { error } = await execPromise(extract_command)
         if (error) throw error
@@ -113,10 +122,22 @@ export async function restore_backup() {
         }
     }
     async function move_files(config = {}) {
-        const { keep, data, temp_data } = config
-        const { filesDir, files = fs.readdirSync(filesDir), remove_filesDir = false } = config
+        //.. Variables //
+        const {
+            filesDir,
+            newDir,
+            files = fs.readdirSync(filesDir),
+            remove_filesDir = false,
+            return_boolean = false
+        } = config
+        const dirs = {
+            temp_data: temp_datadir,
+            data: datadir,
+            keep: keepdir
+        }
+        const current_dir = dirs[newDir]
 
-        //.. Move //
+        //.. Functions //
         async function move(newDir) {
             return files.map(async (name) => {
                 return fs.promises.rename(join(filesDir, name), join(newDir, name))
@@ -124,83 +145,100 @@ export async function restore_backup() {
         }
 
         //.. Verification //
-        if (!keep && !data && !temp_data) {
-            throw new Error(`Nenhum diretório especificado em 'move_files'`);
-        }
-        if (!filesDir) {
-            throw new Error(`Valores obrigatórios faltando em 'move_files'`)
-        }
+        if (!filesDir && !newDir) throw new Error(`Valores obrigatórios faltando em 'move_files'`)
+        if (!current_dir) throw new Error(`Diretório inválido especificado em move_files; '${newDir}'`);
 
         //.. Conditions //
-        if (keep) {
-            if (!await accessFile(keep_dir, fs.constants.F_OK, { console_error: false })) await mkdir(keep_dir)
-            await Promise.all(await move(keep_dir))
-        } else if (data) {
-            await Promise.all(await move(datadir))
-        } else {
-            if (!await accessFile(temp_datadir, fs.constants.F_OK, { console_error: false })) {
-                if (!await mkdir(temp_datadir)) throw new Error(`Falha ao criar pasta 'temp_datadir'`)
+        if (newDir === 'temp_data' || newDir === 'keep') {
+            if (!await accessFile(current_dir, fs.constants.F_OK, { console_error: false })) {
+                await mkdir(current_dir)
+            } else {
+                await remove(current_dir, { emptyfolder: true, console_error: false })
             }
-            await Promise.all(await move(temp_datadir))
         }
-        if (remove_filesDir) await remove(filesDir, { recursive: true })
+
+        if (newDir === 'data' && !await accessFile(datadir, fs.constants.F_OK, { console_error: false })) {
+            throw new Error(`Error mover arquivos para o diretório 'datadir' ele não existe`)
+        }
+
+        try {
+            await Promise.all(await move(current_dir))
+            if (remove_filesDir) await remove(filesDir, { recursive: true })
+            if (return_boolean) return true
+        } catch (error) {
+            console.error(error.message)
+            if (return_boolean) return false
+            throw error
+        }
     }
     async function copyback_backup() {
-        const copyback_restore = `mariabackup --copy-back --target-dir=${restore_backups} --datadir=${datadir}`
+        const copyback_restore = `mariabackup --copy-back --target-dir=${prepare_dir} --datadir=${datadir}`
         const { error } = await execPromise(copyback_restore)
         if (error) throw error
         console.log(`;------- Success copyback backup -------;`);
     }
 
     try {
+        //.. Verification //
+        if (!await accessFile(backup_path, fs.constants.F_OK, { console_error: false })) {
+            throw new Error('o arquivo de backup não existe. (nome do arquivo precisa ser "fullbackup")')
+        }
         //.. Preparation To Restore //
         await prepare_restore()
         await database_service('stop')
-        await move_files({ keep: true, filesDir: datadir, files: essentials_files })
-        await move_files({ temp_data: true, filesDir: datadir })
-
+        if (!await move_files({
+            newDir: 'keep',
+            filesDir: datadir,
+            files: essentials_files,
+            return_boolean: true
+        })) {
+            const user_input = await rlPromise(`Deseja Continuar Mesmo Com Alguns Arquivos Essenciais Faltando? (s/n)`)
+            if (user_input.toLowerCase() === 'n') {
+                throw new Error('Arquivos faltando ao realizar o Restore')
+            }
+        }
+        await move_files({ newDir: 'temp_data', filesDir: datadir })
         //.. Executing Restore //
         await copyback_backup()
-        await move_files({
-            data: true,
-            filesDir: keep_dir,
-            remove_filesDir: true
-        })
-        await remove(temp_datadir, { recursive: true })
+        await move_files({ newDir: 'data', filesDir: keepdir, remove_filesDir: true })
+        //.. Finalizing Restore //
+        await remove(temp_datadir, { deletefolder: true })
+        await remove(prepare_dir, { deletefolder: true })
 
-        rl.question(`Deseja Iniciar o Serviço '${service_name}' Novamente? (s/n)`, async (user_input) => {
-            if (user_input.toLowerCase() === 's') await database_service('start')
-            rl.close()
-        })
-
+        const user_input = await rlPromise(`Deseja Iniciar o Serviço '${service_name}' Novamente? (s/n)`)
+        if (user_input.toLowerCase() === 's') await database_service('start')
+        rl.close()
     } catch (error) {
         console.error(error)
         if (await accessFile(temp_datadir, fs.constants.F_OK, { console_error: false })) {
             await remove(datadir, { emptyfolder: true })
             await move_files({
-                data: true,
+                newDir: 'data',
                 filesDir: temp_datadir,
                 remove_filesDir: true
             })
         }
-        if (await accessFile(keep_dir, fs.constants.F_OK, { console_error: false })) {
+        if (await accessFile(keepdir, fs.constants.F_OK, { console_error: false })) {
             await move_files({
-                data: true,
-                filesDir: keep_dir,
+                newDir: 'data',
+                filesDir: keepdir,
                 remove_filesDir: true
             })
+        }
+        if (await accessFile(prepare_dir, fs.constants.F_OK, { console_error: false })) {
+            await remove(prepare_dir, { deletefolder: true, console_error: false })
         }
     }
 }
 
 export async function backup_db(db_name) {
-
     //# Variáveis //
-
-    const backup_dbs = `${db_name} mysql`
     const { username, password } = await get_root()
+
     const backup_tempfile = `${backup_path}.tmp`
-    const backup_command = `mariabackup --user=${username} --password=${password} --backup --stream=xbstream --databases="${backup_dbs}" | 7z a -si "${backup_path}"`
+
+    const backup_command = `mariabackup --user=${username} --password=${password} --backup --databases="${db_name} mysql" --target-dir=${rawbackup_path}`
+    const compact_command = `7z a "${backup_path}" "${join(rawbackup_path, '*')}"`
 
     //# Funções //
     async function backup_s3() {
@@ -220,7 +258,7 @@ export async function backup_db(db_name) {
             throw error
         }
     }
-    async function backup_exec() {
+    async function backup_localfile() {
         //.. Funções 'backup_exec' //
         //, check_db //
         async function check_db() {
@@ -232,17 +270,16 @@ export async function backup_db(db_name) {
                     cmd: `mariadb-check -o --all-databases --user=${username} --password=${password}`
                 }
             }
-
             for (let key in execs) {
                 const { cmd } = execs[key]
                 const filename = `${key}err.log`
-
                 try {
                     const { stdout } = await execPromise(cmd)
                     if (stdout.includes('Error')) {
                         await writeFile(`${backup_logs}/${filename}`, stdout)
                         throw new Error(stdout)
                     }
+                    console.log(`;------- Comando ${key} finalizado -------;`);
                 } catch (err) {
                     const frmttd_err = JSON.stringify(err, Object.getOwnPropertyNames(err), 2)
                     if (frmttd_err.includes('cmd')) await writeFile(`${backup_logs}/exec_${filename}.log`, frmttd_err)
@@ -250,38 +287,42 @@ export async function backup_db(db_name) {
                 }
             }
         }
+        async function backup_exec() {
+            if (!await accessFile(rawbackup_path, fs.constants.F_OK, { console_error: false })) await mkdir(rawbackup_path)
+            await remove(rawbackup_path, { emptyfolder: true })
+
+            await execPromise(backup_command)
+            await copyFile(join(datadir, 'my.ini'), join(rawbackup_path, 'my.ini'))
+            await execPromise(compact_command)
+
+            await remove(rawbackup_path, { deletefolder: true })
+        }
 
         try {
-            await copyFile(backup_path, backup_tempfile)
-            await unlinkFile(backup_path)
-
+            //.. Create 'temp_file' //
+            await renameFile(backup_path, backup_tempfile, { dont_throw: true, console_error: false })
+            //.. Restart Service // 
             await database_service('stop')
             await database_service('start')
-
-            const check_error = await check_db()
-            if (check_error) throw check_error
-
-            const { error } = await execPromise(backup_command)
-            if (error) throw error
-
-            console.log(`;------- Success 'backup_exec' ${db_name} -------;`);
-            await unlinkFile(backup_tempfile)
+            //.. Execute Backup //
+            await check_db()
+            await backup_exec()
+            //.. Finalize Backup //
+            await unlinkFile(backup_tempfile, { dont_throw: true })
+            console.log(`;------- Success backup ${db_name} -------;`)
         } catch (error) {
-
-            await copyFile(backup_tempfile, backup_path)
-            await unlinkFile(backup_tempfile)
-
+            await remove(rawbackup_path, { deletefolder: true, console_error: false, dont_throw: true })
+            await unlinkFile(backup_path, { dont_throw: true, console_error: false })
+            await renameFile(backup_tempfile, backup_path, { dont_throw: true, console_error: false })
             throw error
         }
     }
 
     try {
-        await backup_exec()
+        await backup_localfile()
         await backup_s3()
+        console.log(`;------- Backup Terminado -------;`)
     } catch (error) {
         console.error(error)
     }
 }
-
-
-

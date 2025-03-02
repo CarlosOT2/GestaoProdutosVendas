@@ -9,6 +9,7 @@ import { formatTable_Date, format_StringDate } from '../helpers/Date/format_date
 import { BuildPagCursor } from '../helpers/Pagination/cursor_based.js'
 
 import { db_gestaoprodutosvendas } from '../db/db_config.js';
+import HTTPError from '../helpers/Classes/HTTPError.js';
 
 //# Variáveis Globais //
 
@@ -44,7 +45,7 @@ router.get(rotaGetPadrao, async (req, res) => {
 
         res.status(200).json(vendas);
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 });
 
@@ -60,22 +61,30 @@ router.post(rotaPostVenda, async (req, res) => {
         i_desconto_vendas
     } = req.body
 
-    if (RequiredVariables({ s_nome_vendas, s_fornecedor_vendas, f_valor_vendas, f_valorFornecedor_vendas, d_data_vendas }, res)) {
-        return
-    }
 
-    //.. Verify // 
-    const Error =
-        (i_quantidade_vendas > 100 || i_quantidade_vendas <= 0) ?
-            'Quantidade Inválida. (1 - 100)'
-            : i_desconto_vendas > 100 || i_desconto_vendas < 0 ?
-                'Desconto Inválido. (0% - 100%)'
-                : undefined
-    if (Error) return res.status(400).json({ info: Error })
 
     try {
-        const query = db_gestaoprodutosvendas('vendas')
+        //.. Verify //
+        await RequiredVariables({
+            s_nome_vendas,
+            s_fornecedor_vendas,
+            f_valor_vendas,
+            f_valorFornecedor_vendas,
+            d_data_vendas
+        })
+        const Error =
+            (i_quantidade_vendas > 100 || i_quantidade_vendas <= 0) ?
+                'Quantidade Inválida. (1 - 100)'
+                : i_desconto_vendas > 100 || i_desconto_vendas < 0 ?
+                    'Desconto Inválido. (0% - 100%)'
+                    : undefined
+        if (Error) {
+            throw new HTTPError(Error, 400)
+        }
 
+        //.. Adding Sale //
+
+        const query = db_gestaoprodutosvendas('vendas')
         const { d_data_vendas: formattedDate } = await format_StringDate({
             type: 'standard',
             verify: true,
@@ -97,7 +106,7 @@ router.post(rotaPostVenda, async (req, res) => {
         }
         res.status(201).json({ info: sales_ID })
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 });
 
@@ -116,7 +125,7 @@ router.delete(rotaDeletePadrao, async (req, res) => {
         await query.del()
         res.status(200).json({ info: "Registro Excluido" })
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 })
 
@@ -182,7 +191,7 @@ router.get(rotaGetFiltrar, async (req, res) => {
 
         res.status(200).json(vendas);
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 })
 

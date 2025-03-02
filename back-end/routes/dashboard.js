@@ -2,12 +2,14 @@
 
 import express from 'express';
 import cors from 'cors';
+import HTTPError from '../helpers/Classes/HTTPError.js';
 
 import { current_date, start } from '../helpers/Date/get_date.js';
 import { format_StringDate } from '../helpers/Date/format_date.js';
 import RequiredVariables from '../helpers/RequiredVariables.js'
 
 import { db_gestaoprodutosvendas } from '../db/db_config.js';
+
 
 //# Variáveis Globais //
 
@@ -30,7 +32,7 @@ async function info_dashboard(config_obj) {
         current_date
     } = config_obj
 
-    if (RequiredVariables({ type })) return
+    if (await RequiredVariables({ type }, { return_boolean: true })) return
 
     //.. Query //
     let query;
@@ -136,15 +138,13 @@ const rotaOverview = "/overview"
 router.get(rotaGetPadrao, async (req, res) => {
 
     //.. Variables //
-    let { limit } = req.query
+    let { limit, previous_date, current_date } = req.query
     const { lucro_maior, lucro_menor, lucro_total, lucro_anual, lucro_semanal } = req.query
-    
     //.. Functions //
-    async function format_dates({ previous_date, current_date }) {
-        if ((previous_date && !current_date) || (current_date && !previous_date)) {
-            return res.status(200).json({ info: `;------- Error Data -------; As 2 Precisam Conter Um Valor.` })
+    async function format_dates() {
+        if (!previous_date || !current_date) {
+            throw new HTTPError(`As 2 datas precisam conter valor, previous_date e current_date`, 200)
         }
-
         return previous_date && current_date
             ?
             await format_StringDate({
@@ -159,7 +159,7 @@ router.get(rotaGetPadrao, async (req, res) => {
     try {
         const data = {}
         if (lucro_maior) {
-            const { previous_date, current_date } = await format_dates(lucro_maior)
+            const { previous_date, current_date } = await format_dates()
             data.lucro_maior = await info_dashboard({
                 type: 'lucro_vendas',
                 previous_date,
@@ -168,7 +168,7 @@ router.get(rotaGetPadrao, async (req, res) => {
             })
         }
         if (lucro_menor) {
-            const { previous_date, current_date } = await format_dates(lucro_menor)
+            const { previous_date, current_date } = await format_dates()
             data.lucro_menor = await info_dashboard({
                 type: 'lucro_vendas',
                 previous_date,
@@ -178,7 +178,7 @@ router.get(rotaGetPadrao, async (req, res) => {
             })
         }
         if (lucro_total) {
-            const { previous_date, current_date } = await format_dates(lucro_total)
+            const { previous_date, current_date } = await format_dates()
             data.lucro_total = await info_dashboard({
                 type: 'lucro_total',
                 previous_date,
@@ -187,10 +187,10 @@ router.get(rotaGetPadrao, async (req, res) => {
         }
         if (lucro_anual) data.lucro_anual = await info_dashboard({ type: 'lucro_anual' })
         if (lucro_semanal) data.lucro_semanal = await info_dashboard({ type: 'lucro_semanal' })
-        
+
         res.status(200).json({ info: data })
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 })
 //.. Rota Overview //
@@ -240,7 +240,7 @@ router.get(rotaOverview, async (req, res) => {
         }
         res.status(200).json({ info: { vendas: vendas, produtos: produtos } })
     } catch (error) {
-        res.status(400).json({ info: error.message })
+        res.status(error.status || 400).json({ info: error.message })
     }
 })
 /*--------------*/
