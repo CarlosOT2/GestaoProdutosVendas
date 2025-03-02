@@ -142,8 +142,8 @@ router.get(rotaGetPadrao, async (req, res) => {
     const { lucro_maior, lucro_menor, lucro_total, lucro_anual, lucro_semanal } = req.query
     //.. Functions //
     async function format_dates() {
-        if (!previous_date || !current_date) {
-            throw new HTTPError(`As 2 datas precisam conter valor, previous_date e current_date`, 200)
+        if ((previous_date && !current_date) || (current_date && !previous_date)) {
+            throw new HTTPError(`Caso Exista Data Na Primeira, A Segunda Precisa Conter Outra Data`, 400)
         }
         return previous_date && current_date
             ?
