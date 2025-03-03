@@ -442,44 +442,46 @@ export default function GeralDashBoard() {
                             visibility: filter.products['filter_enabled'] ? 'visible' : 'hidden'
                         }}
                     >
-                        <TxtPadrão
-                            texto={'O Que Você Quer Filtrar?'}
-                            type={'span'}
-                            className='main-div__filter-title-txt'
-                            default_color={true}
-                        />
-                        <section className='main-div__filter-section' onClick={() => handleSection('Data')}>
+                        <div className='main-div__filter-list-content'>
                             <TxtPadrão
-                                texto={'Data'}
+                                texto={'O Que Você Quer Filtrar?'}
                                 type={'span'}
-                                pointer={true}
-                                className='main-div__filter-section-title'
-                                Txt_icon={<BsCalendar className='main-div__filter-section-icon' />}
+                                className='main-div__filter-title-txt'
+                                default_color={true}
                             />
-                            <br />
-                            <TxtPadrão
-                                texto={'Escolha O Intervalo Da Data, Dia, Mês, E Ano.'}
-                                pointer={true}
-                                type={'span'}
-                                className='main-div__filter-section-label'
-                            />
-                        </section>
-                        <section className='main-div__filter-section' onClick={() => handleSection('Limite')}>
-                            <TxtPadrão
-                                texto={'Limite'}
-                                type={'span'}
-                                pointer={true}
-                                className='main-div__filter-section-title'
-                                Txt_icon={<BsCalendar className='main-div__filter-section-icon' />}
-                            />
-                            <br />
-                            <TxtPadrão
-                                texto={'Escolha O Limite De Produtos'}
-                                pointer={true}
-                                type={'span'}
-                                className='main-div__filter-section-label'
-                            />
-                        </section>
+                            <section className='main-div__filter-section' onClick={() => handleSection('Data')}>
+                                <TxtPadrão
+                                    texto={'Data'}
+                                    type={'span'}
+                                    pointer={true}
+                                    className='main-div__filter-section-title'
+                                    Txt_icon={<BsCalendar className='main-div__filter-section-icon' />}
+                                />
+                                <br />
+                                <TxtPadrão
+                                    texto={'Escolha O Intervalo Da Data, Dia, Mês, E Ano.'}
+                                    pointer={true}
+                                    type={'span'}
+                                    className='main-div__filter-section-label'
+                                />
+                            </section>
+                            <section className='main-div__filter-section' onClick={() => handleSection('Limite')}>
+                                <TxtPadrão
+                                    texto={'Limite'}
+                                    type={'span'}
+                                    pointer={true}
+                                    className='main-div__filter-section-title'
+                                    Txt_icon={<BsCalendar className='main-div__filter-section-icon' />}
+                                />
+                                <br />
+                                <TxtPadrão
+                                    texto={'Escolha O Limite De Produtos'}
+                                    pointer={true}
+                                    type={'span'}
+                                    className='main-div__filter-section-label'
+                                />
+                            </section>
+                        </div>
                     </div>
 
                 </div>

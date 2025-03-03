@@ -5,7 +5,7 @@
 
 const getRandomDate = () => {
   const start = new Date('01-01-2019');
-  const end = new Date('09-29-2024');
+  const end = new Date('08-08-2025');
   const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   return randomDate.toISOString().split('T')[0]
 };

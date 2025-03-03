@@ -1,5 +1,6 @@
 //# Use //
 @use '../../config/global_scss/inputs.scss' as inputs;
+@use '../../config/global_scss/lista.scss' as lista;
 
 //# DIVS //
 
@@ -8,6 +9,7 @@
         display: flex;
         justify-content: right;
         align-items: center;
+
         &__button {
             height: 35px;
             margin: 1px;
@@ -29,6 +31,7 @@
             @extend .input-pequeno;
             width: calc(inputs.$standard-width / 12);
         }
+
         &--date {
             @extend .input-pequeno;
             width: calc(inputs.$standard-width / 8);
@@ -36,3 +39,25 @@
     }
 }
 
+//# Media //
+@media (max-width: lista.$media-max-width) {
+    .input {
+        &-pequeno {
+            width: 98%;
+            &--date {
+                @extend .input-pequeno;
+                text-align: start;
+            }
+        }
+    }
+    .div {
+        &-inputs {
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 210px;
+            &__button {
+                width: 100%;
+            }
+        }
+    }
+}
