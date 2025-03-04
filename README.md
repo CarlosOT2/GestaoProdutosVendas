@@ -7,7 +7,7 @@
 <br/>
 <br/>
 <span>
-  <b>This project is supported in English. You can switch to English ​​by clicking on link [English Version](README.en.md)</b>
+  <b>The docs are supported in English. You can switch to English ​​by clicking on link [English Version](README.en.md)</b>
 </span>
 <br/>
 <br/>
