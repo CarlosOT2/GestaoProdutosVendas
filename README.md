@@ -22,7 +22,7 @@ e um dashboard que proporciona uma visão clara e organizada do seu negócio, aj
 <br/>
 <h2>Sobre O Website</h2>
 
-[Como Instalar O Website](./.docs/br/Como%20Instalar.md)
+[Como Instalar O Website](.docs/br/Como%20Instalar.md)
 
   
 
