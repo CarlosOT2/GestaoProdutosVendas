@@ -15,7 +15,7 @@ Website contains a simple summary, and a dashboard that provides a simple and or
 </p>
 
 <br/>
-<h2>About The Project</h2>
+<h2>About The Website</h2>
 
 [How To Install Website](./.docs/en/How%20To%20Install.md)
 
