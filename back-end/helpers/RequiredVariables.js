@@ -1,9 +1,3 @@
-/*
-                                                   # COMO FUNCIONA ?
-
-..   IRÁ VERIRICAR AS VARIÁVEIS, CASO ALGUMA VARIÁVEL SEJA VAZIO, UNDEFINED, IRÁ RETORNAR TRUE, CASO CONTRÁRIO, IRÁ RETORNAR FALSE.
-
-*/
 //# Import //
 import HTTPError from './Classes/HTTPError.js'
 
