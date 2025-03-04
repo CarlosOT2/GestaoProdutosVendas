@@ -9,13 +9,17 @@
 <span>
   <b>This project is supported in English. You can switch to English ​​by clicking on link [English Version](README.en.md)</b>
 </span>
+<br/>
+<br/>
+
 <p>
-  <b>Este website foi feito com intuito de ser utilizado localmente no computador. Sendo rodado localmente na mesma máquina o back-end, e o front-end.</b>
-</p>
-<p>  
+Este website foi feito com intuito de ser utilizado localmente no computador. Sendo rodado localmente na mesma máquina o back-end, e o front-end.
+  
 Website para gestão de vendas e produtos. Você pode adicionar, alterar e excluir produtos e vendas. O Website contém um resumo simples, 
 e um dashboard que proporciona uma visão clara e organizada do seu negócio, ajudando os usuários a tomar decisões melhores ao seu negócio.
 </p>
+
+<br/>
 <h2>Sobre O Projeto</h2>
   
 
