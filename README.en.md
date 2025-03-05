@@ -17,8 +17,10 @@ Website contains a simple summary, and a dashboard that provides a simple and or
 <br/>
 <h2>About The Website</h2>
 
-- [How To Install Website](./.docs/en/How%20To%20Install.md)
-- [How is The Website Structured?](.docs/br/Website%20Structure.md)
+- [How To Install Website](.docs/en/How%20To%20Install.md)
+- [How To Use The Website](.docs/en/How%20To%20Use%20The%20Website.md)
+- [How is The Website Structured?](.docs/en/Website%20Structure.md)
+
 <br/>
 <h2>How to contribute</h2>
 <h3>What should I keep in mind before opening a Pull Request?</h3>
