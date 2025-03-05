@@ -19,7 +19,8 @@ e um dashboard que proporciona uma visão clara e organizada do seu negócio, aj
 <br/>
 <h2>Sobre O Website</h2>
 
-- [Como Instalar O Website](.docs/br/Como%20Instalar.md)
+- [Como Instalar o Website](.docs/br/Como%20Instalar.md)
+- [Como Utilizar o Website](.docs/br/Como%20Utilizar%20o%20Website.md)
 - [Como o Website Está Estruturado?](.docs/br/Website%20Estrutura.md)
 
 <br/>
