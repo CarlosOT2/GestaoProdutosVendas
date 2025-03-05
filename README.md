@@ -4,15 +4,11 @@
 ![React](https://img.shields.io/badge/React-18.2.0-blue)
 ![MariaDB](https://img.shields.io/badge/MariaDB-11.4.4-blue)
 ![AWS SDK](https://img.shields.io/badge/AWS%20SDK-3.620.0-yellow)
-
-<br/>
-<br/>
-<span>
-  <b>The documentation are supported in English. You can switch to English ​​by clicking on link [English Version](./README.en.md)</b>
-</span>
-<br/>
 <br/>
 
+  <b>The documentation are supported in English. You can switch to English ​​by clicking on link [English Version](README.en.md) </b>
+  
+<br/>
 <p>
 Este website foi feito com intuito de ser utilizado localmente no computador. Sendo rodado localmente na mesma máquina o back-end, e o front-end.
   
