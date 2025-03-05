@@ -29,7 +29,7 @@ e um dashboard que proporciona uma visão clara e organizada do seu negócio, aj
 
 - Para a sua <b>Pull Request</b> ser aprovada, você terá que adicionar um titulo explicativo e simples, seguindo a estrutura e formato correta de arquivos. 
 - Esse é meu projeto pessoal, que usei como aprendizado. Muito provavelmente o código está inconsistente, com partes decentes e outras ruins.
-- Como contribuir? [Confira o passo a passo](.docs/br/)
+- Como contribuir? [Confira o passo a passo](.docs/br/Como%20Contribuir)
 
 <h2>Licença</h2>
 
