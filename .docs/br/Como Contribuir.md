@@ -14,7 +14,7 @@
 6. Envie um Pull Request
 <br/>
 
-<h3>Aprovada</h3>
+<h3>Aprovação</h3>
 
 1. Apague sua branch
 
