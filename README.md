@@ -29,6 +29,10 @@ e um dashboard que proporciona uma visão clara e organizada do seu negócio, aj
 - Esse é meu projeto pessoal, que usei como aprendizado. Muito provavelmente o código está inconsistente, com partes decentes e outras ruins.
 - Como contribuir?: [Confira o passo a passo](.docs/br/)
 
+<h2>Licença</h2>
+
+[MIT](LICENSE)
+
 
   
 
