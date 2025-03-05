@@ -5,13 +5,10 @@
 ![MariaDB](https://img.shields.io/badge/MariaDB-11.4.4-blue)
 ![AWS SDK](https://img.shields.io/badge/AWS%20SDK-3.620.0-yellow)
 <br/>
-<br/>
-<span>
-  <b>This project is supported in English. You can switch to English ​​by clicking on link [English Version](README.en.md)</b>
-</span>
-<br/>
-<br/>
 
+  <b>The documentation are supported in English. You can switch to English ​​by clicking on [English Version](README.en.md) </b>
+  
+<br/>
 <p>
 Este website foi feito com intuito de ser utilizado localmente no computador. Sendo rodado localmente na mesma máquina o back-end, e o front-end.
   
@@ -23,6 +20,18 @@ e um dashboard que proporciona uma visão clara e organizada do seu negócio, aj
 <h2>Sobre O Website</h2>
 
 [Como Instalar O Website](.docs/br/Como%20Instalar.md)
+
+<br/>
+<h2>Como Contribuir</h2>
+<h3>O que devo ter em mente antes de abrir um Pull Request?</h3>
+
+- Para a sua <b>Pull Request</b> ser aprovada, você terá que adicionar um titulo explicativo e simples, seguindo a estrutura e formato correta de arquivos. 
+- Esse é meu projeto pessoal, que usei como aprendizado. Muito provavelmente o código está inconsistente, com partes decentes e outras ruins.
+- Como contribuir?: [Confira o passo a passo](.docs/br/)
+
+<h2>Licença</h2>
+
+[MIT](LICENSE)
 
 
   
