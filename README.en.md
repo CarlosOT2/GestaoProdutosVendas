@@ -25,7 +25,7 @@ Website contains a simple summary, and a dashboard that provides a simple and or
 
 - For your <b>Pull Request</b> to be accepted, you will need to add a simple and explanatory title, following the correct files structure and format.
 - This is my personal project, which I have had used as a learning experience. The code is probably inconsistent, with some decent parts and some bad parts.
-- How to contribute?: [Check out the guide](.docs/en/How%20To%20Contribute.md)
+- How to contribute? [Check out the guide](.docs/en/How%20To%20Contribute.md)
 
 <h2>License</h2>
 
