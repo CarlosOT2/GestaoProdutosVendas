@@ -25,6 +25,14 @@ e um dashboard que proporciona uma visão clara e organizada do seu negócio, aj
 
 [Como Instalar O Website](.docs/br/Como%20Instalar.md)
 
+<br/>
+<h2>Como Contribuir</h2>
+<h3>O que devo ter em mente antes de abrir um Pull Request?</h3>
+
+- Para a sua <b>Pull Request</b> ser aprovada, você terá que adicionar um titulo explicativo e simples, seguindo a estrutura e formato correta de arquivos. 
+- Esse é meu projeto pessoal, que usei como aprendizado. Muito provavelmente o código está inconsistente, com partes decentes e outras ruins.
+- Como contribuir?: [Siga o passo a passo](.docs/br/)
+
 
   
 
