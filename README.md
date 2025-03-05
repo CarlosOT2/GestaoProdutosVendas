@@ -6,7 +6,7 @@
 ![AWS SDK](https://img.shields.io/badge/AWS%20SDK-3.620.0-yellow)
 <br/>
 
-  <b>The documentation are supported in English. You can switch to English ​​by clicking on link [English Version](README.en.md) </b>
+  <b>The documentation are supported in English. You can switch to English ​​by clicking on [English Version](README.en.md) </b>
   
 <br/>
 <p>
