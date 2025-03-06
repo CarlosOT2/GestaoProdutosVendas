@@ -4,4 +4,4 @@ const users = {
     server: 'Carlos',
     user: 'user'
 }
-export { users } 
+export default users

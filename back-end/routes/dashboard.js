@@ -7,7 +7,6 @@ import HTTPError from '../helpers/Classes/HTTPError.js';
 import { current_date, start } from '../helpers/Date/get_date.js';
 import { format_StringDate } from '../helpers/Date/format_date.js';
 import RequiredVariables from '../helpers/RequiredVariables.js'
-
 import { db_gestaoprodutosvendas } from '../db/db_config.js';
 
 
