@@ -22,4 +22,6 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 2. Copie a URL HTTPS do repositório
 3. Execute o comando `git clone https://github.com/usuario/repo.git`
 
+<h3> Configurando O Website Para Seu Computador </h3>
+
 
