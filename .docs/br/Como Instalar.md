@@ -56,6 +56,8 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
   &lt;/Query&gt;
 &lt;/QueryList&gt;
 </code></pre>
+7. Clique em Ok, e Ok
+8. Vá até `Geral` na aba Criar Tarefa, na seção `Opções de segurança` selecione a opção `Executar estando o usuário conectado ou não`
 
 
 
