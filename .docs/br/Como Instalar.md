@@ -27,6 +27,7 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 3. Após isso vá até o diretório `back-end\config`
 4. No arquivo `users_win.js` altere server para o nome do usuário que irá utilizar o website
 5. No arquivo `aws.js` altere credentials_path para o caminho do arquivo das credenciais do aws
+6. Vá até a interface do `HeidiSQL` do banco de dados `MariaDB`, execute a query `CREATE DATABASE db_gestaoprodutosvendas`
 
 
 <h3> Configurando O Front-End </h3>
@@ -38,6 +39,7 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 <h3> Configurando O Agendador De Tarefas </h3>
 
 Uma parte essencial pouco longa que não pode ser ignorada [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
+
 
 
 
