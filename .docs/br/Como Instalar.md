@@ -9,8 +9,6 @@
 <h3> Clonar o Repositório com SSH </h3>
 
 Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://docs.github.com/pt/authentication/connecting-to-github-with-ssh)
-<br/>
-<br/>
 
 1. No git bash, navegue até o diretório onde deseja salvar o repositório
 2. Copie a URL SSH do repositório
@@ -21,7 +19,7 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 1. No git bash, navegue até o diretório onde deseja salvar o repositório
 2. Copie a URL HTTPS do repositório
 3. Execute o comando `git clone https://github.com/usuario/repo.git`
-
+<br/>
 <h3> Configurando O Back-End </h3>
 
 1. No terminal vá até o diretório de GestãoProdutosVendas
@@ -36,31 +34,11 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 1. No terminal vá até o diretório de GestãoProdutosVendas
 2. Execute o comando `npm i`, no diretório front-end
 3. Caso esteja usando uma URL distinta, vá até `src\config`, altere o arquivo `config_websv.js` para a sua URL
-
+<br/>
 <h3> Configurando O Agendador De Tarefas </h3>
 
-1. Abra o aplicativo `Agendador de tarefas`, Clique em `Criar Tarefa` na seção Ações, Nomeie a tarefa para `Delete_LocalRoot`
-2. Vá até `Ações`, crie uma nova Ação clicando em Novo, clique em Procurar, selecione o arquivo `delLocalRoot` no diretório `back-end\data\local_credentials`, clique em Ok
-3. Vá até `Disparadores`, crie um novo Disparador clicando em Novo, selecione a opção `Em Um Evento` em `Iniciar a tarefa`
-5. Selecione a opção Personalizado, clique em `Novo Filtro de Eventos...`, vá até a seção XML, selecione a opção `Editar consulta`, cole este código
-<p>
-<b>(Tenha cuidado com quebras de linha e espaços, a sintaxe é muito sensível)</b>
-</p>
-<pre><code>
-&lt;QueryList&gt;
-  &lt;Query Id="0" Path="System"&gt;
-    &lt;Select Path="System"&gt;
-      *[System[EventID=1074]]
-      and
-      *[EventData[Data[@Name='param5'] and (Data='Desligado')]]
-    &lt;/Select&gt;
-  &lt;/Query&gt;
-&lt;/QueryList&gt;
-</code></pre>
+Uma parte essencial pouco longa que não pode ser ignorada [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
 
-7. Clique em Ok, Clique em Ok novamente
-8. Vá até `Geral`, na seção `Opções de segurança` selecione a opção `Executar estando o usuário conectado ou não`
-9. Finalize a criação da tarefa, clicando em Ok
 
 
 
