@@ -44,6 +44,7 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 3. Nomeie a tarefa para `Delete_LocalRoot`
 4. Vá até Ações na aba Criar Tarefa, clique em Novo
 5. Após isso clique em Procurar, selecione o arquivo `delLocalRoot` no diretório `back-end\data\local_credentials`
+6. Clique em Ok
 
 
 
