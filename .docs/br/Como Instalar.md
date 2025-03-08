@@ -38,7 +38,7 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 <br/>
 <h3> Configurando O Agendador De Tarefas </h3>
 
-Uma parte essencial pouco longa que não pode ser ignorada [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
+Uma parte essencial que não pode ser ignorada [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
 
 
 
