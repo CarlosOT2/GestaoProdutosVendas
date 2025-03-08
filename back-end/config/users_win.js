@@ -1,7 +1,7 @@
 //# Users //
 const users = {
     admin_local: 'AdminLocal',
-    server: 'Carlos',
+    server: 'server',
     user: 'user'
 }
 export default users
