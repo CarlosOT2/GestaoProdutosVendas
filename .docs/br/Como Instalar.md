@@ -40,10 +40,10 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 <h3> Configurando O Agendador De Tarefas </h3>
 
 1. Abra o aplicativo `agendador de tarefas`, Clique em `Criar Tarefa` na seção Ações, Nomeie a tarefa para `Delete_LocalRoot`
-2. Vá até `Ações` na aba Criar Tarefa, clique em Novo, clique em Procurar, selecione o arquivo `delLocalRoot` no diretório `back-end\data\local_credentials`, clique em Ok
+2. Vá até `Ações` na aba Criar Tarefa, crie uma nova Ação clicando em Novo, clique em Procurar, selecione o arquivo `delLocalRoot` no diretório `back-end\data\local_credentials`, clique em Ok
 3. Vá até `Disparadores` na aba Criar Tarefa, clique em Novo
-4. Selecione a opção `Em Um Evento` em Iniciar a tarefa
-5. Selecione a opção Personalizado, clique em Editar Filtro de Eventos...
+4. Selecione a opção `Em Um Evento` em `Iniciar a tarefa`
+5. Selecione a opção Personalizado, clique em Novo Filtro de Eventos...
 6. Vá até a seção XML, selecione a opção Editar consulta, cole este código (Tenha cuidado com quebras de linha e espaços, a sintaxe é muito sensível)
 <pre><code>
 &lt;QueryList&gt;
