@@ -22,13 +22,19 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 2. Copie a URL HTTPS do repositório
 3. Execute o comando `git clone https://github.com/usuario/repo.git`
 
-<h3> Configurando O Website </h3>
+<h3> Configurando O Back-End </h3>
 
 1. No terminal vá até o diretório de GestãoProdutosVendas
-2. Execute o comando `npm i`, no diretório front-end, e back-end
+2. Execute o comando `npm i`, no diretório back-end
 3. Após isso vá até o diretório `back-end\config`
 4. No arquivo `users_win.js` altere `server` para o nome do usuário que irá utilizar o website
 5. No arquivo `aws.js` altere `credentials_path` para o caminho do arquivo das credenciais do aws
+
+<h3> Configurando O Front-End </h3>
+
+1. No terminal vá até o diretório de GestãoProdutosVendas
+2. Execute o comando `npm i`, no diretório front-end
+3. Caso esteja usando uma URL distinta, vá até `src\config`, altere o arquivo `config_websv.js` para a sua URL
 
 
 
