@@ -42,9 +42,24 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 1. Abra o aplicativo `agendador de tarefas`
 2. Clique em `Criar Tarefa` na seção Ações
 3. Nomeie a tarefa para `Delete_LocalRoot`
-4. Vá até Ações na aba Criar Tarefa, clique em Novo
-5. Após isso clique em Procurar, selecione o arquivo `delLocalRoot` no diretório `back-end\data\local_credentials`
-6. Clique em Ok
+4. Vá até `Ações` na aba Criar Tarefa, clique em Novo
+5. Após isso clique em Procurar, selecione o arquivo `delLocalRoot` no diretório `back-end\data\local_credentials`, clique em Ok
+7. Vá até `Disparadores` na aba Criar Tarefa, clique em Novo
+8. Selecione a opção `Em Um Evento` em Iniciar a tarefa
+9. Selecione a opção Personalizado, clique em Editar Filtro de Eventos...
+10. Vá até a seção XML, selecione a opção Editar consulta, cole este código (Tenha cuidado com quebras de linha e espaços, a sintaxe é muito sensível)
+<pre><code>
+&lt;QueryList&gt;
+  &lt;Query Id="0" Path="System"&gt;
+    &lt;Select Path="System"&gt;
+      *[System[EventID=1074]]
+      and
+      *[EventData[Data[@Name='param5'] and (Data='Desligado')]]
+    &lt;/Select&gt;
+  &lt;/Query&gt;
+&lt;/QueryList&gt;
+</code></pre>
+
 
 
 
