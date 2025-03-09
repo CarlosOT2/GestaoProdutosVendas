@@ -17,9 +17,11 @@ Website contains a simple summary, and a dashboard that provides a simple and or
 <br/>
 <h2>About The Website</h2>
 
-- [How To Install Website](.docs/en/How%20To%20Install.md)
-- [How To Use The Website](.docs/en/How%20To%20Use%20The%20Website.md)
-- [How is The Website Structured?](.docs/en/Website%20Structure.md)
+- [How to Install Website](.docs/en/How%20To%20Install.md)
+- [How to Use The Website](.docs/en/How%20To%20Use%20The%20Website.md)
+- [How is The Website Structured](.docs/en/How%20is%20The%20Website%20Structuredmd)
+- [How to Configure Task Scheduler](.docs/en/How%20to%20Configure%20Task%20Scheduler.md)
+- [How to Configure AWS](.docs/en/How%20to%20Configure%20AWS.md)
 
 <br/>
 <h2>How to contribute</h2>
