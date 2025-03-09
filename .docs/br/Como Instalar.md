@@ -35,13 +35,13 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 1. No terminal vá até o diretório de GestãoProdutosVendas/front-end, execute o comando `npm i`
 2. Caso esteja usando uma URL personalizada, vá até `src\config`, altere a variável `WebService` do arquivo `config_websv.js` para a sua URL
 <br/>
-<h3> Configurando O Agendador De Tarefas </h3>
+<h3> Como Configurar O Agendador De Tarefas </h3>
 
-Importante, porém opcional, você não precisa configurar o Agendador de Tarefas para fazer o Website funcionar [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
+Configurar o Agendador de Tarefas é recomendado, mas opcional, você não precisa dele para que seu Website funcione [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
 
-<h3> Configurando A AWS </h3>
+<h3> Como Configurar O AWS </h3>
 
-Essencial, sem a AWS configurada corretamente seu Website não funcionará [Como Configurar O AWS](./Como%20Configurar%20O%20AWS.md) 
+Obrigatório ter o AWS configurado corretamente para que seu Website funcione corretamente [Como Configurar O AWS](./Como%20Configurar%20O%20AWS.md) 
 
 
 
