@@ -25,7 +25,7 @@ If you don't know what SSH is, [How to Connect to Github with SSH](https://docs.
 
 1. Open terminal, go to the `GestãoProdutosVendas/back-end` directory and run command `npm i`
 2. Open `HeidiSQL` app from `MariaDB` and run query `CREATE DATABASE db_gestaoprodutosvendas`
-3. Open terminal again, go to the the `GestãoProdutosVendas/back-end` directory, run command `npm run migrate:latest --env prod`
+3. Open terminal again, go to the `GestãoProdutosVendas/back-end` directory, run command `npm run migrate:latest --env prod`
 4. After that, go to the `back-end\config` directory
-5. Open `users_win.js` file, change server to the name of the Windows user who will use the website
-6. Open `aws.js` file, change credentials_path to the path to the AWS credentials file
+5. Open file `users_win.js`, change server to the name of the Windows User who will use the website
+6. Open file `aws.js`, change credentials_path to path to your AWS credentials file
