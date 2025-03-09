@@ -36,7 +36,13 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 <br/>
 <h3> Configurando O Agendador De Tarefas </h3>
 
-Uma parte essencial que não pode ser ignorada [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
+Importante, porém opcional, você não precisa configurar o Agendador de Tarefas para fazer o Website funcionar [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
+
+<h3> Configurando A AWS </h3>
+
+Essencial, sem a AWS configurada corretamente seu Website não funcionará [Como Configurar O AWS](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md) 
+
+
 
 
 
