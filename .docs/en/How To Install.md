@@ -29,3 +29,9 @@ If you don't know what SSH is, [How to Connect to Github with SSH](https://docs.
 4. After that, go to the `back-end\config` directory
 5. Open file `users_win.js`, change server to the name of the Windows User who will use the website
 6. Open file `aws.js`, change credentials_path to path to your AWS credentials file
+
+<h3> How to Configure the Front-End </h3>
+
+1. Open terminal, go to the `GestãoProdutosVendas/front-end` directory and run command `npm i`
+2. If you're using a custom URL, go to `src\config` and change the variable `WebService` from file `config_websv.js` to your URL
+<br/>
