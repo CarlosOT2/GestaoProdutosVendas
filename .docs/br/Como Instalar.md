@@ -32,7 +32,7 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 <h3> Configurando O Front-End </h3>
 
 1. No terminal vá até o diretório de GestãoProdutosVendas/front-end, execute o comando `npm i`
-2. Caso esteja usando uma URL personalizada, vá até `src\config`, altere o arquivo `config_websv.js` para a sua URL
+2. Caso esteja usando uma URL personalizada, vá até `src\config`, altere a variável `WebService` do arquivo `config_websv.js` para a sua URL
 <br/>
 <h3> Configurando O Agendador De Tarefas </h3>
 
