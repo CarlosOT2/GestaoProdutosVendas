@@ -40,7 +40,7 @@ Importante, porém opcional, você não precisa configurar o Agendador de Tarefa
 
 <h3> Configurando A AWS </h3>
 
-Essencial, sem a AWS configurada corretamente seu Website não funcionará [Como Configurar O AWS](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md) 
+Essencial, sem a AWS configurada corretamente seu Website não funcionará [Como Configurar O AWS](./Como%20Configurar%20O%20AWS.md) 
 
 
 
