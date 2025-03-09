@@ -5,7 +5,7 @@ Tarefa que excluirá o arquivo `root.json` as credenciais do banco de dados arma
 <br/>
 <br/>
 
-1. Abra o aplicativo `Agendador de tarefas`, clique em `Criar Tarefa` na seção Ações, nomeie a tarefa para `Delete_LocalRoot`
+1. Abra o aplicativo `Agendador de tarefas`, clique em `Criar Tarefa`, nomeie a tarefa para `Delete_LocalRoot`
 2. Vá até `Ações`, crie uma nova Ação clicando em Novo, clique em Procurar, selecione o arquivo `delLocalRoot` no diretório `back-end\data\local_credentials`, clique em Ok
 3. Vá até `Disparadores`, crie um novo Disparador clicando em Novo, selecione a opção `Em Um Evento` em `Iniciar a tarefa`
 5. Selecione a opção Personalizado, clique em `Novo Filtro de Eventos...`, vá até a seção XML, selecione a opção `Editar consulta`, cole este código
