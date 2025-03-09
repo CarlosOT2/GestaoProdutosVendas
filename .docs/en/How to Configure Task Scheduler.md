@@ -19,7 +19,7 @@ Task that will delete file `root.json` database credentials stored in the `back-
     &lt;Select Path="System"&gt;
       *[System[EventID=1074]]
       and
-      *[EventData[Data[@Name='param5'] and (Data='Desligado')]]
+      *[EventData[Data[@Name='param5'] and (Data='power off')]]
     &lt;/Select&gt;
   &lt;/Query&gt;
 &lt;/QueryList&gt;
