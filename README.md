@@ -21,7 +21,7 @@ e um dashboard que proporciona uma visão clara e organizada do seu negócio, aj
 
 - [Como Instalar o Website](.docs/br/Como%20Instalar.md)
 - [Como Utilizar o Website](.docs/br/Como%20Utilizar%20o%20Website.md)
-- [Como o Website Está Estruturado](.docs/br/Website%20Estrutura.md)
+- [Como o Website Está Estruturado](.docs/br/Como%20o%20Website%20Está%20Estruturado.md)
 - [Como Configurar O Agendador De Tarefas](.docs/br/Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
 - [Como Configurar O AWS](.docs/br/Como%20Configurar%20O%20AWS.md) 
 
