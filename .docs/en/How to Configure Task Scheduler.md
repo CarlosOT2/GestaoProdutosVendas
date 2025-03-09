@@ -25,6 +25,6 @@ Task that will delete file `root.json` database credentials stored in the `back-
 &lt;/QueryList&gt;
 </code></pre>
 
-7. Click Ok, Click Ok again
+7. Click on Ok, Click on Ok again
 8. Go to `General`, in section `Security options` select the option `Run whether user is logged on or not`
 9. Finish it by clicking on Ok
