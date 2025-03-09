@@ -35,3 +35,11 @@ If you don't know what SSH is, [How to Connect to Github with SSH](https://docs.
 1. Open terminal, go to the `GestãoProdutosVendas/front-end` directory and run command `npm i`
 2. If you're using a custom URL, go to `src\config` and change the variable `WebService` from file `config_websv.js` to your URL
 <br/>
+
+<h3> How to Configure Task Scheduler </h3>
+
+Configuring Task Scheduler is recommended but optional, you don’t need it for your website to work [How To Configure Task Scheduler](./How%20to%20Configure%20Task%20Scheduler.md)
+
+<h3> How to Configure AWS </h3>
+
+It is mandatory to have AWS configured correctly for your website to work correctly [How To Configure AWS](./How%20to%20Configure%20AWS.md)
