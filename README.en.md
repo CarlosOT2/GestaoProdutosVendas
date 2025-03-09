@@ -19,7 +19,7 @@ Website contains a simple summary, and a dashboard that provides a simple and or
 
 - [How to Install Website](.docs/en/How%20To%20Install.md)
 - [How to Use The Website](.docs/en/How%20To%20Use%20The%20Website.md)
-- [How is The Website Structured](.docs/en/How%20is%20The%20Website%20Structuredmd)
+- [How is The Website Structured](.docs/en/How%20is%20The%20Website%20Structured.md)
 - [How to Configure Task Scheduler](.docs/en/How%20to%20Configure%20Task%20Scheduler.md)
 - [How to Configure AWS](.docs/en/How%20to%20Configure%20AWS.md)
 
