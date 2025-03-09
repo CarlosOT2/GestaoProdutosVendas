@@ -22,19 +22,17 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 <br/>
 <h3> Configurando O Back-End </h3>
 
-1. No terminal vá até o diretório de GestãoProdutosVendas
-2. Execute o comando `npm i`, no diretório back-end
-3. Após isso vá até o diretório `back-end\config`
-4. No arquivo `users_win.js` altere server para o nome do usuário que irá utilizar o website
-5. No arquivo `aws.js` altere credentials_path para o caminho do arquivo das credenciais do aws
-6. Vá até a interface do `HeidiSQL` do banco de dados `MariaDB`, execute a query `CREATE DATABASE db_gestaoprodutosvendas`
-
-
+1. No terminal vá até o diretório GestãoProdutosVendas/back-end, execute o comando `npm i`
+2. Abra o aplicativo `HeidiSQL` do banco de dados `MariaDB`, execute a query `CREATE DATABASE db_gestaoprodutosvendas`
+3. No terminal do diretório back-end, execute o comando `npm run migrate:latest --env prod`
+4. Após isso vá até o diretório `back-end\config`
+5. No arquivo `users_win.js` altere server para o nome do usuário do windows que irá utilizar o website
+6. No arquivo `aws.js` altere credentials_path para o caminho do arquivo das credenciais do aws
+  
 <h3> Configurando O Front-End </h3>
 
-1. No terminal vá até o diretório de GestãoProdutosVendas
-2. Execute o comando `npm i`, no diretório front-end
-3. Caso esteja usando uma URL distinta, vá até `src\config`, altere o arquivo `config_websv.js` para a sua URL
+1. No terminal vá até o diretório de GestãoProdutosVendas/front-end, execute o comando `npm i`
+2. Caso esteja usando uma URL personalizada, vá até `src\config`, altere o arquivo `config_websv.js` para a sua URL
 <br/>
 <h3> Configurando O Agendador De Tarefas </h3>
 
