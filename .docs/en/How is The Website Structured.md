@@ -1,1 +1,1 @@
-How to contribute
+# How is The Website Structured #
