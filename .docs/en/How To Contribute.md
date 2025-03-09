@@ -1,6 +1,6 @@
 # How to Contribute #
 
-<b>Before you start contributing, review the project structure [How is The Website Structured](.docs/en/How%20is%20The%20Website%20Structured.md))</b>
+<b>Before you start contributing, review the project structure [How is The Website Structured](.docs/en/How%20is%20The%20Website%20Structured.md)</b>
 <br/>
 <br/>
 
