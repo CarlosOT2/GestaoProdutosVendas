@@ -12,3 +12,15 @@ Task that will delete file `root.json` database credentials stored in the `back-
 <p>
 <b>(Be careful with line breaks and spaces, the syntax is very sensitive)</b>
 </p>
+</p>
+<pre><code>
+&lt;QueryList&gt;
+  &lt;Query Id="0" Path="System"&gt;
+    &lt;Select Path="System"&gt;
+      *[System[EventID=1074]]
+      and
+      *[EventData[Data[@Name='param5'] and (Data='Desligado')]]
+    &lt;/Select&gt;
+  &lt;/Query&gt;
+&lt;/QueryList&gt;
+</code></pre>
