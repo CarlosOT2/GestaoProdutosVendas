@@ -1,6 +1,6 @@
 # Como Contribuir #
 
-<b>Antes de começar a contribuir, revise a estrutura do projeto [Como o Website Está Estruturado?](./Website%20Estrutura.md)</b>
+<b>Antes de começar a contribuir, revise a estrutura do projeto [Como o Website Está Estruturado](./Como%20o%20Website%20Está%20Estruturado.md)</b>
 <br/>
 <br/>
 
