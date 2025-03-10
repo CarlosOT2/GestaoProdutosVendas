@@ -8,6 +8,7 @@ import { decrypt, encrypt } from '../helpers/Encryption/dpapi.js';
 import { get_secret } from '../helpers/Aws/secret_manager.js'
 import { exec } from 'child_process';
 import users from '../config/users_win.js';
+import { root_secret } from '../config/aws.js';
 
 //# Variáveis Globais //
 const __dirname = path.dirname(import.meta.filename)
@@ -50,7 +51,7 @@ export function local_credentials() {
 export default async function get_root() {
     const { create_credentials, decrypt_credentials } = local_credentials()
     try {
-        const root = await get_secret('mysql-user//root//', { console_error: false })
+        const root = await get_secret(root_secret, { console_error: false })
         await create_credentials(root)
         if (!await accessFile(dirfile, fs.constants.F_OK, { console_error: false })) {
             throw new Error(`Não Foi Possível Criar As Credenciais Locais`)
