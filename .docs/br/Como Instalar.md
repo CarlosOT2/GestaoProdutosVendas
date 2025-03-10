@@ -37,7 +37,7 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 <br/>
 <h3> Como Configurar O Agendador De Tarefas </h3>
 
-Configurar o Agendador de Tarefas é recomendado, porém opcional, você não precisa dele para que seu Website funcione. Ele lhe oferecerá segurança extra [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
+Configurar o Agendador de Tarefas é recomendado, porém opcional, você não precisa dele para que seu Website funcione. Ele oferecerá segurança extra [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
 
 
 
