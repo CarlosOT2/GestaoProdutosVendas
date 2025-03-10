@@ -13,5 +13,8 @@
 9. Vá até o serviço `Key Management Service`, na seção Customer managed keys clique em `Create key`
 10. As opções selecionadas são; `Symmetric`, `Encrypt and decrypt`, `KMS - recommended`, `Single-Region key`, clique em Next
 11. Novamente o nome não é importante (deve explicar que irá criptografar segredos do Secrets Manager), clique em Next, clique em Next, clique em Next, clique em Next, clique em Finish, criando a chave
+12. Copie o `ARN` da chave criada, iremos voltar para `IAM`, Na seção Access management clique em `Policies`, clique em `Create policy`, Na seção Policy editor clique em `JSON`
+13. As etapas são semelhantes à Policy anterior, porém com valores diferentes, Na seção `Add actions` pesquise por KMS, clique em KMS, selecione as opções `Decrypt`, `Encrypt`
+14. 
 
    
