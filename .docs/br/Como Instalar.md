@@ -28,7 +28,7 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 3. No terminal do diretório back-end, execute o comando `npm run migrate:latest --env prod`
 4. Após isso vá até o diretório `back-end\config`
 5. No arquivo `users_win.js` altere server para o nome do usuário do windows que irá utilizar o website
-6. No arquivo `aws.js` altere credentials_path para o caminho do arquivo das credenciais do aws
+6. Após isso, você terá que realizar a configuração do AWS [Como Configurar O AWS](./Como%20Configurar%20O%20AWS.md)
   
 <h3> Configurando O Front-End </h3>
 
@@ -37,11 +37,9 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 <br/>
 <h3> Como Configurar O Agendador De Tarefas </h3>
 
-Configurar o Agendador de Tarefas é recomendado, mas opcional, você não precisa dele para que seu Website funcione [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
+Configurar o Agendador de Tarefas é recomendado, porém opcional, você não precisa dele para que seu Website funcione. Ele lhe oferecerá segurança extra [Como Configurar O Agendador De Tarefas](./Como%20Configurar%20O%20Agendador%20De%20Tarefas.md)
 
-<h3> Como Configurar O AWS </h3>
 
-Obrigatório ter o AWS configurado corretamente para que seu Website funcione corretamente [Como Configurar O AWS](./Como%20Configurar%20O%20AWS.md) 
 
 
 
