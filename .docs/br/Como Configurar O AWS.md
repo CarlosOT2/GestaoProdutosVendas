@@ -1,6 +1,9 @@
 # Como Configurar O AWS #
 
 <h3> Configurando Secret Manager </h3>
+Criaremos um usuário que terá acesso ao Secrets Manager, Após isso usaremos suas credenciais no servidor
+<br/>
+<br/>
 
 1. Vá até o serviço `IAM`, na seção Access management clique em `Users`
 2. Clique em `Create User`, o nome de usuário não importa muito, mas deve ser autoexplicativo
@@ -17,5 +20,6 @@
 13. As etapas são semelhantes à Policy anterior, porém com valores diferentes, Na seção `Add actions` pesquise por KMS, clique em KMS, selecione as opções `Decrypt`, `Encrypt`
 14. Vá até `Add a resource` clique em Add, selecione key em `Resource Type`, cole o `ARN` que você copiou no `Resource ARN`, clique em Add resource, clique em Next
 15. Novamente o nome não é importante, clique em Create policy, Agora temos todas as permissões para dar ao usuário que criamos acesso ao Secrets Manager
+16. Vá até o serviço `IAM`, clique em `Users`, clique no usuário criado 
 
    
