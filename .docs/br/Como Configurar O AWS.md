@@ -8,4 +8,5 @@
 4. Na seção Access management clique em `Policies`, clique em `Create policy`, Na seção Policy editor clique em `JSON`
 5. Na seção `Add actions` pesquise por Secrets Manager, clique em Secrets Manager, selecione as opções `DescribeSecret`, e `GetSecretValue`
 6. Embaixo de Add actions, vá até `Add a resource` clique em Add, selecione All Resources em `Resource Type`, clique em Add resource
+7. Após isso, embaixo da página clique em Next, o nome não importa muito (deve ser autoexplicativo), clique em `Create policy`
    
