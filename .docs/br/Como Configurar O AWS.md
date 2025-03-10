@@ -20,6 +20,7 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após isso usaremos s
 13. As etapas são semelhantes à Policy anterior, porém com valores diferentes, Na seção `Add actions` pesquise por KMS, clique em KMS, selecione as opções `Decrypt`, `Encrypt`
 14. Vá até `Add a resource` clique em Add, selecione key em `Resource Type`, cole o `ARN` que você copiou no `Resource ARN`, clique em Add resource, clique em Next
 15. Novamente o nome não é importante, clique em Create policy, Agora temos todas as permissões para dar ao usuário que criamos acesso ao Secrets Manager
-16. Vá até o serviço `IAM`, clique em `Users`, clique no usuário criado 
+16. Vá até o serviço `IAM`, clique em `Users`, clique no usuário criado anteriormente, vá até a seção `Permissions`, clique em Add permissions, selecione a opção Add permissions novamente
+17. Na seção `Permissions options` selecione a opção `Attach policies directly`, procure as duas permissões criadas anteriormente e selecione-as, clique em Next, verifique se você selecionou corretamente, clique em Add permissions
 
    
