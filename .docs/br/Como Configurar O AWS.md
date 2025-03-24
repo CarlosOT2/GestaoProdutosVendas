@@ -57,7 +57,7 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
 
 <br/>
 
-<h3> Armazenando As Credenciais Do Secrets Manager Localmente </h3>
+<h3> Armazenando credenciais do Secrets Manager localmente </h3>
 
 
 
