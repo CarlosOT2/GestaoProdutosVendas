@@ -5,8 +5,6 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
 <br/>
 <br/>
 
-12. Copie o `ARN` da chave criada, iremos voltar para `IAM`, Na seção Access management clique em `Policies`, clique em `Create policy`, Na seção Policy editor clique em `JSON`
-13. As etapas são semelhantes à Policy anterior, porém com valores diferentes, Na seção `Add actions` pesquise por KMS, clique em KMS, selecione as opções `Decrypt`, `Encrypt`
 14. Vá até `Add a resource` clique em Add, selecione key em `Resource Type`, cole o `ARN` que você copiou no `Resource ARN`, clique em Add resource, clique em Next
 15. Novamente o nome não é importante, clique em Create policy, Agora temos todas as permissões para dar ao usuário que criamos acesso ao Secrets Manager
 16. Vá até o serviço `IAM`, clique em `Users`, clique no usuário criado anteriormente, vá até a seção `Permissions`, clique em Add permissions, selecione a opção Add permissions novamente
@@ -21,7 +19,7 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
     <ul>
       <li>Na seção Access management, Vá para <code>Policies</code> e clique em Create policy</li>
       <li>Na seção Policy editor clique em <code>JSON</code></li>
-      <li>Na seção Add actions pesquise por Secrets Manager, clique em Secrets Manager</li>
+      <li>Na seção Add actions pesquise por <code>Secrets Manager</code>, clique em Secrets Manager</li>
       <li>Selecione as opções <code>DescribeSecret</code>, e <code>GetSecretValue</code></li>
       <li>Embaixo de Add actions, vá até Add a resource</li>
       <li>Clique em Add, selecione <code>All Resources</code> em Resource Type, clique em Add resource</li>
@@ -42,7 +40,11 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
     Criar Policy de acesso á chave do KMS:
     <ul>
       <li>Copie o <code>ARN</code> da chave que você criou, retornaremos ao <code>IAM</code></li>
-      
+      <li>Retorne para <code>Policies</code> e clique em Create policy</li>
+      <li>Na seção Policy editor clique em <code>JSON</code></li>
+      <li>Na seção Add actions pesquise por <code>KMS</code>, clique em KMS</li>
+      <li>Selecione as opções <code>Decrypt</code>, e <code>Encrypt</code></li>
+      <li>Vá até Add a resource, clique em Add, cole o <code>ARN</code> que você copiou no <code>Resource ARN</code></li>
     </ul>
   </li>
   <li>Atribuir as permissões ao usuário criado</li>
