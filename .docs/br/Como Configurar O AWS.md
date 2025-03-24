@@ -1,7 +1,7 @@
 # Como Configurar O AWS #
 
-<h3> Configurando Secret Manager </h3>
-Criaremos um usuário que terá acesso ao Secrets Manager, Após isso usaremos suas credenciais no servidor
+<h3> Criando O Usuário Do Secrets Manager </h3>
+Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usaremos suas credenciais
 <br/>
 <br/>
 
@@ -22,5 +22,50 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após isso usaremos s
 15. Novamente o nome não é importante, clique em Create policy, Agora temos todas as permissões para dar ao usuário que criamos acesso ao Secrets Manager
 16. Vá até o serviço `IAM`, clique em `Users`, clique no usuário criado anteriormente, vá até a seção `Permissions`, clique em Add permissions, selecione a opção Add permissions novamente
 17. Na seção `Permissions options` selecione a opção `Attach policies directly`, procure as duas permissões criadas anteriormente e selecione-as, clique em Next, verifique se você selecionou corretamente, clique em Add permissions
+
+<ol>
+  <li>Vá até o serviço <code>IAM</code>, na seção Access management clique em <code>Users</code></li>
+  <li>Clique em Create User, escolha um nome autoexplicativo</li>
+  <li>Clique em Next duas vezes para criar o usuário</li>
+  <li>
+    Criando Policies Ao Secrets Manager:
+    <ul>
+      <li>Na seção Access management, Vá para <code>Policies</code> e clique em Create policy</li>
+      <li>Na seção Policy editor clique em <code>JSON</code></li>
+      <li>Na seção Add actions pesquise por Secrets Manager, clique em Secrets Manager</li>
+      <li>Selecione as opções <code>DescribeSecret</code>, e <code>GetSecretValue</code></li>
+      <li>Embaixo de Add actions, vá até Add a resource</li>
+      <li>Clique em Add, selecione <code>All Resources</code> em Resource Type, clique em Add resource</li>
+      <li>Após isso, embaixo da página clique em Next, escolha um nome autoexplicativo, clique em Create policy</li>
+    </ul>
+  </li>
+  <li>
+    Criar chave de criptografia no KMS:
+    <ul>
+      <li>Vá até o serviço <code>Key Management Service</code></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </li>
+  <li>
+    Criar política para usar a chave do KMS:
+    <ul>
+      <li>Crie outra política no <code>IAM</code></li>
+      <li>Adicione as ações <code>Decrypt</code> e <code>Encrypt</code></li>
+      <li>Use o <code>ARN</code> da chave criada no recurso</li>
+    </ul>
+  </li>
+  <li>Atribuir as permissões ao usuário criado</li>
+</ol>
+
+<br/>
+
+<h3> Armazenando As Credenciais Do Secrets Manager Localmente </h3>
+
+
+
+
 
    
