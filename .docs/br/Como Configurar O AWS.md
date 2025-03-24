@@ -5,17 +5,6 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
 <br/>
 <br/>
 
-1. Vá até o serviço `IAM`, na seção Access management clique em `Users`
-2. Clique em `Create User`, o nome de usuário não importa muito, mas deve ser autoexplicativo
-3. Clique em Next, clique em Next novamente, criando o usuário que irá ter permissões sobre o Secret Manager
-4. Na seção Access management clique em `Policies`, clique em `Create policy`, Na seção Policy editor clique em `JSON`
-5. Na seção `Add actions` pesquise por Secrets Manager, clique em Secrets Manager, selecione as opções `DescribeSecret`, e `GetSecretValue`
-6. Embaixo de Add actions, vá até `Add a resource` clique em Add, selecione All Resources em `Resource Type`, clique em Add resource
-7. Após isso, embaixo da página clique em Next, o nome não importa muito (deve ser autoexplicativo), clique em `Create policy`
-8. Iremos criar outra policy, que irá descriptografar e criptografar segredos do Secrets Manager, porém antes iremos criar a chave de criptografia
-9. Vá até o serviço `Key Management Service`, na seção Customer managed keys clique em `Create key`
-10. As opções selecionadas são; `Symmetric`, `Encrypt and decrypt`, `KMS - recommended`, `Single-Region key`, clique em Next
-11. Novamente o nome não é importante (deve explicar que irá criptografar segredos do Secrets Manager), clique em Next, clique em Next, clique em Next, clique em Next, clique em Finish, criando a chave
 12. Copie o `ARN` da chave criada, iremos voltar para `IAM`, Na seção Access management clique em `Policies`, clique em `Create policy`, Na seção Policy editor clique em `JSON`
 13. As etapas são semelhantes à Policy anterior, porém com valores diferentes, Na seção `Add actions` pesquise por KMS, clique em KMS, selecione as opções `Decrypt`, `Encrypt`
 14. Vá até `Add a resource` clique em Add, selecione key em `Resource Type`, cole o `ARN` que você copiou no `Resource ARN`, clique em Add resource, clique em Next
@@ -28,7 +17,7 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
   <li>Clique em Create User, escolha um nome autoexplicativo</li>
   <li>Clique em Next duas vezes para criar o usuário</li>
   <li>
-    Criando Policies Ao Secrets Manager:
+    Criar Policy de acesso ao Secrets Manager:
     <ul>
       <li>Na seção Access management, Vá para <code>Policies</code> e clique em Create policy</li>
       <li>Na seção Policy editor clique em <code>JSON</code></li>
@@ -43,18 +32,17 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
     Criar chave de criptografia no KMS:
     <ul>
       <li>Vá até o serviço <code>Key Management Service</code></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li>Na seção Customer managed keys clique em Create key</li>
+      <li>As opções selecionadas são; <code>Symmetric</code>, <code>Encrypt and decrypt</code>, <code>KMS - recommended</code>, <code>Single-Region key</code></li>
+      <li>Clique em Next, escolha um nome autoexplicativo (deve explicar que a chave criptografará os segredos do Secrets Manager)</li> 
+      <li>Clique em Next quatro vezes, e clique em Finish para criar a chave</li>
     </ul>
   </li>
   <li>
-    Criar política para usar a chave do KMS:
+    Criar Policy de acesso á chave do KMS:
     <ul>
-      <li>Crie outra política no <code>IAM</code></li>
-      <li>Adicione as ações <code>Decrypt</code> e <code>Encrypt</code></li>
-      <li>Use o <code>ARN</code> da chave criada no recurso</li>
+      <li>Copie o <code>ARN</code> da chave que você criou, retornaremos ao <code>IAM</code></li>
+      
     </ul>
   </li>
   <li>Atribuir as permissões ao usuário criado</li>
