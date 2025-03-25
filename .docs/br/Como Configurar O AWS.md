@@ -83,6 +83,8 @@ Utilizaremos para acessar o serviço localmente no servidor
       <li>Na seção summary copie o <code>Access key 1</code>, volte ao terminal de comando</li>
       <li>No input <code>AWS Access Key ID</code> cole o Access key e pressione Enter</li>
       <li>No input <code>AWS Secret Access Key</code> cole a chave de acesso Secret access key salva anteriormente, pressione Enter</li>
+      <li>No input <code>Default region name</code> use sua região, a opção padrão seria us-east-1</li>
+      <li>No input <code>Default output format</code> escreva json</li>
     </ul>
   </li>
   
