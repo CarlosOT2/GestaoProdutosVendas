@@ -58,6 +58,10 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
 <br/>
 
 <h3> Utilizando as credenciais do usuário Secrets Manager </h3>
+Utilizaremos para acessar o serviço localmente no servidor
+
+<br/>
+<br/>
 
 <ol>
   <li>Instale o <code>AWS CLI</code>, verifique se a versão correta foi instalada (a versão correta está na página inicial do repositório) </li>
@@ -68,6 +72,9 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
       <li>Vá até a seção <code>Security credentials</code>, procure a seção Access keys, clique em <code>Create access key</code></li>
       <li>Selecione a opção <code>Local code</code>, após isso selecione a opção abaixo de Confirmation, clique em Next, clique em Create access key</li>
     </ul>
+  </li>
+  <li>
+    Utilizando as credenciais: 
   </li>
   
 </ol>
