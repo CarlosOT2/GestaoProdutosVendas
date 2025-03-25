@@ -1,6 +1,6 @@
 # Como Configurar O AWS #
 
-<h3> Criando o usuário com acesso ao Secrets Manager </h3>
+<h3> Criando usuário com acesso ao Secrets Manager </h3>
 Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usaremos suas credenciais
 <br/>
 <br/>
@@ -57,7 +57,7 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
 
 <br/>
 
-<h3> Armazenando credenciais do Secrets Manager localmente </h3>
+<h3> Utilizando as credenciais do usuário Secrets Manager </h3>
 
 
 
