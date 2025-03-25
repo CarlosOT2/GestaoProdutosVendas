@@ -3,7 +3,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-20.11.1-green)
 ![React](https://img.shields.io/badge/React-18.2.0-blue)
 ![MariaDB](https://img.shields.io/badge/MariaDB-11.4.4-blue)
-![AWS SDK](https://img.shields.io/badge/AWS%20SDK-3.620.0-yellow)
+![AWS CLI](https://img.shields.io/badge/AWS%20CLI-2.17.18-yellow)
 <br/>
 <br/>
 <p>
