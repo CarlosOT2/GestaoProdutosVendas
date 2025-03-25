@@ -47,7 +47,7 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
     Atribuir as Policies ao usuário do Secrets Manager 
     <ul>
       <li>Vá até o serviço <code>IAM</code>, clique em <code>Users</code>, clique no usuário do Secrets Manager criado anteriormente</li> 
-      <li>Vá até a seção <code>Permissions policies</code>, clique em Add permission, selecione a opção Add permissions</li>
+      <li>Vá até a seção <code>Permissions</code>, clique em Add permission, selecione a opção Add permissions</li>
       <li>Na seção Permissions options selecione a opção <code>Attach policies directly</code></li>
       <li>Procure as duas Policies criadas anteriormente e selecione-as</li>
       <li>Clique em Next, verifique se você selecionou corretamente, clique em Add permissions</li>
@@ -58,6 +58,18 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
 <br/>
 
 <h3> Utilizando as credenciais do usuário Secrets Manager </h3>
+
+<ol>
+  <li>Instale o <code>AWS CLI</code>, verifique se a versão correta foi instalada (a versão correta está na página inicial do repositório) </li>
+  <li>
+    Criando as credenciais
+    <ul>
+      <li>Após isso, vá até <code>IAM</code>, clique em <code>Users</code>, clique no usuário do Secrets Manager</li>
+      <li>Vá até a seção <code>Security credentials</code></li>
+    </ul>
+  </li>
+  
+</ol>
 
 
 
