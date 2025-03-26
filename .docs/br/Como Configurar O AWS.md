@@ -120,6 +120,9 @@ Utilizaremos para acessar o serviço localmente no servidor
 <h3> Salvando credenciais root do banco de dados </h3>
 Para salvar as credenciais root do banco de dados, usaremos o Secrets Manager, O servidor acessará essas credenciais automaticamente
 
+<br/>
+<br/>
+
 <ol>
   <li>Vá até o serviço Secrets Manager, clique em <code>Store a new secret</code>, na seção Secret type selecione a opção <code>Other type of secret</code></li>
   <li>
