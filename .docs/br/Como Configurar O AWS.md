@@ -107,6 +107,10 @@ Utilizaremos para acessar o serviço localmente no servidor
         Iremos alterar o código, vá até o arquivo <code>back-end\helpers\Aws\secret_manager.js</code>. você encontrará um bloco de código comentado. este bloco será o código que irá descriptografar o arquivo das credenciais,
         apague a linha de código <code>const client = new SecretsManagerClient()</code>, substituída pelo bloco de código comentado
       </li>
+      <li>
+        Caso o escopo de criptografia do dpapi for diferente de <code>LocalMachine</code>, você terá que alterar a linha <code>await decrypt</code> para:
+        <pre><code>await decrypt({ path: credentials_path, scope: 'CurrentUser' })</code></pre>
+      </li>
     </ul>
   </li>
   <li>Após criar/criptografar as credenciais local, abra o arquivo <code>back-end\config\aws.js</code></li>
