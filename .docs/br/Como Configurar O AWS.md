@@ -85,14 +85,13 @@ Utilizaremos para acessar o serviço localmente no servidor
       <li>No input <code>AWS Secret Access Key</code> cole a chave de acesso Secret access key salva anteriormente, pressione Enter</li>
       <li>No input <code>Default region name</code> use sua região, a opção padrão seria us-east-1</li>
       <li>No input <code>Default output format</code> escreva json</li>
-      <li>Após a criação das credenciais local, abra o arquivo <code>back-end\config\aws.js</code></li>
-      <li>Altere a variável <code>credentials_path</code> para o diretório do arquivo das credenciais</li>
+      <li>Após criamos com sucesso as credenciais locais, podemos escolher criptografá-la para maior segurança ou não</li>
     </ul>
   </li>
   <li>
     Criptografando as credenciais com dpapi (opcional):
     <ul>
-      <li>Se você deseja segurança extra para suas credenciais locais, faça este processo</li>
+      <li>Se você deseja segurança extra para suas credenciais locais, faça este processo. caso contrário, pule estas etapas</li>
       <li>Vá até a pasta onde as credenciais estão localizadas geralmente <code>USERNAME\.aws</code>, na pasta você criará um arquivo JSON</li>
       <li>O arquivo conterá as credenciais, crie um arquivo igual a esse apenas alterando os respectivos valores para accessKeyId e secretAccessKey (valores das credenciais):
       <pre><code>{
@@ -101,14 +100,15 @@ Utilizaremos para acessar o serviço localmente no servidor
 }</code></pre>
       </li>
       <li>
-        Após isso, criptografaremos o arquivo json com dpapi, para isso temos uma função pronta no diretório <code>back-end\helpers\Encryption\dpapi.js</code> chamada encrypt(),
-        ela criptografará os arquivos usando dpapi
+        Após isso, criptografaremos o arquivo json com dpapi. para isso temos uma função pronta no diretório <code>back-end\helpers\Encryption\dpapi.js</code> chamada encrypt(),
+        ela criptografará os arquivos usando dpapi. use qualquer método para criptografá-lo.
       </li>
     </ul>
   </li>
   
 </ol>
-
+<li>Após a criação das credenciais local, abra o arquivo <code>back-end\config\aws.js</code></li>
+      <li>Altere a variável <code>credentials_path</code> para o diretório do arquivo das credenciais</li>
 
 
 
