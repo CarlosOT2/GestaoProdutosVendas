@@ -122,8 +122,10 @@ Para salvar as credenciais root do banco de dados, usaremos o Secrets Manager, O
 
 <ol>
   <li>Vá até o serviço Secrets Manager, clique em <code>Store a new secret</code>, na seção Secret type selecione a opção <code>Other type of secret</code></li>
-  <li>Na seção key/value clique em <code>Add row</code>, na primeira Row o valor será respectivamente; <code>username</code> em sequência o valor do usuário root, na segunda row será respectivamente; <code>password</code> </li>
-  <li></li>
+  <li>
+    Na seção key/value clique em <code>Add row</code>, na primeira Row o key/value será respectivamente; <code>username/valor</code>, na segunda row será respectivamente; <code>password/valor</code>. 
+    Apenas alterando os respectivos valores para as credenciais do root
+  </li>
 </ol>
 
 
