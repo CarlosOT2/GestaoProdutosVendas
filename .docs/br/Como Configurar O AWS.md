@@ -79,12 +79,35 @@ Utilizaremos para acessar o serviço localmente no servidor
     Utilizando as credenciais: 
     <ul>
       <li>Vá até o diretório <code>back-end</code> no terminal de comando, execute o comando <code>aws configure</code></li>
-      <li>Utilizaremos as credenciais criadas anteriormente, vá até o usuário do Secrets Manager</li>
+      <li>Utilizaremos as credenciais criadas anteriormente localmente, vá até o usuário do Secrets Manager</li>
       <li>Na seção summary copie o <code>Access key 1</code>, volte ao terminal de comando</li>
       <li>No input <code>AWS Access Key ID</code> cole o Access key e pressione Enter</li>
       <li>No input <code>AWS Secret Access Key</code> cole a chave de acesso Secret access key salva anteriormente, pressione Enter</li>
       <li>No input <code>Default region name</code> use sua região, a opção padrão seria us-east-1</li>
       <li>No input <code>Default output format</code> escreva json</li>
+      <li>Após a criação das credenciais local, abra o arquivo <code>back-end\config\aws.js</code></li>
+      <li>Altere a variável <code>credentials_path</code> para o diretório do arquivo das credenciais</li>
+    </ul>
+  </li>
+  <li>
+    Criptografando as credenciais com dpapi (opcional):
+    <ul>
+      <li>Se você deseja segurança extra para suas credenciais locais, faça este processo</li>
+      <li>Vá até a pasta onde as credenciais estão localizadas geralmente <code>USERNAME\.aws</code>, na pasta você criará um arquivo JSON</li>
+      <li>O arquivo conterá as credenciais, crie um arquivo igual a esse apenas alterando os respectivos valores para accessKeyId e secretAccessKey</li>
+      <li>
+        <pre><code>
+&lt;QueryList&gt;
+  &lt;Query Id="0" Path="System"&gt;
+    &lt;Select Path="System"&gt;
+      *[System[EventID=1074]]
+      and
+      *[EventData[Data[@Name='param5'] and (Data='Desligado')]]
+    &lt;/Select&gt;
+  &lt;/Query&gt;
+&lt;/QueryList&gt;
+</code></pre>
+      </li>
     </ul>
   </li>
   
