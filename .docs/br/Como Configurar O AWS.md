@@ -94,19 +94,11 @@ Utilizaremos para acessar o serviço localmente no servidor
     <ul>
       <li>Se você deseja segurança extra para suas credenciais locais, faça este processo</li>
       <li>Vá até a pasta onde as credenciais estão localizadas geralmente <code>USERNAME\.aws</code>, na pasta você criará um arquivo JSON</li>
-      <li>O arquivo conterá as credenciais, crie um arquivo igual a esse apenas alterando os respectivos valores para accessKeyId e secretAccessKey</li>
-      <li>
-        <pre><code>
-&lt;QueryList&gt;
-  &lt;Query Id="0" Path="System"&gt;
-    &lt;Select Path="System"&gt;
-      *[System[EventID=1074]]
-      and
-      *[EventData[Data[@Name='param5'] and (Data='Desligado')]]
-    &lt;/Select&gt;
-  &lt;/Query&gt;
-&lt;/QueryList&gt;
-</code></pre>
+      <li>O arquivo conterá as credenciais, crie um arquivo igual a esse apenas alterando os respectivos valores para accessKeyId e secretAccessKey:
+      <pre><code>{
+  "accessKeyId": "accessKeyId",
+  "secretAccessKey": "secretAccessKey"
+}</code></pre>
       </li>
     </ul>
   </li>
