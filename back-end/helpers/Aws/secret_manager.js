@@ -16,14 +16,17 @@ export async function get_secret(secret_name, optional_config = {}) {
     } = optional_config
 
     //# Client //
-    const decryptedData = await decrypt({ path: credentials_path })
-    const { accessKeyId, secretAccessKey } = JSON.parse(decryptedData)
-    const client = new SecretsManagerClient({
-        credentials: {
-            accessKeyId,
-            secretAccessKey
-        }
-    });
+    /*
+        const decryptedData = await decrypt({ path: credentials_path })
+        const { accessKeyId, secretAccessKey } = JSON.parse(decryptedData)
+        const client = new SecretsManagerClient({
+            credentials: {
+                accessKeyId,
+                secretAccessKey
+            }
+        });
+    */
+    const client = new SecretsManagerClient()
 
 
     const command = new GetSecretValueCommand({ SecretId: secret_name });
