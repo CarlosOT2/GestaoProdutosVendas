@@ -105,10 +105,10 @@ Utilizaremos para acessar o serviço localmente no servidor
       </li>
     </ul>
   </li>
-  
+  <li>Após criar/criptografar as credenciais local, abra o arquivo <code>back-end\config\aws.js</code></li>
+  <li>Altere a variável <code>credentials_path</code> para o caminho do arquivo das credenciais</li>
 </ol>
-<li>Após a criação das credenciais local, abra o arquivo <code>back-end\config\aws.js</code></li>
-      <li>Altere a variável <code>credentials_path</code> para o diretório do arquivo das credenciais</li>
+
 
 
 
