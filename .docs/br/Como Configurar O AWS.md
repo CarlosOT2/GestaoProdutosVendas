@@ -117,6 +117,15 @@ Utilizaremos para acessar o serviço localmente no servidor
   <li>Altere a variável <code>credentials_path</code> para o caminho do arquivo das credenciais</li>
 </ol>
 
+<h3> Salvando credenciais root do banco de dados </h3>
+Para salvar as credenciais root do banco de dados, usaremos o Secrets Manager, O servidor acessará essas credenciais automaticamente
+
+<ol>
+  <li>Vá até o serviço Secrets Manager, clique em <code>Store a new secret</code>, na seção Secret type selecione a opção <code>Other type of secret</code></li>
+  <li>Na seção key/value clique em <code>Add row</code>, na primeira Row o valor será respectivamente; <code>username</code> em sequência o valor do usuário root, na segunda row será respectivamente; <code>password</code> </li>
+  <li></li>
+</ol>
+
 
 
 
