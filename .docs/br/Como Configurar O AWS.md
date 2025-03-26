@@ -101,7 +101,11 @@ Utilizaremos para acessar o serviço localmente no servidor
       </li>
       <li>
         Após isso, criptografaremos o arquivo json com dpapi. para isso temos uma função pronta no diretório <code>back-end\helpers\Encryption\dpapi.js</code> chamada encrypt(),
-        ela criptografará os arquivos usando dpapi. use qualquer método para criptografá-lo.
+        ela criptografará os arquivos usando dpapi. use qualquer método para criptografá-lo
+      </li>
+      <li> 
+        Iremos alterar o código, vá até o arquivo <code>back-end\helpers\Aws\secret_manager.js</code>. você encontrará um bloco de código comentado. este bloco será o código que irá descriptografar o arquivo das credenciais,
+        apague a linha de código <code>const client = new SecretsManagerClient()</code>, substituída pelo bloco de código comentado
       </li>
     </ul>
   </li>
