@@ -51,8 +51,8 @@ Creating a user that'll have access to Secrets Manager, After that, we'll use us
    <li>Go to the <code>IAM</code> service, click on <code>Users</code>, click on the User that you created earlier</li>
    <li>Go to the <code>Permissions</code> section, click on Add permission, select the option Add permissions</li>
    <li>In the Permissions options section, select the option <code>Attach policies directly</code></li> 
-   <li>Look for the two Policies created previously and select them</li>
-   <li>Click Next, check if you selected correctly, click Add permissions</li>
+   <li>Search for the two Policies created previously and select them</li>
+   <li>Click on Next, verify that you had selected correctly, click on Add permissions</li>
   </ul>
  </li>
 </ol>
