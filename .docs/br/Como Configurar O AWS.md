@@ -1,5 +1,8 @@
 # Como Configurar O AWS #
+Vamos configurar a AWS para poder rodar o website corretamente, sem essa configuração ele não funcionará
 
+<br/>
+<br/>
 <h3> Criando usuário com acesso ao Secrets Manager </h3>
 Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usaremos suas credenciais
 <br/>
