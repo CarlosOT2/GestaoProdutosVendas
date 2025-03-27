@@ -36,13 +36,13 @@ Creating a user that'll have access to Secrets Manager, After that, we'll use us
  <li>
  Create KMS key access policy:
   <ul>
-   <li>Copy the <code>ARN</code> of the key created previously, we will return to <code>IAM</code></li>
-   <li>Return to <code>Policies</code> and click Create policy</li>
-   <li>In the Policy editor section click <code>JSON</code></li>
-   <li>In the Add actions section search for <code>KMS</code>, click KMS</li>
-   <li>Select the <code>Decrypt</code> and <code>Encrypt</code></li> options
-   <li>Go to Add a resource, click Add, paste the <code>ARN</code> you copied in <code>Resource ARN</code>, click Add resource</li>
-   <li>Click Next, choose a self-explanatory name, click Create policy</li>
+   <li>Copy the <code>ARN</code> of the key created previously, we'll return to <code>IAM</code></li>
+   <li>Go to <code>Policies</code> and click Create policy</li>
+   <li>In the Policy editor section click on <code>JSON</code></li>
+   <li>In the Add actions section search for <code>KMS</code>, click on KMS</li>
+   <li>Select the options <code>Decrypt</code> and <code>Encrypt</code></li> 
+   <li>Go to Add a resource, click on Add, paste the <code>ARN</code> that you had copied in <code>Resource ARN</code>, click on Add resource</li>
+   <li>Click on Next, choose a self-explanatory name, click Create policy</li>
   </ul>
  </li>
  <li>
