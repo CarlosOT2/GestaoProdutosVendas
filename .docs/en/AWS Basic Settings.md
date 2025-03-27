@@ -57,4 +57,61 @@ Creating a user that'll have access to Secrets Manager, After that, we'll use us
  </li>
 </ol>
 
+<h3> Using the Secrets Manager user credentials </h3>
+We will use them to access the service locally on the server
+
 <br/>
+<br/>
+
+<ol>
+ <li>Install the <code>AWS CLI</code>, check if the correct version was installed (the correct version is on the repository home page)</li>
+ <li>
+ Creating the credentials:
+  <ul>
+   <li>Go to <code>IAM</code>, click on <code>Users</code>, click on the Secrets Manager user</li>
+   <li>Go to the <code>Security credentials</code> section, look for the Access keys section, click on <code>Create access key</code></li>
+   <li>Select the <code>Local code</code> option, after that select the option below Confirmation, click on Next</li>
+   <li>Save the access key <code>Secret access key</code>, click on Create access key</li> <li>Don't forget to save it, or you will have to repeat the process again</li>
+  </ul>
+ </li>
+ <li>
+ Using the credentials:
+  <ul>
+   <li>Go to the <code>back-end</code> directory in the command terminal, run the command <code>aws configure</code></li>
+   <li>We will use the credentials previously created locally, go to the Secrets Manager user</li>
+   <li>In the summary section, copy the <code>Access key 1</code>, return to the command terminal</li>
+   <li>In the <code>AWS Access Key ID</code> input, paste the Access key and press Enter</li>
+   <li>In the <code>AWS Secret Access Key</code> input, paste the Secret access key saved previously, press Enter</li>
+   <li>In the <code>Default region name</code> input, use your region, the default option would be us-east-1</li>
+   <li>In the <code>Default output input format</code> write json</li>
+   <li>After we have successfully created the local credentials, we can choose to encrypt them for greater security or not</li>
+  </ul>
+ </li>
+ <li>
+ Encrypting credentials with dpapi (optional):
+  <ul>
+   <li>If you want extra security for your local credentials, do this process. otherwise, skip these steps</li>
+   <li>Go to the folder where the credentials are usually located <code>USERNAME\.aws</code>, in the folder you will create a JSON file</li>
+   <li>The file will contain the credentials, create a file like this just changing the respective values ​​for accessKeyId and secretAccessKey (credential values):
+   <pre><code>{
+   "accessKeyId": "accessKeyId",
+   "secretAccessKey": "secretAccessKey"
+   }</code></pre>
+  </li>
+  <li>
+  After that, we will encrypt the json file with dpapi. for this we have a ready function in the <code>back-end\helpers\Encryption\dpapi.js</code> directory called encrypt(),
+  it will encrypt the files using dpapi. use any method to encrypt it
+  </li>
+  <li>
+  We will change the code, go to the file <code>back-end\helpers\Aws\secret_manager.js</code>. you will find a commented block of code. This block will be the code that will decrypt the credentials file,
+  delete the line of code <code>const client = new SecretsManagerClient()</code>, replaced by the commented code block
+  </li>
+  <li>
+  If the dpapi encryption scope is different from <code>LocalMachine</code>, you will have to change the line <code>await decrypt</code> to:
+  <pre><code>await decrypt({ path: credentials_path, scope: 'CurrentUser' })</code></pre>
+  </li>
+  </ul>
+  </li>
+  <li>After creating/encrypting the local credentials, open the file <code>back-end\config\aws.js</code></li>
+ <li>Change the variable <code>credentials_path</code> to the path of the credentials file</li>
+</ol>
