@@ -37,7 +37,7 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
     Criar Policy de acesso á chave do KMS:
     <ul>
       <li>Copie o <code>ARN</code> da chave criada anteriormente, retornaremos ao <code>IAM</code></li>
-      <li>Retorne para <code>Policies</code> e clique em Create policy</li>
+      <li>Vá para <code>Policies</code> e clique em Create policy</li>
       <li>Na seção Policy editor clique em <code>JSON</code></li>
       <li>Na seção Add actions pesquise por <code>KMS</code>, clique em KMS</li>
       <li>Selecione as opções <code>Decrypt</code>, e <code>Encrypt</code></li>
