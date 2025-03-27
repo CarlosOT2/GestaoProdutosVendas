@@ -1,5 +1,5 @@
 # AWS Basic Settings #
-We'll configure AWS to website works correctly, without this configuration it'll not work
+We'll configure AWS to website runs correctly, without this configuration it'll not work
 
 <br/>
 <h3> Creating a user with access to Secrets Manager </h3>
