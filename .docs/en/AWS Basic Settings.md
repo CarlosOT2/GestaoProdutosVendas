@@ -52,26 +52,29 @@ Creating a user that'll have access to Secrets Manager, After that, we'll use us
    <li>Go to the <code>Permissions</code> section, click on Add permission, select the option Add permissions</li>
    <li>In the Permissions options section, select the option <code>Attach policies directly</code></li> 
    <li>Search for the two Policies created previously and select them</li>
-   <li>Click on Next, verify that you had selected correctly, click on Add permissions</li>
+   <li>Click on Next, verify that you selected correctly, click on Add permissions</li>
   </ul>
  </li>
 </ol>
 
-<h3> Using the Secrets Manager user credentials </h3>
-We will use them to access the service locally on the server
+<br/>
+
+<h3> Using the User Secrets Manager credentials </h3>
+The credentials will be used locally on the server to access the service
 
 <br/>
 <br/>
 
 <ol>
- <li>Install the <code>AWS CLI</code>, check if the correct version was installed (the correct version is on the repository home page)</li>
+ <li>Install <code>AWS CLI</code>, verify that you installed the correct version (correct version is on the repository home page)</li>
  <li>
  Creating the credentials:
   <ul>
-   <li>Go to <code>IAM</code>, click on <code>Users</code>, click on the Secrets Manager user</li>
-   <li>Go to the <code>Security credentials</code> section, look for the Access keys section, click on <code>Create access key</code></li>
-   <li>Select the <code>Local code</code> option, after that select the option below Confirmation, click on Next</li>
-   <li>Save the access key <code>Secret access key</code>, click on Create access key</li> <li>Don't forget to save it, or you will have to repeat the process again</li>
+   <li>Go to <code>IAM</code>, click on <code>Users</code>, click on the User you previously created</li>
+   <li>Go to the <code>Security credentials</code> section, search for the section Access keys, click on <code>Create access key</code></li>
+   <li>Select the option <code>Local code</code>, after that select the option below Confirmation, click on Next</li>
+   <li>Save the <code>Secret access key</code>, click on Create access key</li> 
+   <li>Don't forget to save it, or you'll have to repeat this process again</li>
   </ul>
  </li>
  <li>
