@@ -3,7 +3,7 @@ We'll configure AWS to website works correctly, without this configuration it'll
 
 <br/>
 <h3> Creating a user with access to Secrets Manager </h3>
-Creating a user that'll have access to Secrets Manager, After that, we'll use their credentials.
+Creating a user that'll have access to Secrets Manager, After that, we'll use user credentials
 <br/>
 <br/>
 
@@ -20,17 +20,17 @@ Creating a user that'll have access to Secrets Manager, After that, we'll use th
    <li>Select the options <code>DescribeSecret</code>, and <code>GetSecretValue</code></li>
    <li>Under Add actions, go to Add a resource</li>
    <li>Click on Add, select <code>All Resources</code> in Resource Type, click on Add resource</li>
-   <li>After that, click on Next, choose a self-explanatory name, click on Create policy</li>
+   <li>After that click on Next, choose a self-explanatory name, click on Create policy</li>
   </ul>
  </li>
  <li>
  Create encryption key in KMS:
   <ul>
-   <li>Go to the <code>Key Management Service</code></li>
+   <li>Go to the <code>Key Management Service</code> service</li>
    <li>In the Customer managed keys section, click on Create key</li>
    <li>The selected options are; <code>Symmetric</code>, <code>Encrypt and decrypt</code>, <code>KMS - recommended</code>, <code>Single-Region key</code></li>
-   <li>Click Next, choose a self-explanatory name (it should explain that the key will encrypt Secrets Manager secrets)</li>
-   <li>Click Next four times, and click Finish to create the key</li>
+   <li>Click on Next, choose a self-explanatory name (it should explain that the key will encrypt Secrets Manager secrets)</li>
+   <li>Click on Next four times, and click on Finish to create the key</li>
   </ul>
  </li>
  <li>
