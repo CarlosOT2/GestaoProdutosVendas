@@ -110,11 +110,11 @@ The credentials will be used locally on the server to access the service
   delete the line <code>const client = new SecretsManagerClient()</code>, it'll be replaced by commented code block
   </li>
   <li>
-  If the dpapi encryption scope is different from <code>LocalMachine</code>, you will have to change the line <code>await decrypt</code> to:
+  If dpapi encryption scope is different from <code>LocalMachine</code>, you'll have to modify the line <code>await decrypt</code> to:
   <pre><code>await decrypt({ path: credentials_path, scope: 'CurrentUser' })</code></pre>
   </li>
   </ul>
   </li>
-  <li>After creating/encrypting the local credentials, open the file <code>back-end\config\aws.js</code></li>
- <li>Change the variable <code>credentials_path</code> to the path of the credentials file</li>
+  <li>After creating/encrypting the local credentials, open file <code>back-end\config\aws.js</code></li>
+ <li>Change the variable <code>credentials_path</code> to path of the credentials file</li>
 </ol>
