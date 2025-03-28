@@ -12,8 +12,7 @@ Tarefa que excluirá o arquivo `root.json` as credenciais do banco de dados arma
 <p>
 <b>(Tenha cuidado com quebras de linha e espaços, a sintaxe é muito sensível)</b>
 </p>
-<pre><code>
-&lt;QueryList&gt;
+<pre><code>&lt;QueryList&gt;
   &lt;Query Id="0" Path="System"&gt;
     &lt;Select Path="System"&gt;
       *[System[EventID=1074]]
