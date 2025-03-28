@@ -118,3 +118,20 @@ The credentials will be used locally on the server to access the service
   <li>After creating/encrypting the local credentials, open file <code>back-end\config\aws.js</code></li>
  <li>Change the variable <code>credentials_path</code> to path of the credentials file</li>
 </ol>
+
+<h3> Saving database root credentials </h3>
+To save database root credentials, we'll use Secrets Manager, the server will access these credentials automatically
+
+<br/>
+<br/>
+
+<ol>
+ <li>Go to service Secrets Manager, click on <code>Store a new secret</code>, in section Secret type select the option <code>Other type of secret</code></li>
+ <li>
+   In the section key/value click on <code>Add row</code>, in first row the key/value will be respectively; <code>username/value</code>, in second row it'll be respectively; <code>password/value</code>.
+   just changing respective values ​​for the database root credentials
+ </li>
+ <li>In the section <code>Encryption key</code>, select the encryption key created previously to encrypt Secrets Manager secrets</li>
+ <li>Click Next, choose a self-explanatory name, click Next twice, click Store</li>
+ <li>After creating it, go to <code>back-end\config\aws.js</code>, Change the <code>root_secret</code> variable to the name chosen previously</li>
+</ol>
