@@ -81,7 +81,7 @@ Utilizaremos para acessar o serviço localmente no servidor
     Utilizando as credenciais: 
     <ul>
       <li>Vá até o diretório <code>back-end</code> no terminal de comando, execute o comando <code>aws configure</code></li>
-      <li>Utilizaremos as credenciais criadas anteriormente localmente, vá até o usuário do Secrets Manager</li>
+      <li>Utilizaremos as credenciais criadas anteriormente, vá até o usuário do Secrets Manager</li>
       <li>Na seção summary copie o <code>Access key 1</code>, volte ao terminal de comando</li>
       <li>No input <code>AWS Access Key ID</code> cole o Access key e pressione Enter</li>
       <li>No input <code>AWS Secret Access Key</code> cole a chave de acesso Secret access key salva anteriormente, pressione Enter</li>
