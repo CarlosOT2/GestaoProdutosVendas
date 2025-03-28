@@ -87,23 +87,23 @@ The credentials will be used locally on the server to access the service
    <li>In the input <code>AWS Secret Access Key</code>, paste the Secret access key saved previously and press Enter</li>
    <li>In the input <code>Default region name</code> use your region, the default option is us-east-1</li>
    <li>In the input <code>Default output format</code> type json</li>
-   <li>After successfully creating the local credentials, you can choose to encrypt them for more security or not</li>
+   <li>After successfully creating the local credentials, you can choose to encrypt them for extra security or not</li>
   </ul>
  </li>
  <li>
  Encrypting credentials with dpapi (optional):
   <ul>
    <li>If you want extra security for your local credentials, do this process. otherwise, skip these steps</li>
-   <li>Go to the folder where the credentials are usually located <code>USERNAME\.aws</code>, in the folder you will create a JSON file</li>
-   <li>The file will contain the credentials, create a file like this just changing the respective values ​​for accessKeyId and secretAccessKey (credential values):
+   <li>Go to folder where the credentials are located, usually <code>USERNAME\.aws</code>, in the folder you'll create a file JSON</li>
+   <li>The file will have the credentials, create a file exactly like this one just changing respective values ​​for accessKeyId and secretAccessKey (credentials values):
    <pre><code>{
-   "accessKeyId": "accessKeyId",
-   "secretAccessKey": "secretAccessKey"
-   }</code></pre>
+  "accessKeyId": "accessKeyId",
+  "secretAccessKey": "secretAccessKey"
+}</code></pre>
   </li>
   <li>
-  After that, we will encrypt the json file with dpapi. for this we have a ready function in the <code>back-end\helpers\Encryption\dpapi.js</code> directory called encrypt(),
-  it will encrypt the files using dpapi. use any method to encrypt it
+  After that, we'll encrypt the json file with dpapi. there is a function in the directory <code>back-end\helpers\Encryption\dpapi.js</code> called encrypt(),
+  it'll encrypt files using dpapi. you can use any method to encrypt it with dpapi
   </li>
   <li>
   We will change the code, go to the file <code>back-end\helpers\Aws\secret_manager.js</code>. you will find a commented block of code. This block will be the code that will decrypt the credentials file,
