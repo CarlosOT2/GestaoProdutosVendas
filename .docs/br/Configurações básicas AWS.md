@@ -133,7 +133,7 @@ Para salvar as credenciais root do banco de dados, usaremos o Secrets Manager, o
   </li>
   <li>Na seção <code>Encryption key</code> selecione a chave de criptografia criada anteriormente para criptografar os segredos do Secrets Manager</li>
   <li>Clique em Next, escolha um nome autoexplicativo, clique em Next duas vezes, clique em Store</li>
-  <li>Após cria-lo vá para <code>back-end\config\aws.js</code>, Altere a variável <code>root_secret</code> para o nome escolhido anteriormente</li>
+  <li>Após cria-lo vá para <code>back-end\config\aws.js</code>, altere a variável <code>root_secret</code> para o nome escolhido anteriormente</li>
 </ol>
 
 
