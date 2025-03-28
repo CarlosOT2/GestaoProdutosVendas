@@ -106,8 +106,8 @@ The credentials will be used locally on the server to access the service
   it'll encrypt files using dpapi. you can use any method to encrypt it with dpapi
   </li>
   <li>
-  We will change the code, go to the file <code>back-end\helpers\Aws\secret_manager.js</code>. you will find a commented block of code. This block will be the code that will decrypt the credentials file,
-  delete the line of code <code>const client = new SecretsManagerClient()</code>, replaced by the commented code block
+  We'll modify the source code, go to the file <code>back-end\helpers\Aws\secret_manager.js</code>. you'll find a commented code block. This block will decrypt the credentials file,
+  delete the line <code>const client = new SecretsManagerClient()</code>, it'll be replaced by commented code block
   </li>
   <li>
   If the dpapi encryption scope is different from <code>LocalMachine</code>, you will have to change the line <code>await decrypt</code> to:
