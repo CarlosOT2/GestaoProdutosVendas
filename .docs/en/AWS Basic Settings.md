@@ -133,5 +133,5 @@ To save database root credentials, we'll use Secrets Manager, the server will ac
  </li>
  <li>In the section <code>Encryption key</code>, select the encryption key created previously to encrypt Secrets Manager secrets</li>
  <li>Click Next, choose a self-explanatory name, click Next twice, click Store</li>
- <li>After creating it, go to <code>back-end\config\aws.js</code>, Change the <code>root_secret</code> variable to the name chosen previously</li>
+ <li>After creating it go to <code>back-end\config\aws.js</code>, change the variable <code>root_secret</code> to the name chosen previously</li>
 </ol>
