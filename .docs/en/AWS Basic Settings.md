@@ -80,14 +80,14 @@ The credentials will be used locally on the server to access the service
  <li>
  Using the credentials:
   <ul>
-   <li>Go to the <code>back-end</code> directory in the command terminal, run the command <code>aws configure</code></li>
-   <li>We will use the credentials previously created locally, go to the Secrets Manager user</li>
-   <li>In the summary section, copy the <code>Access key 1</code>, return to the command terminal</li>
-   <li>In the <code>AWS Access Key ID</code> input, paste the Access key and press Enter</li>
-   <li>In the <code>AWS Secret Access Key</code> input, paste the Secret access key saved previously, press Enter</li>
-   <li>In the <code>Default region name</code> input, use your region, the default option would be us-east-1</li>
-   <li>In the <code>Default output input format</code> write json</li>
-   <li>After we have successfully created the local credentials, we can choose to encrypt them for greater security or not</li>
+   <li>Go to the directory <code>back-end</code> in command prompt, run the command <code>aws configure</code></li>
+   <li>We'll use the credentials previously created, go to the Secrets Manager User</li>
+   <li>In the section summary copy <code>Access key 1</code>, go back to command prompt</li>
+   <li>In the input <code>AWS Access Key ID</code>, paste the Access key and press Enter</li>
+   <li>In the input <code>AWS Secret Access Key</code>, paste the Secret access key saved previously and press Enter</li>
+   <li>In the input <code>Default region name</code> use your region, the default option is us-east-1</li>
+   <li>In the input <code>Default output format</code> type json</li>
+   <li>After successfully creating the local credentials, you can choose to encrypt them for more security or not</li>
   </ul>
  </li>
  <li>
