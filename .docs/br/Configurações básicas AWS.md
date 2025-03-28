@@ -94,7 +94,7 @@ Utilizaremos para acessar o serviço localmente no servidor
     Criptografando as credenciais com dpapi (opcional):
     <ul>
       <li>Se você deseja segurança extra para suas credenciais locais, faça este processo. caso contrário, pule estas etapas</li>
-      <li>Vá até a pasta onde as credenciais estão localizadas geralmente <code>USERNAME\.aws</code>, na pasta você criará um arquivo JSON</li>
+      <li>Vá até a pasta onde as credenciais estão localizadas, geralmente <code>USERNAME\.aws</code>, na pasta você criará um arquivo JSON</li>
       <li>O arquivo conterá as credenciais, crie um arquivo igual a esse apenas alterando os respectivos valores para accessKeyId e secretAccessKey (valores das credenciais):
       <pre><code>{
   "accessKeyId": "accessKeyId",
@@ -103,7 +103,7 @@ Utilizaremos para acessar o serviço localmente no servidor
       </li>
       <li>
         Após isso, criptografaremos o arquivo json com dpapi. para isso temos uma função pronta no diretório <code>back-end\helpers\Encryption\dpapi.js</code> chamada encrypt(),
-        ela criptografará os arquivos usando dpapi. use qualquer método para criptografá-lo
+        ela criptografará os arquivos usando dpapi. use qualquer método para criptografá-lo com dpapi
       </li>
       <li> 
         Iremos alterar o código, vá até o arquivo <code>back-end\helpers\Aws\secret_manager.js</code>. você encontrará um bloco de código comentado. este bloco será o código que irá descriptografar o arquivo das credenciais,
