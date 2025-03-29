@@ -53,16 +53,28 @@ Podemos nos aprofundar na estrutura dos diretórios <b>db</b>, <b>data</b>, e ro
 │   │── backup_db.bat        # Script que realiza o backup
 │   │── restore_db.bat       # Script que realiza a restauração
 │── db_gestaoprodutosvendas/ # Armazena as migrations e seeds do banco de dados         
-│── db_config.js             # Arquivo que será usado pelo servidor para se comunicar com o banco de dados (principalmente as rotas)
-│── db_knex_file.js          
-│── root_credentials.js
+│── db_config.js             # Arquivo que será usado pelas rotas para se comunicar com o banco de dados
+│── db_knex_file.js          # Arquivo de configuração do banco de dados próprio do knex   
+│── root_credentials.js      # Funções relacionadas à criação ou recuperação da credencial root do banco de dados
 </pre>
 
 <pre>
 /routes
-│── dashboard.js          
+│── dashboard.js
+│   │── Get /             
+│   │── Get /overview
 │── produtos.js
-│── vendas.js         
+│   │── Get /            
+│   │── Get /fitrar
+│   │── Post /
+│   │── Post /upload
+│   │── Put /:id
+│   │── Delete /:id
+│── vendas.js  
+│   │── Get /             
+│   │── Get /filtrar
+│   │── Post /
+│   │── Delete /:id
 </pre>
 
 <br/>
