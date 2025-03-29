@@ -32,7 +32,7 @@ o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podem
 │── package-lock.js  
 </pre>
 
-Podemos nos aprofundar na estrutura dos diretórios <b>db</b> e <b>data</b>
+Podemos nos aprofundar na estrutura dos diretórios <b>db</b>, <b>data</b>, e rotas do diretório <b>routes</b>
 <br/>
 
 <pre>
@@ -40,9 +40,9 @@ Podemos nos aprofundar na estrutura dos diretórios <b>db</b> e <b>data</b>
 # Armazena as imagens do servidor
 │── imgData/
 │   ├── produtos/       # Armazena imagens salvas do cliente
-│   ├── server_imagem/  # Armazena imagens salvas pelo próprio servidor, não podem ser excluídas ou alteradas
+│   ├── server_imagem/  # Armazena imagens do servidor, não podem ser excluídas ou alteradas
 │   ├── temp_produtos/  # Armazena imagens temporárias do cliente, antes de se tornarem permanentes na diretório produtos
-│── local_credentials/   
+│── local_credentials/  # Armazena o script que excluirá a credencial local e a própria credencial local
 </pre>
 
 <pre>
@@ -53,6 +53,13 @@ Podemos nos aprofundar na estrutura dos diretórios <b>db</b> e <b>data</b>
 │── db_config.js 
 │── db_knex_file.js          
 │── root_credentials.js
+</pre>
+
+<pre>
+/routes
+│── dashboard.js          
+│── produtos.js
+│── vendas.js         
 </pre>
 
 <br/>
