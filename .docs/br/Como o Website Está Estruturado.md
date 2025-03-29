@@ -6,10 +6,10 @@
 <br/>
 
 <pre>
-│── .docs/          # Documentação
-│── back-end/       # Código-fonte do Back End
-│── front-end/      # Código-fonte do Front End
-│── .gitignore      # Arquivos e pastas ignorados pelo Git
+│── .docs/   # Documentação
+│── back-end/   # Código-fonte do Back End
+│── front-end/   # Código-fonte do Front End
+│── .gitignore   # Arquivos e pastas ignorados pelo Git
 │── LICENSE         
 │── README.en       
 │── README          
@@ -21,12 +21,12 @@ o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podem
 <br/>
 
 <pre>
-│── config/ # Contém os principais arquivos de configuração, que podem ser usados ​​em qualquer parte do servidor
-│── data/ # Armazena dados do cliente e do próprio servidor, como imagens e credenciais locais
-│── db/ # Contém dados/código relacionado ao banco de dados, como; logs, rotina de backup, estrutura do banco de dados
-│── helpers/ # Contém funções auxiliares que serão usadas em todo o servidor, como; funções para criptografia, paginação   
+│── config/  # Contém os principais arquivos de configuração, que podem ser usados ​​em qualquer parte do servidor
+│── data/  # Armazena dados do cliente e do próprio servidor, como imagens e credenciais locais
+│── db/  # Contém dados/código relacionado ao banco de dados, como; logs, rotina de backup, estrutura do banco de dados
+│── helpers/  # Contém funções auxiliares que serão usadas em todo o servidor, como; funções para criptografia, paginação   
 │── node_modules/ 
-│── routes/ # Contém as rotas da API, usada pelo front-end   
+│── routes/  # Contém as rotas da API, usada pelo front-end   
 │── app.js   
 │── package.js 
 │── package-lock.js  
@@ -39,9 +39,9 @@ Podemos nos aprofundar na estrutura dos diretórios <b>db</b> e <b>data</b>
 /data
 # Armazena as imagens do servidor
 │── imgData/
-│   ├── produtos/ # Armazena imagens salvas do cliente
-│   ├── server_imagem/ # Armazena imagens salvas pelo próprio servidor, não podem ser excluídas ou alteradas
-│   ├── temp_produtos/  # Armazena imagens temporárias do cliente, antes de se tornarem permanentes na diretório produtos
+│   ├── produtos/  # Armazena imagens salvas do cliente
+│   ├── server_imagem/  # Armazena imagens salvas pelo próprio servidor, não podem ser excluídas ou alteradas
+│   ├── temp_produtos/   # Armazena imagens temporárias do cliente, antes de se tornarem permanentes na diretório produtos
 │── local_credentials/   
 </pre>
 
