@@ -1,7 +1,7 @@
 //# Variaveis //
 
 import express from 'express'
-import port from './port.js'
+import port from './config/port.js'
 const app = express()
 
 import produtos from './routes/produtos.js'

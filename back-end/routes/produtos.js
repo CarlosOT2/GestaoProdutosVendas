@@ -14,7 +14,7 @@ import { accessFile, unlinkFile, resizeFile } from '../helpers/Fs/fsHelpers.js'
 import fs from 'fs'
 
 import { db_gestaoprodutosvendas } from '../db/db_config.js';
-import port from '../port.js';
+import port from '../config/port.js';
 import HTTPError from '../helpers/Classes/HTTPError.js';
 
 
