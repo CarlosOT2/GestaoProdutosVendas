@@ -32,7 +32,7 @@ o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podem
 │── package-lock.js  
 </pre>
 
-Podemos nos aprofundar na estrutura dos diretórios <b>db</b>, <b>data</b>, e rotas do diretório <b>routes</b>
+Podemos nos aprofundar na estrutura dos diretórios <b>data</b>, <b>db</b>, e rotas do diretório <b>routes</b>
 <br/>
 
 <pre>
