@@ -23,7 +23,7 @@ o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podem
 <pre>
 │── config/ # Contém os principais arquivos de configuração, que podem ser usados ​​em qualquer parte do servidor
 │── data/ # Armazena dados do cliente e do próprio servidor, como imagens e credenciais locais
-│── db/ # Contém dados/código relacionado ao banco de dados, como; logs, rotina de backup, estrutura do banco de dados, entre outros
+│── db/ # Contém dados/código relacionado ao banco de dados, como; logs, rotina de backup, estrutura do banco de dados
 │── helpers/ # Contém funções auxiliares que serão usadas em todo o servidor, como; funções para criptografia, paginação   
 │── node_modules/ 
 │── routes/ # Contém as rotas da API, usada pelo front-end   
