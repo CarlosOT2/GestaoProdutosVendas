@@ -19,8 +19,8 @@ Website contains a simple summary, and a dashboard that provides a simple and or
 
 - [How to Install Website](.docs/en/How%20To%20Install.md)
 - [How is The Website Structured](.docs/en/How%20is%20The%20Website%20Structured.md)
-- [How to Configure Task Scheduler](.docs/en/How%20to%20Configure%20Task%20Scheduler.md)
-- [How to Configure AWS](.docs/en/How%20to%20Configure%20AWS.md)
+- [Task Scheduler Settings](.docs/en/Task%20Scheduler%20Settings.md)
+- [AWS Basic Settings](.docs/en/AWS%20Basic%20Settings.md)
 
 <br/>
 <h2>How to contribute</h2>

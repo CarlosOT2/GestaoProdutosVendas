@@ -1,5 +1,7 @@
-# Como Configurar O AWS #
+# Configurações básicas AWS #
+Vamos configurar o AWS para o website rodar corretamente, sem essa configuração ele não funcionará
 
+<br/>
 <h3> Criando usuário com acesso ao Secrets Manager </h3>
 Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usaremos suas credenciais
 <br/>
@@ -35,7 +37,7 @@ Criaremos um usuário que terá acesso ao Secrets Manager, Após criá-lo usarem
     Criar Policy de acesso á chave do KMS:
     <ul>
       <li>Copie o <code>ARN</code> da chave criada anteriormente, retornaremos ao <code>IAM</code></li>
-      <li>Retorne para <code>Policies</code> e clique em Create policy</li>
+      <li>Vá para <code>Policies</code> e clique em Create policy</li>
       <li>Na seção Policy editor clique em <code>JSON</code></li>
       <li>Na seção Add actions pesquise por <code>KMS</code>, clique em KMS</li>
       <li>Selecione as opções <code>Decrypt</code>, e <code>Encrypt</code></li>
@@ -79,7 +81,7 @@ Utilizaremos para acessar o serviço localmente no servidor
     Utilizando as credenciais: 
     <ul>
       <li>Vá até o diretório <code>back-end</code> no terminal de comando, execute o comando <code>aws configure</code></li>
-      <li>Utilizaremos as credenciais criadas anteriormente localmente, vá até o usuário do Secrets Manager</li>
+      <li>Utilizaremos as credenciais criadas anteriormente, vá até o usuário do Secrets Manager</li>
       <li>Na seção summary copie o <code>Access key 1</code>, volte ao terminal de comando</li>
       <li>No input <code>AWS Access Key ID</code> cole o Access key e pressione Enter</li>
       <li>No input <code>AWS Secret Access Key</code> cole a chave de acesso Secret access key salva anteriormente, pressione Enter</li>
@@ -92,7 +94,7 @@ Utilizaremos para acessar o serviço localmente no servidor
     Criptografando as credenciais com dpapi (opcional):
     <ul>
       <li>Se você deseja segurança extra para suas credenciais locais, faça este processo. caso contrário, pule estas etapas</li>
-      <li>Vá até a pasta onde as credenciais estão localizadas geralmente <code>USERNAME\.aws</code>, na pasta você criará um arquivo JSON</li>
+      <li>Vá até a pasta onde as credenciais estão localizadas, geralmente <code>USERNAME\.aws</code>, na pasta você criará um arquivo JSON</li>
       <li>O arquivo conterá as credenciais, crie um arquivo igual a esse apenas alterando os respectivos valores para accessKeyId e secretAccessKey (valores das credenciais):
       <pre><code>{
   "accessKeyId": "accessKeyId",
@@ -101,7 +103,7 @@ Utilizaremos para acessar o serviço localmente no servidor
       </li>
       <li>
         Após isso, criptografaremos o arquivo json com dpapi. para isso temos uma função pronta no diretório <code>back-end\helpers\Encryption\dpapi.js</code> chamada encrypt(),
-        ela criptografará os arquivos usando dpapi. use qualquer método para criptografá-lo
+        ela criptografará os arquivos usando dpapi. use qualquer método para criptografá-lo com dpapi
       </li>
       <li> 
         Iremos alterar o código, vá até o arquivo <code>back-end\helpers\Aws\secret_manager.js</code>. você encontrará um bloco de código comentado. este bloco será o código que irá descriptografar o arquivo das credenciais,
@@ -115,6 +117,23 @@ Utilizaremos para acessar o serviço localmente no servidor
   </li>
   <li>Após criar/criptografar as credenciais local, abra o arquivo <code>back-end\config\aws.js</code></li>
   <li>Altere a variável <code>credentials_path</code> para o caminho do arquivo das credenciais</li>
+</ol>
+
+<h3> Salvando credenciais root do banco de dados </h3>
+Para salvar as credenciais root do banco de dados, usaremos o Secrets Manager, o servidor acessará essas credenciais automaticamente
+
+<br/>
+<br/>
+
+<ol>
+  <li>Vá até o serviço Secrets Manager, clique em <code>Store a new secret</code>, na seção Secret type selecione a opção <code>Other type of secret</code></li>
+  <li>
+    Na seção key/value clique em <code>Add row</code>, na primeira Row o key/value será respectivamente; <code>username/valor</code>, na segunda row será respectivamente; <code>password/valor</code>. 
+    apenas alterando os respectivos valores para as credenciais do root
+  </li>
+  <li>Na seção <code>Encryption key</code> selecione a chave de criptografia criada anteriormente para criptografar os segredos do Secrets Manager</li>
+  <li>Clique em Next, escolha um nome autoexplicativo, clique em Next duas vezes, clique em Store</li>
+  <li>Após cria-lo vá para <code>back-end\config\aws.js</code>, altere a variável <code>root_secret</code> para o nome escolhido anteriormente</li>
 </ol>
 
 

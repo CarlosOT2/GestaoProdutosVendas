@@ -28,7 +28,7 @@ If you don't know what SSH is, [How to Connect to Github with SSH](https://docs.
 3. Open terminal again, go to the `GestãoProdutosVendas/back-end` directory, run command `npm run migrate:latest --env prod`
 4. After that, go to the `back-end\config` directory
 5. Open file `users_win.js`, change server to the name of the Windows User who will use the website
-6. After that, you will have to configure AWS [How To Configure AWS](./How%20to%20Configure%20AWS.md)
+6. After that, you will have to configure AWS [AWS Basic Settings](./AWS%20Basic%20Settings.md)
 
 <h3> How to Configure the Front-End </h3>
 
@@ -38,5 +38,5 @@ If you don't know what SSH is, [How to Connect to Github with SSH](https://docs.
 
 <h3> How to Configure Task Scheduler </h3>
 
-Configuring Task Scheduler is recommended but optional, you don’t need it for your website to work. It will offer extra security [How To Configure Task Scheduler](./How%20to%20Configure%20Task%20Scheduler.md) 
+Configuring Task Scheduler is recommended but optional, you don’t need it for your website to work. It will offer extra security [Task Scheduler Settings](./Task%20Scheduler%20Settings.md)
 

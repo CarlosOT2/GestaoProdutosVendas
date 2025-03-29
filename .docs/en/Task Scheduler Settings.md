@@ -1,4 +1,4 @@
-# How to Configure Task Scheduler # 
+# Task Scheduler Settings # 
 <h3> Creating Task Delete_LocalRoot </h3>
 
 Task that will delete file `root.json` database credentials stored in the `back-end\data\local_credentials` directory upon operating system shutdown <b>(it won't work if you use the Power Button)</b>
@@ -13,8 +13,7 @@ Task that will delete file `root.json` database credentials stored in the `back-
 <b>(Be careful with line breaks and spaces, the syntax is very sensitive)</b>
 </p>
 </p>
-<pre><code>
-&lt;QueryList&gt;
+<pre><code>&lt;QueryList&gt;
   &lt;Query Id="0" Path="System"&gt;
     &lt;Select Path="System"&gt;
       *[System[EventID=1074]]

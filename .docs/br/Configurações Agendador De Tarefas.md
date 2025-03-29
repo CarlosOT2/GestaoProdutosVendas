@@ -1,4 +1,4 @@
-# Como Configurar O Agendador De Tarefas #
+# Configurações Agendador De Tarefas #
 <h3> Criando Tarefa Delete_LocalRoot </h3>
 
 Tarefa que excluirá o arquivo `root.json` as credenciais do banco de dados armazenadas no diretório `back-end\data\local_credentials` após o desligamento do sistema operacional <b>(não funcionará se você usar o Power Button)</b>
@@ -12,8 +12,7 @@ Tarefa que excluirá o arquivo `root.json` as credenciais do banco de dados arma
 <p>
 <b>(Tenha cuidado com quebras de linha e espaços, a sintaxe é muito sensível)</b>
 </p>
-<pre><code>
-&lt;QueryList&gt;
+<pre><code>&lt;QueryList&gt;
   &lt;Query Id="0" Path="System"&gt;
     &lt;Select Path="System"&gt;
       *[System[EventID=1074]]
