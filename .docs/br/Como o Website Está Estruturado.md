@@ -37,17 +37,17 @@ Podemos nos aprofundar na estrutura dos diretórios <b>data</b>, <b>db</b>, e ro
 
 <pre>
 /data
-│── imgData/   # Armazena as imagens do servidor
-│   ├── produtos/       # Armazena imagens salvas do cliente
+│── imgData/   
+│   ├── produtos/       # Armazena imagens permanentes do cliente
 │   ├── server_imagem/  # Armazena imagens do servidor, não podem ser excluídas ou alteradas
-│   ├── temp_produtos/  # Armazena imagens temporárias do cliente, antes de se tornarem permanentes no diretório produtos
+│   ├── temp_produtos/  # Armazena imagens temporárias para serem verificadas do cliente, antes de se tornarem permanentes
 │── local_credentials/  # Armazena o script que excluirá a credencial local root do banco de dados e a própria credencial
 </pre>
 
 <pre>
 /db
 │── backup_logs/   # Contém logs de erros da rotina de backup, como erros de execução, verificação, etc...     
-│── db_backups/    # Armazena o código-fonte do backup, restauração, e até o próprio arquivo de backup
+│── db_backups/    
 │   │── backups/             # Armazena o arquivo de backup  
 │   │── .backup_functions.js # Código-fonte do backup e restauração
 │   │── backup_db.bat        # Script que realiza o backup
@@ -55,7 +55,7 @@ Podemos nos aprofundar na estrutura dos diretórios <b>data</b>, <b>db</b>, e ro
 │── db_gestaoprodutosvendas/ # Armazena as migrations e seeds do banco de dados         
 │── db_config.js             # Arquivo que será usado pelas rotas para se comunicar com o banco de dados
 │── db_knex_file.js          # Arquivo de configuração do banco de dados próprio do knex   
-│── root_credentials.js      # Funções relacionadas à criação ou recuperação da credencial root do banco de dados
+│── root_credentials.js      # Funções usadas para recuperação e criação da credencial root do banco de dados
 </pre>
 
 <pre>
