@@ -1,8 +1,9 @@
 # Como o Website Está Estruturado #
+Um breve resumo de toda a estrutura do website, sem muitos detalhes. para entender mais, você terá que se aprofundar mais por conta própria
+<br/>
 
 <h3> Diretório Pai </h3>
 é o diretório que contem todos os arquivos do projeto, sua estrutura seria;
-<br/>
 <br/>
 
 <pre>
@@ -17,7 +18,6 @@
 
 <h3> Back End </h3>
 o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podemos chamar de servidor. um breve resumo da estrutura;
-<br/>
 <br/>
 
 <pre>
@@ -61,11 +61,11 @@ Podemos nos aprofundar na estrutura dos diretórios <b>data</b>, <b>db</b>, e ro
 <pre>
 /routes
 │── dashboard.js
-│   │── Get /             
-│   │── Get /overview
+│   │── Get /          # Calcula dados brutos de vendas e gera o lucro com base nos valores brutos              
+│   │── Get /overview  # Obtém um resumo de produtos e vendas. por exemplo; produto mais vendido e lucro mensal
 │── produtos.js
-│   │── Get /            
-│   │── Get /fitrar
+│   │── Get /          # Obtêm os dados da tabela produtos
+│   │── Get /fitrar    # Obtêm e filtra os dados da tabela produtos, com 'req.query'
 │   │── Post /
 │   │── Post /upload
 │   │── Put /:id
