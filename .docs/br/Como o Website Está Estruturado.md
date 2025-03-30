@@ -80,6 +80,52 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 <br/>
 
 <h3> Front End </h3>
-o front-end contém o código-fonte da <b>interface usada pelo usuário</b>, que podemos chamar de cliente. um breve resumo da estrutura;
+o front-end contém o código-fonte da <b>interface usada pelo usuário</b>, que podemos chamar de cliente, sua estrutura seria;
 <br/>
-<br/>
+
+<pre>
+│── node_modules/
+│── public/       # Contém arquivos estáticos que não passam pelo processamento do React
+│── src/          # Código-fonte da aplicação React, onde o website está localizado
+│── package.js
+│── package-lock.js
+</pre>
+
+No diretório <b>src</b>
+<pre>
+│── components/ # Contém os componentes do website
+│── config/     # Contém os arquivos de configuração, que podem ser usados ​​em qualquer parte do front
+│── helpers/    # Contém funções auxiliares que serão usadas em todo o front, como; funções para requisições, paginação  
+│── App.js      
+│── App.scss    # Estilos do componente raiz (que afeta todo o website)
+│── index.js
+</pre>
+
+Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
+
+<pre>
+│── Componentes Globais/
+│   │── Div/
+│   │── Inputs/ 
+│   │── Lista/ 
+│   │── Miscellaneous/
+│   │── Theme/
+│── Menu Lateral/
+│   │── MenuLateral
+│── Rota DashBoard/
+│   │── Geral/
+│   │── MainDshB
+│── Rota Home/ 
+│   │── Home 
+│   │── MainHome
+│── Rota Inclusão/
+│   │── InputProdutos
+│   │── InputVendas
+│   │── MainInclusao
+│── Rota Manutenção/
+│   │── ListaProdutos
+│   │── ListaVendas
+│   │── MainManut
+│   │── Manutencao
+│   │── ManutForm
+</pre>
