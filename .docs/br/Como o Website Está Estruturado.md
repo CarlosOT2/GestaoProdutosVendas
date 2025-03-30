@@ -17,7 +17,7 @@ Um breve resumo de toda a estrutura do website, sem muitos detalhes. para entend
 </pre>
 
 <h3> Back End </h3>
-o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podemos chamar de servidor. um breve resumo da estrutura;
+o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podemos chamar de servidor, sua estrutura seria;
 <br/>
 
 <pre>
@@ -32,7 +32,7 @@ o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podem
 │── package-lock.js  
 </pre>
 
-Podemos nos aprofundar na estrutura dos diretórios <b>data</b>, <b>db</b>, e rotas do diretório <b>routes</b>
+Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db</b>, e os <b>endpoints</b> das rotas do diretório routes
 <br/>
 
 <pre>
@@ -64,12 +64,12 @@ Podemos nos aprofundar na estrutura dos diretórios <b>data</b>, <b>db</b>, e ro
 │   │── Get /          # Calcula dados brutos de vendas e gera o lucro com base nos valores brutos              
 │   │── Get /overview  # Obtém um resumo de produtos e vendas. por exemplo; produto mais vendido e lucro mensal
 │── produtos.js
-│   │── Get /          # Obtêm os dados da tabela produtos
-│   │── Get /fitrar    # Obtêm e filtra os dados da tabela produtos, com 'req.query'
-│   │── Post /
-│   │── Post /upload
-│   │── Put /:id
-│   │── Delete /:id
+│   │── Get /          # Obtêm os registros da tabela produtos
+│   │── Get /fitrar    # Obtêm e filtra os registros da tabela produtos, com 'req.query'
+│   │── Post /         # Adiciona um produto à tabela produtos
+│   │── Post /upload   # Toda imagem passará por esta rota para verificação. Os caminhos obtidos são usados ​​no Post padrão
+│   │── Put /:id       # Modifica registros específicos da tabela produtos 
+│   │── Delete /:id    # Deleta registros da tabela produtos
 │── vendas.js  
 │   │── Get /             
 │   │── Get /filtrar
