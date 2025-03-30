@@ -71,10 +71,10 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 │   │── Put /:id       # Modifica registros específicos da tabela produtos 
 │   │── Delete /:id    # Deleta registros da tabela produtos
 │── vendas.js  
-│   │── Get /             
-│   │── Get /filtrar
-│   │── Post /
-│   │── Delete /:id
+│   │── Get /          # Obtêm os registros da tabela vendas          
+│   │── Get /filtrar   # Obtêm e filtra os registros da tabela vendas, com 'req.query'
+│   │── Post /         # Adiciona uma/várias vendas à tabela vendas
+│   │── Delete /:id    # Deleta registros da tabela vendas
 </pre>
 
 <br/>
