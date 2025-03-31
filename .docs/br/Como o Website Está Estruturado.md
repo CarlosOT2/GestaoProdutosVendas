@@ -104,6 +104,7 @@ No diretório <b>src</b>
 Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
 
 <pre>
+/components
 │── Componentes Globais/  # Componentes redundantes usados ​​em diversos outros componentes
 │   │── Div/              # Componentes que têm uma div como a tag raiz
 │   │── Inputs/           # Componentes inputs que recebem entrada de dados 
@@ -130,4 +131,20 @@ Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
 │   │── MainManut
 │   │── Manutencao        # Componente que reúne os componentes da Rota Manutenção, exceto o MainManut, fundindo a lógica
 │   │── ManutForm         # Componente form usado para filtrar os dados de ambas as listas (produtos, e vendas)
+</pre>
+
+<pre>
+/config
+│── global_scss/        # Contém arquivos SCSS com estilos padrão reutilizáveis ​​(facilitando a padronização e alterações)
+│   │── inputs.scss
+│   │── label.scss
+│   │── lista.scss
+│   │── media.scss 
+│   │── scrolling.scss 
+│   │── user-select.scss
+│── usr_cnfg/
+│   │── context/
+│   │── local_storage/
+│   │── scss/
+│── config_websv.js     # Contém a URL padrão usada no website
 </pre>
