@@ -112,22 +112,22 @@ Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
 │   │── Theme/            # Componentes relacionados ao tema do website
 │── Menu Lateral/         # Componentes usados ​​no menu lateral
 │   │── MenuLateral
-│── Rota DashBoard/       # Componentes usados na URL /dashboard
-│   │── Geral/
-│   │   │── GeralDshB
-│   │   │── GeralForm
+│── Rota DashBoard/       # Componentes usados na rota DashBoard (/dashboard)
+│   │── Geral/            # Componentes usados na rota DashBoard Geral (dashboard/geral)
+│   │   │── GeralDshB     
+│   │   │── GeralForm     # Componente form usado para filtrar os dados da seção produtos
 │   │── MainDshB
-│── Rota Home/            # Componentes usados na URL Home (URL base)
+│── Rota Home/            # Componentes usados na rota Home (/)
 │   │── Home 
 │   │── MainHome
-│── Rota Inclusão/        # Componentes usados na URL /inclusao 
-│   │── InputProdutos     
-│   │── InputVendas
+│── Rota Inclusão/        # Componentes usados na rota Inclusão (/inclusao)
+│   │── InputProdutos     # Componente form usado para adicionar produtos 
+│   │── InputVendas       # Componente form usado para adicionar vendas
 │   │── MainInclusao
-│── Rota Manutenção/      # Componentes usados na URL /manut 
-│   │── ListaProdutos
-│   │── ListaVendas
+│── Rota Manutenção/      # Componentes usados na rota Manutenção (/manut)
+│   │── ListaProdutos     # Componente que usa o componente global Lista para exibir registros da tabela produtos
+│   │── ListaVendas       # Componente que usa o componente global Lista para exibir registros da tabela vendas 
 │   │── MainManut
-│   │── Manutencao
-│   │── ManutForm
+│   │── Manutencao        # Componente que reúne os componentes da Rota Manutenção, exceto o MainManut, fundindo a lógica
+│   │── ManutForm         # Componente form usado para filtrar os dados de ambas as listas (produtos, e vendas)
 </pre>
