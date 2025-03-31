@@ -97,32 +97,34 @@ No diretório <b>src</b>
 │── config/     # Contém os arquivos de configuração, que podem ser usados ​​em qualquer parte do front
 │── helpers/    # Contém funções auxiliares que serão usadas em todo o front, como; funções para requisições, paginação  
 │── App.js      
-│── App.scss    # Estilos do componente raiz (que afeta todo o website)
+│── App.scss    # Estilos do App.js (que afeta todo o website)
 │── index.js
 </pre>
 
 Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
 
 <pre>
-│── Componentes Globais/
-│   │── Div/
-│   │── Inputs/ 
-│   │── Lista/ 
-│   │── Miscellaneous/
-│   │── Theme/
-│── Menu Lateral/
+│── Componentes Globais/  # Componentes redundantes usados ​​em diversos outros componentes
+│   │── Div/              # Componentes que têm uma div como a tag raiz
+│   │── Inputs/           # Componentes inputs que recebem entrada de dados 
+│   │── Lista/            # Componentes relacionados a uma tabela/lista
+│   │── Miscellaneous/    # Componentes que não se encaixam em nenhuma das categorias mencionadas 
+│   │── Theme/            # Componentes relacionados ao tema do website
+│── Menu Lateral/         # Componentes usados ​​no menu lateral
 │   │── MenuLateral
-│── Rota DashBoard/
+│── Rota DashBoard/       # Componentes usados na URL /dashboard
 │   │── Geral/
+│   │   │── GeralDshB
+│   │   │── GeralForm
 │   │── MainDshB
-│── Rota Home/ 
+│── Rota Home/            # Componentes usados na URL Home (URL base)
 │   │── Home 
 │   │── MainHome
-│── Rota Inclusão/
-│   │── InputProdutos
+│── Rota Inclusão/        # Componentes usados na URL /inclusao 
+│   │── InputProdutos     
 │   │── InputVendas
 │   │── MainInclusao
-│── Rota Manutenção/
+│── Rota Manutenção/      # Componentes usados na URL /manut 
 │   │── ListaProdutos
 │   │── ListaVendas
 │   │── MainManut
