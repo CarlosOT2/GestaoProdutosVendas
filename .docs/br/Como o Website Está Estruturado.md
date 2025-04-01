@@ -42,7 +42,7 @@ Diretório que contem todos os arquivos do website. Sua estrutura seria;
 │── .docs/     # Documentação
 │── back-end/  # Código-fonte do Back End
 │── front-end/ # Código-fonte do Front End
-│── .gitignore # Arquivos e pastas ignorados pelo Git
+│── .gitignore 
 │── LICENSE         
 │── README.en       
 │── README          
