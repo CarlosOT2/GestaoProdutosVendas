@@ -1,10 +1,22 @@
 # Como o Website Está Estruturado #
+<h3> Regras Gerais </h3>
+Regras que devem ser seguidas para padronizar o website
+<br/>
+<br/>
+<h3> Formato Dados </h3>
+O formato de dados refere-se aos formato de requições e responses ao servidor, e do servidor
+<br/>
+<br/>
+
+<h3> Padrão De Response </h3>
+O padrão de response se refere a um padrão de todas as responses enviadas pelo servidor ao cliente. Existe um padrão de response para cada método de requisição
+<br/>
+<br/>
 
 <h3> Estrutura de pastas e arquivos </h3>
-Breve resumo de toda a estrutura de pastas e arquivos, sem muitos detalhes. para compreender mais, você terá que se aprofundar mais por conta própria
+Breve resumo de toda a estrutura de pastas e arquivos que deve ser seguido. para compreender além, você terá que se aprofundar mais por conta própria
 <br/>
 <br/>
-
 <b>Diretório pai</b>, é o diretório que contem todos os arquivos do projeto. Sua estrutura seria;
 <pre>
 │── .docs/     # Documentação
