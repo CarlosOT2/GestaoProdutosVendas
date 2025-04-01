@@ -1,7 +1,7 @@
 # Como o Website Está Estruturado #
 Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 
-<h3> Regras </h3>
+<h2> Regras </h2>
 <ul>
   <li>Request
     <ul>
@@ -30,11 +30,14 @@ Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 </ul>
 
 <br/>
-<h3> Estrutura de pastas e arquivos </h3>
+<h2> Estrutura de pastas e arquivos </h2>
 Breve resumo de toda a estrutura de pastas e arquivos. para compreender além, você terá que se aprofundar mais por conta própria
-<br/>
-<br/>
-<b>Diretório pai</b>, é o diretório que contem todos os arquivos do website. Sua estrutura seria;
+
+
+
+<h3> Diretório pai </h3>
+
+Diretório que contem todos os arquivos do website. Sua estrutura seria;
 <pre>
 │── .docs/     # Documentação
 │── back-end/  # Código-fonte do Back End
@@ -45,7 +48,9 @@ Breve resumo de toda a estrutura de pastas e arquivos. para compreender além, v
 │── README          
 </pre>
 
-O <b>back-end</b> contém o <b>código-fonte da API</b> usada pelo front-end, que podemos chamar de servidor. Sua estrutura seria;
+<h3> Back End </h3>
+
+Contém o código-fonte da API, que podemos chamar de servidor. Sua estrutura seria;
 <pre>
 │── config/   # Contém os principais arquivos de configuração, que podem ser usados ​​em qualquer parte do servidor
 │── data/     # Armazena dados do cliente e do próprio servidor, como imagens e credenciais locais
@@ -102,9 +107,9 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 </pre>
 
 <br/>
+<h3> Front End </h3>
 
-
-O <b>front-end</b> contém o código-fonte da <b>interface usada pelo usuário</b>, que podemos chamar de cliente. Sua estrutura seria;
+Contém o código-fonte da interface do usuário, que podemos chamar de cliente. Sua estrutura seria;
 <pre>
 │── node_modules/
 │── public/       # Contém arquivos estáticos que não passam pelo processamento do React
