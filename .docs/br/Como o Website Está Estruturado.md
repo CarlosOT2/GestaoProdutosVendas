@@ -1,11 +1,11 @@
 # Como o Website Está Estruturado #
-Um breve resumo de toda a estrutura do website, sem muitos detalhes. para entender mais, você terá que se aprofundar mais por conta própria
+
+<h3> Estrutura de pastas e arquivos </h3>
+Breve resumo de toda a estrutura de pastas e arquivos, sem muitos detalhes. para compreender mais, você terá que se aprofundar mais por conta própria
+<br/>
 <br/>
 
-<h3> Diretório Pai </h3>
-é o diretório que contem todos os arquivos do projeto, sua estrutura seria;
-<br/>
-
+<b>Diretório pai</b>, é o diretório que contem todos os arquivos do projeto. Sua estrutura seria;
 <pre>
 │── .docs/     # Documentação
 │── back-end/  # Código-fonte do Back End
@@ -16,10 +16,7 @@ Um breve resumo de toda a estrutura do website, sem muitos detalhes. para entend
 │── README          
 </pre>
 
-<h3> Back End </h3>
-o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podemos chamar de servidor, sua estrutura seria;
-<br/>
-
+O <b>back-end</b> contém o <b>código-fonte da API</b> usada pelo front-end, que podemos chamar de servidor. Sua estrutura seria;
 <pre>
 │── config/   # Contém os principais arquivos de configuração, que podem ser usados ​​em qualquer parte do servidor
 │── data/     # Armazena dados do cliente e do próprio servidor, como imagens e credenciais locais
@@ -33,8 +30,6 @@ o back-end contém o <b>código-fonte da API</b> usada pelo front-end, que podem
 </pre>
 
 Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db</b>, e os <b>endpoints</b> das rotas do diretório routes
-<br/>
-
 <pre>
 /data
 │── imgData/   
@@ -79,10 +74,8 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 
 <br/>
 
-<h3> Front End </h3>
-o front-end contém o código-fonte da <b>interface usada pelo usuário</b>, que podemos chamar de cliente, sua estrutura seria;
-<br/>
 
+O <b>front-end</b> contém o código-fonte da <b>interface usada pelo usuário</b>, que podemos chamar de cliente. Sua estrutura seria;
 <pre>
 │── node_modules/
 │── public/       # Contém arquivos estáticos que não passam pelo processamento do React
@@ -91,7 +84,7 @@ o front-end contém o código-fonte da <b>interface usada pelo usuário</b>, que
 │── package-lock.js
 </pre>
 
-No diretório <b>src</b>
+Dentro do diretório <b>src</b>;
 <pre>
 │── components/ # Contém os componentes do website
 │── config/     # Contém os arquivos de configuração, que podem ser usados ​​em qualquer parte do front
@@ -102,7 +95,6 @@ No diretório <b>src</b>
 </pre>
 
 Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
-
 <pre>
 /components
 │── Componentes Globais/  # Componentes redundantes usados ​​em diversos outros componentes
@@ -142,9 +134,9 @@ Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
 │   │── media.scss 
 │   │── scrolling.scss 
 │   │── user-select.scss
-│── usr_cnfg/
+│── usr_cnfg/           # Contém arquivos e funções para a configuração do usuário, como o tema
 │   │── context/
 │   │── local_storage/
-│   │── scss/
+│   │── scss/           
 │── config_websv.js     # Contém a URL padrão usada no website
 </pre>
