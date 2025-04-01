@@ -1,18 +1,27 @@
 # Como o Website Está Estruturado #
-<h3> Regras Gerais </h3>
-Regras que devem ser seguidas para padronizar o website
-<br/>
-<br/>
-<h3> Formato Dados </h3>
-O formato de dados refere-se aos formato de requições e responses ao servidor, e do servidor
-<br/>
-<br/>
+Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 
-<h3> Padrão De Response </h3>
-O padrão de response se refere a um padrão de todas as responses enviadas pelo servidor ao cliente. Existe um padrão de response para cada método de requisição
-<br/>
-<br/>
+<h3> Padrões/Regras </h3>
+<ul>
+  <li>Padrões
+    <ul>
+      <li>Request; Cada Request enviada ao servidor deve estar em JSON</li>
+      <li>Response; Cada Response enviada do servidor estará em JSON</li>
+    </ul>
+  </li>
+  <li>Regras
+    <ul>
+      <li>
+        Data; Formato padrão enviado ao servidor deve ser 'Y0000M00D00' uma string.  O valor não pode ser abaixo que '0100-01-01', não é suportado pelo banco de dados.   
+      </li>
+      <li>
+        Data; Para formatar 'Y0000M00D00' corretamente, é usado a função format_date(), localizada na pasta helpers/Date no back-end.
+      </li>
+    </ul>
+  </li>
+</ul>
 
+<br/>
 <h3> Estrutura de pastas e arquivos </h3>
 Breve resumo de toda a estrutura de pastas e arquivos que deve ser seguido. para compreender além, você terá que se aprofundar mais por conta própria
 <br/>
