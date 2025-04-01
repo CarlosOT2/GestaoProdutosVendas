@@ -1,21 +1,29 @@
 # Como o Website Está Estruturado #
 Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 
-<h3> Padrões/Regras </h3>
+<h3> Regras </h3>
 <ul>
-  <li>Padrões
+  <li>Request
     <ul>
-      <li>Request; Cada Request enviada ao servidor deve estar em JSON</li>
-      <li>Response; Cada Response enviada do servidor estará em JSON</li>
+      <li>Cada Request enviada ao servidor deve estar em JSON</li>
+      <li>
+        Usamos a função PerformRequest() para padronizar as requisições, localizada na pasta helpers/js no front-end. 
+        Se a requisição for complexa, ela poderá ficar um pouco fora dessa regra, mas ainda terá que usar a função PerformRequest()
+      </li>
     </ul>
   </li>
-  <li>Regras
+  <li>Response
+    <ul>
+      <li>Cada Response enviada do servidor estará em JSON</li>
+    </ul>
+  </li>
+  <li>Formatação Data
     <ul>
       <li>
-        Data; Formato padrão enviado ao servidor deve ser 'Y0000M00D00' uma string.  O valor não pode ser abaixo que '0100-01-01', não é suportado pelo banco de dados.   
+        Formato padrão enviado ao servidor deve ser 'Y0000M00D00' uma string.  O valor não pode ser abaixo que '0100-01-01', não é suportado pelo banco de dados.   
       </li>
       <li>
-        Data; Para formatar 'Y0000M00D00' corretamente, é usado a função format_date(), localizada na pasta helpers/Date no back-end.
+        Para formatar 'Y0000M00D00' corretamente, é usado a função format_date(), localizada na pasta helpers/Date no back-end.
       </li>
     </ul>
   </li>
@@ -23,10 +31,10 @@ Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 
 <br/>
 <h3> Estrutura de pastas e arquivos </h3>
-Breve resumo de toda a estrutura de pastas e arquivos que deve ser seguido. para compreender além, você terá que se aprofundar mais por conta própria
+Breve resumo de toda a estrutura de pastas e arquivos. para compreender além, você terá que se aprofundar mais por conta própria
 <br/>
 <br/>
-<b>Diretório pai</b>, é o diretório que contem todos os arquivos do projeto. Sua estrutura seria;
+<b>Diretório pai</b>, é o diretório que contem todos os arquivos do website. Sua estrutura seria;
 <pre>
 │── .docs/     # Documentação
 │── back-end/  # Código-fonte do Back End
