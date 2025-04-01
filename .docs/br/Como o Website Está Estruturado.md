@@ -5,10 +5,10 @@ Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 <ul>
   <li>Request
     <ul>
-      <li>Cada Request enviada ao servidor deve estar em JSON</li>
+      <li>Cada requisição enviada ao servidor deve estar em JSON</li>
       <li>
-        Usamos a função PerformRequest() para padronizar as requisições, localizada na pasta helpers/js no front-end. 
-        Se a requisição for complexa, ela poderá ficar um pouco fora dessa regra, mas ainda terá que usar a função PerformRequest()
+        Usamos a função PerformRequest(), localizada em helpers/js, para padronizar as requisições. 
+        Todas as requisições devem ser feitas usando desta função
       </li>
     </ul>
   </li>
