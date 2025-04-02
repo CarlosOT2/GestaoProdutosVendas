@@ -33,8 +33,6 @@ Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 <h2> Organização de pastas e arquivos </h2>
 Breve resumo de toda a organização de pastas e arquivos. para compreender além, você terá que se aprofundar mais por conta própria
 
-
-
 <h3> Diretório pai </h3>
 
 Diretório que contem todos os arquivos do website. Sua estrutura seria;
