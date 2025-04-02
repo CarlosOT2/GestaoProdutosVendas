@@ -30,8 +30,8 @@ Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 </ul>
 
 <br/>
-<h2> Organização de pastas e arquivos </h2>
-Breve resumo de toda a organização de pastas e arquivos. para compreender além, você terá que se aprofundar mais por conta própria
+<h2> Estrutura de pastas e arquivos </h2>
+Breve resumo de toda a estrutura de pastas e arquivos. para compreender além, você terá que se aprofundar mais por conta própria
 
 <h3> Diretório pai </h3>
 
@@ -50,7 +50,7 @@ Diretório que contem todos os arquivos do website. Sua estrutura seria;
 
 Contém o código-fonte da API, que podemos chamar de servidor. Sua estrutura seria;
 <pre>
-│── config/   # Contém os principais arquivos de configuração, que podem ser usados ​​em qualquer parte do servidor
+│── config/   # Contém os arquivos de configuração, que podem ser usados ​​em qualquer parte do servidor
 │── data/     # Armazena dados do cliente e do próprio servidor, como imagens e credenciais locais
 │── db/       # Contém dados/código relacionado ao banco de dados, como; logs, rotina de backup, estrutura do banco de dados
 │── helpers/  # Contém funções auxiliares que serão usadas em todo o servidor, como; funções para criptografia, paginação   
@@ -66,8 +66,8 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 /data
 │── imgData/   
 │   ├── produtos/       # Armazena imagens permanentes do cliente
-│   ├── server_imagem/  # Armazena imagens do servidor, que não podem ser excluídas ou alteradas
-│   ├── temp_produtos/  # Armazena imagens temporárias para serem verificadas do cliente, antes de se tornarem permanentes
+│   ├── server_imagem/  # Armazena imagens do servidor, que não podem ser excluídas ou alteradas pelo cliente
+│   ├── temp_produtos/  # Armazena imagens temporárias do cliente para serem verificadas, antes de se tornarem permanentes
 │── local_credentials/  # Armazena o script que excluirá a credencial local root do banco de dados e a própria credencial
 </pre>
 
