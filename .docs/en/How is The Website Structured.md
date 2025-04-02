@@ -31,16 +31,16 @@ All requests must be sent through this function
 </ul>
 
 <br/>
-<h2> Organization of folders and files </h2>
-A brief summary of the folders and files organization. For a deeper understanding, you may need to learn deeper on your own
+<h2> Structure of folders and files </h2>
+A brief summary of the folders and files structure. For a deeper understanding, you may need to learn deeper on your own
 
 <h3>Root directory</h3>
 
-Directory that contains all the website files. its structure would be;
+Directory that contains all the website files. Its structure would be;
 <pre>
 │── .docs/     # Documentation
-│── back-end/  # Back end source code 
-│── front-end/ # Front end source code 
+│── back-end/  # Source code for Back End
+│── front-end/ # Source code for Front End
 │── .gitignore 
 │── LICENSE         
 │── README.en       
@@ -51,15 +51,58 @@ Directory that contains all the website files. its structure would be;
 
 it contains the source code of the API, which we can name it to server. Its structure would be;
 <pre>
-│── config/   # Contém os principais arquivos de configuração, que podem ser usados ​​em qualquer parte do servidor
-│── data/     # Armazena dados do cliente e do próprio servidor, como imagens e credenciais locais
-│── db/       # Contém dados/código relacionado ao banco de dados, como; logs, rotina de backup, estrutura do banco de dados
-│── helpers/  # Contém funções auxiliares que serão usadas em todo o servidor, como; funções para criptografia, paginação   
+│── config/   # Contains configuration files, which can be used anywhere on the server
+│── data/     # Stores client and server data, such as; images and local credentials
+│── db/       # Contains data/code related to the database, such as; logs, backup routine, database structure
+│── helpers/  # Contains helper functions that will be used throughout the server, such as; functions for encryption, paging   
 │── node_modules/ 
-│── routes/   # Contém as rotas da API, usada pelo front-end   
+│── routes/   # Contains API routes used by front-end
 │── app.js   
 │── package.js 
 │── package-lock.js  
+</pre>
+
+We can dive a little bit deeper into the structures of <b>data</b>, <b>db</b>, and <b>endpoints</b> of the routes
+<pre>
+/data
+│── imgData/   
+│   ├── produtos/       # Stores client permanent images 
+│   ├── server_imagem/  # Stores server images, that cannot be deleted or modified by the client
+│   ├── temp_produtos/  # Stores client temporary images, that'll be verified before becoming permanent
+│── local_credentials/  # Stores a script that'll delete the local credentials database, alongside with the local credentials file
+</pre>
+
+<pre>
+/db
+│── backup_logs/   # Contém logs de erros da rotina de backup, como erros de execução, verificação, etc...     
+│── db_backups/    
+│   │── backups/             # Armazena o arquivo de backup  
+│   │── .backup_functions.js # Código-fonte do backup e restauração
+│   │── backup_db.bat        # Script que realiza o backup
+│   │── restore_db.bat       # Script que realiza a restauração
+│── db_gestaoprodutosvendas/ # Armazena as migrations e seeds do banco de dados         
+│── db_config.js             # Arquivo que será usado pelas rotas para se comunicar com o banco de dados
+│── db_knex_file.js          # Arquivo de configuração do banco de dados próprio do knex   
+│── root_credentials.js      # Funções usadas para recuperação e criação da credencial root do banco de dados
+</pre>
+
+<pre>
+/routes
+│── dashboard.js
+│   │── Get /          # Calcula dados brutos de vendas e gera o lucro com base nos valores brutos              
+│   │── Get /overview  # Obtém um resumo de produtos e vendas. por exemplo; produto mais vendido e lucro mensal
+│── produtos.js
+│   │── Get /          # Obtêm os registros da tabela produtos
+│   │── Get /fitrar    # Obtêm e filtra os registros da tabela produtos, com 'req.query'
+│   │── Post /         # Adiciona um produto à tabela produtos
+│   │── Post /upload   # Toda imagem passará por esta rota para verificação. Os caminhos obtidos são usados ​​no Post padrão
+│   │── Put /:id       # Modifica registros específicos da tabela produtos 
+│   │── Delete /:id    # Deleta registros da tabela produtos
+│── vendas.js  
+│   │── Get /          # Obtêm os registros da tabela vendas          
+│   │── Get /filtrar   # Obtêm e filtra os registros da tabela vendas, com 'req.query'
+│   │── Post /         # Adiciona uma/várias vendas à tabela vendas
+│   │── Delete /:id    # Deleta registros da tabela vendas
 </pre>
 
 
