@@ -23,7 +23,7 @@ Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
         Formato padrão enviado ao servidor deve ser 'Y0000M00D00' uma string.  O valor não pode ser abaixo que '0100-01-01', não é suportado pelo banco de dados.   
       </li>
       <li>
-        Para formatar a data corretamente é usado a função format_date(), localizada na pasta helpers/Date no back-end. irá formatar datas como 'Y0000M00D00' para '0000-00-00'
+        Estamos utilizando a função format_date(), localizada em helpers/Date no back-end, para formatar datas no padrão aceito pelo banco de dados. Ela converte datas no formato 'Y0000M00D00' para '0000-00-00'.
       </li>
     </ul>
   </li>
