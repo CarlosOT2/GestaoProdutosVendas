@@ -30,8 +30,8 @@ Normas e estruturas que devem ser seguidas para um melhor desenvolvimento
 </ul>
 
 <br/>
-<h2> Estrutura de pastas e arquivos </h2>
-Breve resumo de toda a estrutura de pastas e arquivos. para compreender além, você terá que se aprofundar mais por conta própria
+<h2> Organização de pastas e arquivos </h2>
+Breve resumo de toda a organização de pastas e arquivos. para compreender além, você terá que se aprofundar mais por conta própria
 
 
 
