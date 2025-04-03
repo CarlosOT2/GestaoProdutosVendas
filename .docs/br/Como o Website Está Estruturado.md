@@ -68,7 +68,7 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 │   ├── produtos/       # Armazena imagens permanentes do cliente
 │   ├── server_imagem/  # Armazena imagens do servidor, que não podem ser excluídas ou alteradas pelo cliente
 │   ├── temp_produtos/  # Armazena imagens temporárias do cliente para serem verificadas, antes de se tornarem permanentes
-│── local_credentials/  # Armazena o script que excluirá as credenciais do banco de dados local, junto com o próprio arquivo das credenciais
+│── local_credentials/  # Armazena o script que excluirá as credenciais do banco de dados local, junto com a própria credenciais
 </pre>
 
 <pre>
