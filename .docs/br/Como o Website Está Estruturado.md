@@ -94,8 +94,8 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 │   │── Get /          # Obtêm os registros da tabela produtos
 │   │── Get /fitrar    # Obtêm e filtra os registros da tabela produtos, com 'req.query'
 │   │── Post /         # Adiciona um produto à tabela produtos
-│   │── Post /upload   # Toda imagem passará por esta rota para verificação. Os caminhos obtidos são usados ​​no Post padrão
-│   │── Put /:id       # Modifica registros específicos da tabela produtos 
+│   │── Post /upload   # Toda imagem passará por este endpoint para verificação. Os caminhos obtidos são usados ​​no Post padrão
+│   │── Put /:id       # Modifica registros da tabela produtos 
 │   │── Delete /:id    # Deleta registros da tabela produtos
 │── vendas.js  
 │   │── Get /          # Obtêm os registros da tabela vendas          
