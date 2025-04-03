@@ -62,7 +62,7 @@ it contains the source code of the API, which we can name it to server. Its stru
 │── package-lock.js  
 </pre>
 
-We can dive a little bit deeper into the structures of <b>data</b>, <b>db</b>, and <b>endpoints</b> of the routes
+We can delve a little deeper into the structures of <b>data</b>, <b>db</b>, and <b>endpoints</b> of the routes
 <pre>
 /data
 │── imgData/   
@@ -74,35 +74,35 @@ We can dive a little bit deeper into the structures of <b>data</b>, <b>db</b>, a
 
 <pre>
 /db
-│── backup_logs/   # Contém logs de erros da rotina de backup, como erros de execução, verificação, etc...     
+│── backup_logs/   # Logs errors that occur during backup and restore execution
 │── db_backups/    
-│   │── backups/             # Armazena o arquivo de backup  
-│   │── .backup_functions.js # Código-fonte do backup e restauração
-│   │── backup_db.bat        # Script que realiza o backup
-│   │── restore_db.bat       # Script que realiza a restauração
-│── db_gestaoprodutosvendas/ # Armazena as migrations e seeds do banco de dados         
-│── db_config.js             # Arquivo que será usado pelas rotas para se comunicar com o banco de dados
-│── db_knex_file.js          # Arquivo de configuração do banco de dados próprio do knex   
-│── root_credentials.js      # Funções usadas para recuperação e criação da credencial root do banco de dados
+│   │── backups/             # Stores backup file
+│   │── .backup_functions.js # Source code for backup and restore functions
+│   │── backup_db.bat        # Script that executes backup function
+│   │── restore_db.bat       # Script that executes restore function
+│── db_gestaoprodutosvendas/ # Stores database migrations and seeds    
+│── db_config.js             # File used by the routes to communicate with the database
+│── db_knex_file.js          # Database configuration file made by knex
+│── root_credentials.js      # Functions used to retrieve the database root credentials and create them locally
 </pre>
 
 <pre>
 /routes
 │── dashboard.js
-│   │── Get /          # Calcula dados brutos de vendas e gera o lucro com base nos valores brutos              
-│   │── Get /overview  # Obtém um resumo de produtos e vendas. por exemplo; produto mais vendido e lucro mensal
+│   │── Get /          # Calculates gross sales data and generates profit based on gross values          
+│   │── Get /overview  # Get a summary of the produtos and vendas tables. example; best-selling product and monthly profit
 │── produtos.js
-│   │── Get /          # Obtêm os registros da tabela produtos
-│   │── Get /fitrar    # Obtêm e filtra os registros da tabela produtos, com 'req.query'
-│   │── Post /         # Adiciona um produto à tabela produtos
-│   │── Post /upload   # Toda imagem passará por esta rota para verificação. Os caminhos obtidos são usados ​​no Post padrão
-│   │── Put /:id       # Modifica registros específicos da tabela produtos 
-│   │── Delete /:id    # Deleta registros da tabela produtos
+│   │── Get /          # Gets records from the produtos table
+│   │── Get /fitrar    # Gets and filters records from the produtos table, with 'req.query'
+│   │── Post /         # Add a product to the produtos table
+│   │── Post /upload   # Every image will go through this endpoint for verification. The obtained paths are used in default Post
+│   │── Put /:id       # Modify records from the produtos table
+│   │── Delete /:id    # Delete records from the produtos table
 │── vendas.js  
-│   │── Get /          # Obtêm os registros da tabela vendas          
-│   │── Get /filtrar   # Obtêm e filtra os registros da tabela vendas, com 'req.query'
-│   │── Post /         # Adiciona uma/várias vendas à tabela vendas
-│   │── Delete /:id    # Deleta registros da tabela vendas
+│   │── Get /          # Gets records from the vendas table          
+│   │── Get /filtrar   # Gets and filters records from the vendas table, with 'req.query'
+│   │── Post /         # Add one or more sales to the vendas table
+│   │── Delete /:id    # Delete records from the vendas table
 </pre>
 
 
