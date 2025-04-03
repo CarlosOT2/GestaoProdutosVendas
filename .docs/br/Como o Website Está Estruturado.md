@@ -76,13 +76,13 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 │── backup_logs/   # Registra os erros ocorridos durante a execução do backup, e restauração 
 │── db_backups/    
 │   │── backups/             # Armazena o arquivo de backup  
-│   │── .backup_functions.js # Código-fonte do backup e restauração
-│   │── backup_db.bat        # Script que realiza o backup
-│   │── restore_db.bat       # Script que realiza a restauração
+│   │── .backup_functions.js # Código-fonte das funções de backup e restauração
+│   │── backup_db.bat        # Script que executa o backup
+│   │── restore_db.bat       # Script que executa a restauração
 │── db_gestaoprodutosvendas/ # Armazena as migrations e seeds do banco de dados         
-│── db_config.js             # Arquivo que será usado pelas rotas para se comunicar com o banco de dados
-│── db_knex_file.js          # Arquivo de configuração do banco de dados próprio do knex   
-│── root_credentials.js      # Funções usadas para recuperação e criação da credencial root do banco de dados
+│── db_config.js             # Arquivo utilizado pelas rotas para se comunicar com o banco de dados
+│── db_knex_file.js          # Arquivo de configuração do banco de dados feito pelo knex   
+│── root_credentials.js      # Funções usadas para recuperar as credenciais root do banco de dados e criá-las localmente
 </pre>
 
 <pre>
