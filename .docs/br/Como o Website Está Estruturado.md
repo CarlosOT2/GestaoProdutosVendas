@@ -73,7 +73,7 @@ Podemos nos aprofundar um pouco na estrutura dos diretórios <b>data</b>, <b>db<
 
 <pre>
 /db
-│── backup_logs/   # Contém logs de erros da rotina de backup, como erros de execução, verificação, etc...     
+│── backup_logs/   # Registra os erros ocorridos durante a execução do backup, e restauração 
 │── db_backups/    
 │   │── backups/             # Armazena o arquivo de backup  
 │   │── .backup_functions.js # Código-fonte do backup e restauração
