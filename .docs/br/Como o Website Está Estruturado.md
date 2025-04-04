@@ -111,14 +111,14 @@ Contém o código-fonte da interface do usuário, que podemos chamar de cliente.
 <pre>
 │── node_modules/
 │── public/       # Contém arquivos estáticos que não passam pelo processamento do React
-│── src/          # Código-fonte da aplicação React, onde o website está localizado
+│── src/          # Código-fonte da aplicação React
 │── package.js
 │── package-lock.js
 </pre>
 
 Dentro do diretório <b>src</b>;
 <pre>
-│── components/ # Contém os componentes do website
+│── components/ # Contém todos os componentes
 │── config/     # Contém os arquivos de configuração, que podem ser usados ​​em qualquer parte do front
 │── helpers/    # Contém funções auxiliares que serão usadas em todo o front, como; funções para requisições, paginação  
 │── App.js      
@@ -126,15 +126,15 @@ Dentro do diretório <b>src</b>;
 │── index.js
 </pre>
 
-Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
+Podemos nos aprofundar um pouco na estrutura dos diretórios <b>components</b> e <b>config</b>
 <pre>
 /components
-│── Componentes Globais/  # Componentes redundantes usados ​​em diversos outros componentes
-│   │── Div/              # Componentes que têm uma div como a tag raiz
+│── Componentes Globais/  # Componentes redundantes reutilizados ​​em outros componentes
+│   │── Div/              # Componentes que se comportam como uma div
 │   │── Inputs/           # Componentes inputs que recebem entrada de dados 
-│   │── Lista/            # Componentes relacionados a uma tabela/lista
-│   │── Miscellaneous/    # Componentes que não se encaixam em nenhuma das categorias mencionadas 
-│   │── Theme/            # Componentes relacionados ao tema do website
+│   │── Lista/            # Componentes relacionados a tabelas e listas
+│   │── Miscellaneous/    # Componentes não classificados em nenhuma das categorias mencionadas
+│   │── Theme/            # Componentes relacionados ao tema visual
 │── Menu Lateral/         # Componentes usados ​​no menu lateral
 │   │── MenuLateral
 │── Rota DashBoard/       # Componentes usados na rota DashBoard (/dashboard)
@@ -150,25 +150,25 @@ Podemos nos aprofundar nos diretórios <b>components</b> e <b>config</b>
 │   │── InputVendas       # Componente form usado para adicionar vendas
 │   │── MainInclusao
 │── Rota Manutenção/      # Componentes usados na rota Manutenção (/manut)
-│   │── ListaProdutos     # Componente que usa o componente global Lista para exibir registros da tabela produtos
-│   │── ListaVendas       # Componente que usa o componente global Lista para exibir registros da tabela vendas 
+│   │── ListaProdutos     # Componente que usa o componente global Lista.js para exibir registros da tabela produtos
+│   │── ListaVendas       # Componente que usa o componente global Lista.js para exibir registros da tabela vendas 
 │   │── MainManut
-│   │── Manutencao        # Componente que reúne os componentes da Rota Manutenção, exceto o MainManut, fundindo a lógica
-│   │── ManutForm         # Componente form usado para filtrar os dados de ambas as listas (produtos, e vendas)
+│   │── Manutencao        # Componente que reúne todos os componentes da Rota Manutenção, exceto o MainManut, fundindo a lógica
+│   │── ManutForm         # Componente form usado para filtrar os dados de ambas as listas (ListaProdutos e ListaVendas)
 </pre>
 
 <pre>
 /config
-│── global_scss/        # Contém arquivos SCSS com estilos padrão reutilizáveis ​​(facilitando a padronização e alterações)
+│── global_scss/        # Contém arquivos SCSS com estilos padrão reutilizáveis ​​para padronização e alterações mais fáceis
 │   │── inputs.scss
 │   │── label.scss
 │   │── lista.scss
 │   │── media.scss 
 │   │── scrolling.scss 
 │   │── user-select.scss
-│── usr_cnfg/           # Contém arquivos e funções para a configuração do usuário, como o tema
+│── usr_cnfg/           # Contém arquivos e funções para a configuração do usuário
 │   │── context/
 │   │── local_storage/
 │   │── scss/           
-│── config_websv.js     # Contém a URL padrão usada no website
+│── config_websv.js     # Contém a URL padrão
 </pre>
