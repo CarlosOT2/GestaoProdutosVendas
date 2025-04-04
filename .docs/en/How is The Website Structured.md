@@ -105,6 +105,74 @@ We can delve a little deeper into the structures of <b>data</b>, <b>db</b>, and 
 │   │── Delete /:id    # Delete records from the vendas table
 </pre>
 
+<h3> Front End </h3>
+
+it contains the source code of the UI, which we can name it to client. Its structure would be;
+<pre>
+│── node_modules/
+│── public/ # Contains static files that do not go through React processing
+│── src/ # Source code for React application
+│── package.js
+│── package-lock.js
+</pre>
+
+Inside <b>src</b> directory;
+<pre>
+│── components/ # Contains all components
+│── config/ # Contains configuration files, which can be used anywhere on the client 
+│── helpers/ # Contains helper functions that will be used throughout the client, such as; functions for encryption, paging
+│── App.js
+│── App.scss # App.js styles (It can affect the entire client)
+│── index.js
+</pre>
+
+We can delve a little deeper into the structures of <b>components</b> and <b>config</b>
+<pre>
+/components
+│── Componentes Globais/  # Redundant components reused in other components       
+│   │── Div/              # Components that behave like a div
+│   │── Inputs/           # Input components that receive data entries
+│   │── Lista/            # components related to tables and lists
+│   │── Miscellaneous/    # Components not classified under any of the mentioned categories
+│   │── Theme/            # UI Theme Related Components
+│── Menu Lateral/         # Components used in sidebar menu
+│   │── MenuLateral
+│── Rota DashBoard/       # Components used in DashBoard route (/dashboard)
+│   │── Geral/            # Components used in DashBoard Geral route (dashboard/geral)
+│   │   │── GeralDshB     
+│   │   │── GeralForm     # Inputs form component designed to filter data in products section
+│   │── MainDshB
+│── Rota Home/            # Components used in Home route (/)
+│   │── Home 
+│   │── MainHome
+│── Rota Inclusão/        # Components used in Inclusão route (/inclusao)
+│   │── InputProdutos     # Inputs form component used to add products          
+│   │── InputVendas       # Inputs form component used to add sales
+│   │── MainInclusao
+│── Rota Manutenção/      # Components used in Manutenção route (/manut)
+│   │── ListaProdutos     # Componente que usa o componente global Lista para exibir registros da tabela produtos
+│   │── ListaVendas       # Componente que usa o componente global Lista para exibir registros da tabela vendas 
+│   │── MainManut
+│   │── Manutencao        # Componente que reúne os componentes da Rota Manutenção, exceto o MainManut, fundindo a lógica
+│   │── ManutForm         # Componente form usado para filtrar os dados de ambas as listas (produtos, e vendas)
+</pre>
+
+<pre>
+/config
+│── global_scss/        # Contém arquivos SCSS com estilos padrão reutilizáveis ​​(facilitando a padronização e alterações)
+│   │── inputs.scss
+│   │── label.scss
+│   │── lista.scss
+│   │── media.scss 
+│   │── scrolling.scss 
+│   │── user-select.scss
+│── usr_cnfg/           # Contém arquivos e funções para a configuração do usuário, como o tema
+│   │── context/
+│   │── local_storage/
+│   │── scss/           
+│── config_websv.js     # Contém a URL padrão usada no website
+</pre>
+
 
 
 
