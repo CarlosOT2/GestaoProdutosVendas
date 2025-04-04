@@ -140,7 +140,7 @@ We can delve a little deeper into the structures of <b>components</b> and <b>con
 │── Rota DashBoard/       # Components used in DashBoard route (/dashboard)
 │   │── Geral/            # Components used in DashBoard Geral route (dashboard/geral)
 │   │   │── GeralDshB     
-│   │   │── GeralForm     # Inputs form component designed to filter data in products section
+│   │   │── GeralForm     # Inputs form component designed to filter data in produtos section
 │   │── MainDshB
 │── Rota Home/            # Components used in Home route (/)
 │   │── Home 
@@ -150,27 +150,27 @@ We can delve a little deeper into the structures of <b>components</b> and <b>con
 │   │── InputVendas       # Inputs form component used to add sales
 │   │── MainInclusao
 │── Rota Manutenção/      # Components used in Manutenção route (/manut)
-│   │── ListaProdutos     # Componente que usa o componente global Lista para exibir registros da tabela produtos
-│   │── ListaVendas       # Componente que usa o componente global Lista para exibir registros da tabela vendas 
+│   │── ListaProdutos     # Component that uses the redundant component Lista.js to display records from the produtos table
+│   │── ListaVendas       # Component that uses the redundant component Lista.js to display records from the vendas table 
 │   │── MainManut
-│   │── Manutencao        # Componente que reúne os componentes da Rota Manutenção, exceto o MainManut, fundindo a lógica
-│   │── ManutForm         # Componente form usado para filtrar os dados de ambas as listas (produtos, e vendas)
+│   │── Manutencao        # Component that gathers all components of the Manutenção Route, except MainManut, merging the logic
+│   │── ManutForm         # Inputs form component designed to filter data from both lists (ListaProdutos and ListaVendas)
 </pre>
 
 <pre>
 /config
-│── global_scss/        # Contém arquivos SCSS com estilos padrão reutilizáveis ​​(facilitando a padronização e alterações)
+│── global_scss/        # Contains SCSS files with reusable default styles for standardization and easier changes
 │   │── inputs.scss
 │   │── label.scss
 │   │── lista.scss
 │   │── media.scss 
 │   │── scrolling.scss 
 │   │── user-select.scss
-│── usr_cnfg/           # Contém arquivos e funções para a configuração do usuário, como o tema
+│── usr_cnfg/           # Contains files and functions for user configuration
 │   │── context/
 │   │── local_storage/
 │   │── scss/           
-│── config_websv.js     # Contém a URL padrão usada no website
+│── config_websv.js     # Contains the default URL
 </pre>
 
 
