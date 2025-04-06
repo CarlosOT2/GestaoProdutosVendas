@@ -239,12 +239,13 @@ export async function backup_db(db_name) {
 
     const backup_command = `mariabackup --user=${username} --password=${password} --backup --databases="${db_name} mysql" --target-dir=${rawbackup_path}`
     const compact_command = `7z a "${backup_path}" "${join(rawbackup_path, '*')}"`
+    const credentials_secret_name = 'secret_name'
 
     //# Funções //
     async function backup_s3() {
         const file_content = fs.readFileSync(backup_path)
         const upload_params = {
-            credentials_secret_name: 'credentials-user//access_bucket---mysql-db.backups//',
+            credentials_secret_name,
             params: {
                 Bucket: 'mysql-db.backups',
                 Key: `${db_name}/fullbackup`,
