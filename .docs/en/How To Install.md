@@ -23,12 +23,12 @@ If you don't know what SSH is, [How to Connect to Github with SSH](https://docs.
 
 <h3> How to Configure the Back-End </h3>
 
-1. Open terminal, go to the `GestãoProdutosVendas/back-end` directory and run command `npm i`
-2. Open `HeidiSQL` app from `MariaDB` and run query `CREATE DATABASE db_gestaoprodutosvendas`
-3. Open terminal again, go to the `GestãoProdutosVendas/back-end` directory, run command `npm run migrate:latest --env prod`
-4. After that, go to the `back-end\config` directory
-5. Open file `users_win.js`, change server to the name of the Windows User who will use the website
-6. After that, you will have to configure AWS [AWS Basic Settings](./AWS%20Basic%20Settings.md)
+1. In the terminal, go to the directory `GestãoProdutosVendas/back-end` and run the command `npm i`
+2. Open the app `HeidiSQL` for the database `MariaDB` and run query `CREATE DATABASE db_gestaoprodutosvendas`
+3. Go to data directory, usually located at <code>User\MariaDB\data</code>, open the file <code>my.ini</code> and in the [mysqld] section, add following configuration: <code>lc_time_names=pt_BR</code>
+4. After that, you'll need to configure AWS [AWS Basic Settings](./AWS%20Basic%20Settings.md)
+5. In the terminal again, go to the directory `GestãoProdutosVendas/back-end` and run command `npm run migrate:latest --env prod`
+6.  Go to the directory `back-end\config`, in file `users_win.js` change server to the name of the Windows User who'll use the website
 
 <h3> How to Configure the Front-End </h3>
 

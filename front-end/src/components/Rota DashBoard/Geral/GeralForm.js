@@ -16,13 +16,11 @@ export default function GeralForm({ req_dashboard, filter, className }) {
         {
             name: 'previous_date',
             placeholder: '2022/10/27',
-            required: true,
             labelText: 'Data'
         },
         {
             name: 'current_date',
             placeholder: '2024/10/27',
-            required: true
         },
         {
             name: 'limit',
@@ -39,14 +37,10 @@ export default function GeralForm({ req_dashboard, filter, className }) {
             submitFunction: async (inputsData) => {
                 const { previous_date, current_date, limit } = inputsData
                 req_dashboard({
-                    lucro_maior: {
-                        previous_date,
-                        current_date
-                    },
-                    lucro_menor: {
-                        previous_date,
-                        current_date
-                    },
+                    lucro_maior: true,
+                    lucro_menor: true,
+                    previous_date,
+                    current_date,
                     limit
                 })
             }

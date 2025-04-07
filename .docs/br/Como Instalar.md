@@ -21,14 +21,15 @@ Caso não saiba o que seja SSH, [Como Se Conectar No Github Com SSH](https://doc
 3. Execute o comando `git clone https://github.com/usuario/repo.git`
 <br/>
 
+
 <h3> Configurando O Back-End </h3>
 
 1. No terminal vá até o diretório GestãoProdutosVendas/back-end, execute o comando `npm i`
 2. Abra o aplicativo `HeidiSQL` do banco de dados `MariaDB`, execute a query `CREATE DATABASE db_gestaoprodutosvendas`
-3. No terminal do diretório back-end, execute o comando `npm run migrate:latest --env prod`
-4. Após isso vá até o diretório `back-end\config`
-5. No arquivo `users_win.js` altere server para o nome do usuário do windows que irá utilizar o website
-6. Após isso, você terá que realizar a configuração do AWS [Configurações básicas AWS](./Configurações%20básicas%20AWS.md)
+3. Vá até o diretório data, que geralmente fica em <code>User\MariaDB\data</code>, abra o arquivo my.ini e na seção [mysqld] adicione a seguinte configuração: <code>lc_time_names=pt_BR</code>
+4. Em seguida, será necessário realizar a configuração do AWS [Configurações básicas AWS](./Configurações%20básicas%20AWS.md)
+5. No terminal do diretório back-end, execute o comando `npm run migrate:latest --env prod`
+6. Após isso, vá para o diretório `back-end\config`, no arquivo `users_win.js` altere server para o nome do usuário do windows que irá utilizar o website
   
 <h3> Configurando O Front-End </h3>
 
