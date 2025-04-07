@@ -5,9 +5,8 @@
 
 //# Import //
 import { SecretsManagerClient, GetSecretValueCommand } from '@aws-sdk/client-secrets-manager'
-import fs from 'fs'
-import dpapi from 'win-dpapi'
-import { users } from '../../users_win/users.js'
+import { decrypt } from '../../helpers/Encryption/dpapi.js'
+import { credentials_path } from '../../config/aws.js'
 
 //# Funções Exportadas //
 
@@ -16,20 +15,19 @@ export async function get_secret(secret_name, optional_config = {}) {
         console_error = true
     } = optional_config
 
-    //# User //
-    const { server } = users
-
     //# Client //
-    const data = fs.readFileSync(`C:/Users/${server}/.aws/credentials`);
-    const decryptedData = dpapi.unprotectData(data, null, "CurrentUser");
-    const { accessKeyId, secretAccessKey } = JSON.parse(decryptedData)
+    /*
+        const decryptedData = await decrypt({ path: credentials_path })
+        const { accessKeyId, secretAccessKey } = JSON.parse(decryptedData)
+        const client = new SecretsManagerClient({
+            credentials: {
+                accessKeyId,
+                secretAccessKey
+            }
+        });
+    */
+    const client = new SecretsManagerClient()
 
-    const client = new SecretsManagerClient({
-        credentials: {
-            accessKeyId,
-            secretAccessKey
-        }
-    });
 
     const command = new GetSecretValueCommand({ SecretId: secret_name });
     try {
@@ -37,10 +35,10 @@ export async function get_secret(secret_name, optional_config = {}) {
 
         if ('SecretString' in data) {
             return JSON.parse(data.SecretString)
-            
+
         }
         if ('SecretBinary' in data) {
-            const buff = Buffer.from(data.SecretBinary, 'base64');     
+            const buff = Buffer.from(data.SecretBinary, 'base64');
             return JSON.parse(buff.toString('ascii'))
         }
         throw Error(`Unknown 'data' format received from Secrets Manager`)

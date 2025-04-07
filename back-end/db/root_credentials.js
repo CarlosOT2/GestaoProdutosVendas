@@ -1,60 +1,69 @@
 //# Import //
-import fs from 'fs';
+import fs from 'fs'
 import path from 'path';
+import util from 'util'
 
-import { writeFile } from '../helpers/Fs/fsHelpers.js'
+import { accessFile } from '../helpers/Fs/fsHelpers.js'
+import { decrypt, encrypt } from '../helpers/Encryption/dpapi.js';
 import { get_secret } from '../helpers/Aws/secret_manager.js'
 import { exec } from 'child_process';
-import { users } from '../users_win/users.js';
-import dpapi from 'win-dpapi'
+import users from '../config/users_win.js';
+import { root_secret } from '../config/aws.js';
+
+//# Variáveis Globais //
+const __dirname = path.dirname(import.meta.filename)
+const dirfolder = path.join(__dirname, '../data/local_credentials')
+const dirfile = path.join(dirfolder, '/root.json')
+
+const execPromise = util.promisify(exec)
 
 //# Funções Exportadas // 
 export function local_credentials() {
-    const __dirname = path.dirname(import.meta.filename)
-
-    const dirfolder = path.join(__dirname, '../data/local_credentials')
-    const dirfile = path.join(dirfolder, '/root.json')
-    const { server } = users
-
     async function create_credentials(root) {
-        const buffer_root = Buffer.from(JSON.stringify(root))
-        const crypted_root = dpapi.protectData(buffer_root, null, "CurrentUser")
-        writeFile(dirfile, crypted_root)
-        exec(`icacls ${dirfile} /inheritance:r`)
-        exec(`icacls "${dirfile}" /grant "${server}":F SYSTEM:F "BUILTIN\\Administradores":F`)
-    }
-    async function access_credentials(config_access = {}) {
-        const { exists } = config_access
-        return new Promise((resolve, reject) => {
-            fs.readFile(dirfile, (fs_error, data) => {
-                if (exists) resolve(!fs_error)
-                if (fs_error) {
-                    reject(new Error(`;------- Error access_credentials -------; Não Foi Possível Acessar O Arquivo`, fs_error));
-                } else {
-                    const encrypted_data = dpapi.unprotectData(data, null, "CurrentUser");
-                    resolve(JSON.parse(encrypted_data))
-                }
+        try {
+            await encrypt({
+                data: JSON.stringify(root),
+                new_path: dirfile,
+                scope: "CurrentUser"
             })
-        })
-
+            await Promise.all([
+                execPromise(`icacls ${dirfile} /inheritance:r`),
+                execPromise(`icacls "${dirfile}" /grant "${users.server}":F SYSTEM:F "BUILTIN\\Administradores":F`)
+            ])
+        } catch (error) {
+            throw error
+        }
     }
-    return { create_credentials, access_credentials }
+    async function decrypt_credentials() {
+        try {
+            const decrypted_data = await decrypt({ path: dirfile, scope: "CurrentUser" })
+            return JSON.parse(decrypted_data)
+        } catch (error) {
+            throw error
+        }
+    }
+
+    return { create_credentials, decrypt_credentials }
 }
 
 
 
 export default async function get_root() {
-    const { create_credentials, access_credentials } = local_credentials()
+    const { create_credentials, decrypt_credentials } = local_credentials()
     try {
-        const root = await get_secret('mysql-user//root//', { console_error: false })
+        const root = await get_secret(root_secret, { console_error: false })
         await create_credentials(root)
-        if (!await access_credentials({ exists: true })) {
-            console.error(`;------- Error get_root -------; Não Foi Possível Criar 'local_credentials'`)
+        if (!await accessFile(dirfile, fs.constants.F_OK, { console_error: false })) {
+            throw new Error(`Não Foi Possível Criar As Credenciais Locais`)
         }
         return root
     } catch (error) {
         console.error(`;------- Error get_root -------;`, error)
-        console.log(`Usando credenciais locais para iniciar o servidor`)
-        return await access_credentials()
+        if (!await accessFile(dirfile, fs.constants.F_OK, { console_error: false })) {
+            console.error(`Não Foi Possível Acessar As Credenciais Locais Para Iniciar O Servidor`)
+        } else {
+            console.log(`Acessando Credenciais Locais Para Iniciar o Servidor`)
+            return await decrypt_credentials()
+        }
     }
 }

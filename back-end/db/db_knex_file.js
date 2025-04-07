@@ -15,17 +15,16 @@ const knex_file = {
   dev: {
     client: 'mysql2',
     connection: {
-      host: 'localhost',
+      database: 'my_db',
       user: username,
-      password: password,
-      database: 'db_gestaoprodutosvendas',
+      password: password
     },
-    useNullAsDefault: true,
+    pool: {
+      min: 2,
+      max: 10
+    },
     migrations: {
-      directory: './db_gestaoprodutosvendas/db_migrations'
-    },
-    seeds: {
-      directory: './db_gestaoprodutosvendas/db_seeds'
+      tableName: 'knex_migrations'
     }
   },
 
@@ -48,16 +47,17 @@ const knex_file = {
   prod: {
     client: 'mysql2',
     connection: {
-      database: 'my_db',
+      host: 'localhost',
       user: username,
-      password: password
+      password: password,
+      database: 'db_gestaoprodutosvendas',
     },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    useNullAsDefault: true,
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './db_gestaoprodutosvendas/db_migrations'
+    },
+    seeds: {
+      directory: './db_gestaoprodutosvendas/db_seeds'
     }
   }
 };
