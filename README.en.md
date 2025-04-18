@@ -22,6 +22,7 @@ Website contains a simple summary, and a dashboard that provides a simple and or
 - [Task Scheduler Settings](.docs/en/Task%20Scheduler%20Settings.md)
 - [AWS Basic Settings](.docs/en/AWS%20Basic%20Settings.md)
 - [Backup and Restore](.docs/en/Backup%20and%20Restore.md)
+- [Complex Functions](.docs/en/Complex%20Functions.md)
 
 <br/>
 <h2>How to contribute</h2>

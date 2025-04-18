@@ -444,8 +444,6 @@ export default function ListaTBODY(
             </>
         )
     }
-
-    /*--------------*/
     return (
         //# TBODY //
         <>
@@ -489,6 +487,5 @@ export default function ListaTBODY(
                 }
             </tbody >
         </>
-        /*--------------*/
     )
 }

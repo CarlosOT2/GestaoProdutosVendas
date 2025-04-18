@@ -24,8 +24,7 @@ e um dashboard que proporciona uma visão clara e organizada do seu negócio, aj
 - [Configurações Agendador De Tarefas](.docs/br/Configurações%20Agendador%20De%20Tarefas.md)
 - [Configurações básicas AWS](.docs/br/Configurações%20básicas%20AWS.md)
 - [Backup e Restore](.docs/br/Backup%20e%20Restore.md)
-
-
+- [Funções Complexas](.docs/br/Funções%20Complexas.md)
 <br/>
 <h2>Como Contribuir</h2>
 <h3>O que devo ter em mente antes de abrir um Pull Request?</h3>
