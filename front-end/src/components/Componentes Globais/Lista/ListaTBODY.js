@@ -6,7 +6,7 @@ import Txt from '../Miscellaneous/TxtPadrão'
 import './ListaTBODY.scss'
 //# Helpers //
 import { frmt } from '../../../helpers/js/FormatClasses';
-import { PerformRequest } from '../../../helpers/js/PerformRequest'
+import { PerformRequest } from 'performrequest'
 
 export default function ListaTBODY(
     {

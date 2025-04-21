@@ -11,13 +11,12 @@ import InputBoolean from "../Componentes Globais/Inputs/InputBoolean"
 //# Libs //
 import { useState } from 'react'
 import InputsControl from "../../helpers/js/InputsControl"
+import { PerformRequest } from 'performrequest'
 //# Icons //
 import { FaBoxes } from 'react-icons/fa';
 import { FaTruck } from 'react-icons/fa';
 //# Classes //
 import "./InputProdutos.scss"
-//# Helpers //
-import { PerformRequest } from '../../helpers/js/PerformRequest'
 /*--------------*/
 
 export default function InputsController() {

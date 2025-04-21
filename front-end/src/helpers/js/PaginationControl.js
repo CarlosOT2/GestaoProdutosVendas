@@ -1,8 +1,8 @@
 //# Libs //
 import { useState } from 'react'
-//# Helpers //
+import { PerformRequest } from 'performrequest'
+//# Config //
 import WebService from '../../config/config_websv.js'
-import { PerformRequest } from './PerformRequest.js'
 
 //# Exportações // 
 export default function PaginationControl(config_pagination) {

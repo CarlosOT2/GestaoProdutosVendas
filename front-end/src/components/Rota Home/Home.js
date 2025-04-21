@@ -2,10 +2,10 @@
 import Txt from '../Componentes Globais/Miscellaneous/TxtPadrão'
 //# Libs //
 import { useState, useEffect } from 'react'
+import { PerformRequest } from 'performrequest'
 //# Classes //
 import './Home.scss'
 //# Helpers //
-import { PerformRequest } from '../../helpers/js/PerformRequest'
 import Numeral from '../../helpers/js/Numeral';
 //# Config //
 import WebService from '../../config/config_websv'

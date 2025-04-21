@@ -12,6 +12,7 @@
     "lodash": "^4.17.21",
     "mathjs": "^13.0.3",
     "numeral": "^2.0.6",
+    "performrequest": "^1.0.0",
     "qs": "^6.13.0",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",

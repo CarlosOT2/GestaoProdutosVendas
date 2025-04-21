@@ -6,13 +6,13 @@ import GeralForm from './GeralForm';
 import { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts';
 import qs from 'qs'
+import { PerformRequest } from 'performrequest'
 //# Icons //
 import { BsFilter } from 'react-icons/bs';
 import { BsCalendar } from 'react-icons/bs';
 //# Classes //
 import './GeralDshB.scss'
 //# Helpers //
-import { PerformRequest } from '../../../helpers/js/PerformRequest'
 import Numeral from '../../../helpers/js/Numeral';
 //# Config //
 import WebService from '../../../config/config_websv'

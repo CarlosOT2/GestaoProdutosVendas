@@ -11,6 +11,7 @@ import Txt from '../Componentes Globais/Miscellaneous/TxtPadrão'
 //# Libs //
 import InputsControl from "../../helpers/js/InputsControl"
 import { useState } from "react"
+import { PerformRequest } from 'performrequest'
 //# Icons //
 import { FaCashRegister } from 'react-icons/fa';
 import { FaTruck } from 'react-icons/fa';
@@ -18,8 +19,6 @@ import { FaTruck } from 'react-icons/fa';
 import { CurrentDate } from '../../helpers/js/CurrentDate';
 //# Classes //
 import './InputVendas.scss'
-//# Helpers //
-import { PerformRequest } from '../../helpers/js/PerformRequest'
 /*--------------*/
 
 export default function InputsController() {
