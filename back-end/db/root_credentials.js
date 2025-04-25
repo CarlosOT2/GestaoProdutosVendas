@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path';
 import util from 'util'
 
-import { accessFile } from '../helpers/Fs/fsHelpers.js'
+import { accessFile } from 'improved_nodefs'
 import { decrypt, encrypt } from '../helpers/Encryption/dpapi.js';
 import { get_secret } from '../helpers/Aws/secret_manager.js'
 import { exec } from 'child_process';

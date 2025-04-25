@@ -9,7 +9,8 @@ import BuilderWhere from '../helpers/Builder/BuilderWhere.js'
 import { BuildPagCursor } from '../helpers/Pagination/cursor_based.js'
 import BuilderUpdate from '../helpers/Builder/BuilderUpdate.js';
 import { verifyMimeType } from '../helpers/Img.js';
-import { accessFile, unlinkFile, resizeFile } from '../helpers/Fs/fsHelpers.js'
+import { accessFile, unlinkFile } from 'improved_nodefs'
+import { resizeFile } from '../helpers/Sharp/sharpHelpers.js';
 
 import fs from 'fs'
 

@@ -1,7 +1,7 @@
 //# Import //
 import fs from 'fs'
 import dpapi from 'win-dpapi'
-import { writeFile } from '../Fs/fsHelpers.js'
+import { writeFile } from 'improved_nodefs'
 
 //# Funções Exportadas //
 
