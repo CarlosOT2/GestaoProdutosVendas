@@ -1,8 +1,3 @@
-/*
--- O Motivo Disso Está Dando Certo, É Porque A Credencial Default, Ter Permissão Para Acessar O 'Secrets Manager', Caso Mude O Default,
--- E Ele Não Tenha Permissão Á O 'Secrets Manager', Essas Funções Não Irão Funcionar, E Funções Que Usam Essas Funções Não Irão.
-*/
-
 //# Import //
 import { SecretsManagerClient, GetSecretValueCommand } from '@aws-sdk/client-secrets-manager'
 import { decrypt } from '../../helpers/Encryption/dpapi.js'
@@ -16,6 +11,7 @@ export async function get_secret(secret_name, optional_config = {}) {
     } = optional_config
 
     //# Client //
+    /*
         const decryptedData = await decrypt({ path: credentials_path })
         const { accessKeyId, secretAccessKey } = JSON.parse(decryptedData)
         const client = new SecretsManagerClient({
@@ -24,7 +20,9 @@ export async function get_secret(secret_name, optional_config = {}) {
                 secretAccessKey
             }
         });
-    
+    */
+    const client = new SecretsManagerClient()
+
 
 
     const command = new GetSecretValueCommand({ SecretId: secret_name });

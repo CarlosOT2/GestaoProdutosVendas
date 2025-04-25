@@ -299,7 +299,6 @@ export default function GeralDashBoard() {
                 success: (req_json) => {
                     setDataDashBoard(prevState => {
                         const formatted_data = format_res(req_json.info)
-                        console.log(formatted_data)
                         return ({
                             ...prevState,
                             ...formatted_data

@@ -137,7 +137,7 @@ export default function InputsControl(
             console.error(`;------- Error FormControl -------; Função onChange Argumento Type ${type} Inválido.`)
             return
         }
-        console.log(inputsData)
+        
         setInputsData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
 
